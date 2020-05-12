@@ -1,0 +1,6 @@
+import sys
+from aqt import mw
+from importlib import reload
+sys.path.insert(0,mw.pm.addonFolder())
+import ui
+reload(ui)

@@ -25,7 +25,7 @@ else:
     CountTimesNew = 2
 #-------------Configuration------------------
 CountTimesNew = 2
-def run():
+def updateStatsMethod():
     def renderStats(self, _old):
         # Get due and new cards
         new = 0
@@ -148,7 +148,7 @@ def run():
             {}
         </div>
         <div class='col s6 valign-wrapper card horizontal small  red lighten-4 grey-text text-darken-4'>
-           <i class=" material-icons  small red-text text-darken-2   left">add_alarm</i> {} &nbsp;more
+           <i class=" material-icons  small red-text text-darken-2   left">timer</i> {} &nbsp;more
         </div>
         </row></div>
         """.format(average_remaining, str(ngettext("%s minute", "%s minutes", minutes) % (minutes)))

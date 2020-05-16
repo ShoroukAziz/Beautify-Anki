@@ -1,0 +1,124 @@
+
+/*********************************************************MY STYLE************************************/
+
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(../flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+
+body {
+	animation: gradient 30s ease infinite;
+  height:100vh;
+}
+h1{
+  font-size:8rem ;
+  color: #fff;
+  font-family: fantasy;
+}
+@keyframes gradient {
+	0% {
+        
+		background-position: 0% 50%;
+	}
+    25% {
+        
+		background-position: 50% 50%;
+	}
+	50% {
+        
+		background-position: 100% 50%;
+	}
+    75% {
+        
+		background-position: 50% 50%;
+	}
+	100% {
+        
+		background-position: 0% 50%;
+	}
+}
+
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.number{
+  font-size:2.5rem
+}
+.number-container{
+  height: 145px;
+  background-color:#fff;
+  padding:15px;
+  border-radius:5px;
+}
+
+.total{
+ width: 92.5% !important;
+  height:60px;
+  padding:15px;
+  border-radius:5px;
+
+}
+
+.row .col.s3 {
+    width: 23% !important ;
+    margin: 1% !important ;
+}    
+
+@media only screen and (min-width: 993px){
+.container {
+   width: 95% !important ; 
+}
+}
+
+.right-col{
+  padding-top:5% !important;
+}
+
+.charts{
+  padding:10px;
+  border-radius:5px;
+  background-color:#fff;
+}
+
+.row .col.s6 {
+    width: 45% !important ;
+    margin: 1% !important ;
+} 
+
+.stats-row{
+  height:150px;
+}
+
+.row {
+    margin-bottom: 5px !important ;
+    }
+card .card-content {
+    padding: 10px !important ;
+    border-radius: 0 0 2px 2px !important ;
+}
+.material-icons {
+  font-size:35px;
+}

@@ -72,7 +72,7 @@ to their original deck.</div>"""
 
 
 bg_path = "assets/deck_backgrounds/"+"%(deck)s.jpg"
-background_style="body{ background-image:linear-gradient(311deg,#9E9E9E, #033155cc), url('"+ bg_path +"'); }"
+background_style="body{ background-image:linear-gradient(311deg,#9E9E9E, #033155cc), url('"+ bg_path +"') ,url('assets/background.jpg'); }"
 
 
 def table(self):
@@ -200,8 +200,8 @@ var chart = new CanvasJS.Chart("chartContainer", {{
 	data: [{{
 		type: "doughnut",
 		//startAngle: 60,
-		//innerRadius: 60,
-		indexLabelFontSize: 17,
+		innerRadius: 60,
+		indexLabelFontSize: 12,
 		indexLabel: "{{label}} - #percent%",
 		toolTipContent: "<b>{{label}}:</b> {{y}} (#percent%)",
 		dataPoints: [

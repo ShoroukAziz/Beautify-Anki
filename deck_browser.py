@@ -48,24 +48,24 @@ def renderStats(self, _old):
     stats = _old(self)
             
     
-    new_cards = " <i class=' material-icons  small indigo-text   left'>fiber_new</i>   New Cards :  &nbsp;  %(d)s" % dict(d=new)
+    new_cards = " <i class=' material-icons  medium white-text   left'>fiber_new</i>   New Cards :  &nbsp;  %(d)s" % dict(d=new)
     
     learn_cards = " Learn : &nbsp;  %(c)s <br> "% dict(c=lrn)
     review_cards = " Review : &nbsp; %(c)s  "% dict(c=due)       
-    due_cards = "<i class=' material-icons  small red-text text-darken-2  left'>schedule</i>   Due  :  &nbsp;   %(c)s<br> " %dict(c=(lrn+due))
+    due_cards = "<i class=' material-icons  medium white-text   left'>schedule</i>   Due  :  &nbsp;   %(c)s<br> " %dict(c=(lrn+due))
     due_cards+= learn_cards +review_cards 
     
-    totals_cards = "<i class=' material-icons  small light-blue-text left'>donut_small </i> Total :  &nbsp;  %(c)s" % dict(c=(totalDisplay))
+    totals_cards = "<i class=' material-icons  medium white-text left'>donut_small </i> Total :  &nbsp;  %(c)s" % dict(c=(totalDisplay))
     
-    average_remaining =   _("%.01f") % (speed) + "&nbsp;" + (_("Cards") + "/" + _("Minutes").replace("s", "")).lower()  
+    average_remaining =   _("%.01f") % (speed) + "<br>" + (_("Cards") + "/" + _("Minutes").replace("s", "")).lower()  
 
 
     new_due_row="""
     <div class="row">
-    <div class='col s6 valign-wrapper card horizontal small red-text indigo lighten-4 grey-text text-darken-4'>
+    <div class='col s6 valign-wrapper card horizontal small stats  indigo darken-1 white-text'>
     {}
     </div>
-    <div class='col s6 valign-wrapper card horizontal small white-text red lighten-4 grey-text text-darken-4'>
+    <div class='col s6 valign-wrapper card horizontal small stats white-text  cyan darken-4 white-text'>
     {}
     </div>
 
@@ -76,8 +76,8 @@ def renderStats(self, _old):
     
     original_stats_row="""
     <div class="row">
-    <div class='col s12 valign-wrapper card horizontal small white-text green lighten-4 grey-text text-darken-4'>
-            <i class=" material-icons  small green-text   left">playlist_add_check</i>
+    <div class='col s12 valign-wrapper card horizontal small stats white-text green  white-text'>
+            <i class=" material-icons  medium white-text   left">playlist_add_check</i>
         {}
     </div>
     </div>
@@ -85,19 +85,19 @@ def renderStats(self, _old):
 
     average_remaining_row="""
     <div class="row">
-    <div class='col s6 valign-wrapper card horizontal small lime lighten-4 grey-text text-darken-4'>
-        <i class=" material-icons  small lime-text   left">access_alarm</i> Average:
+    <div class='col s6 valign-wrapper card horizontal small stats  yellow darken-4 white-text'>
+        <i class=" material-icons  medium white-text   left">access_alarm</i> Average:
         {}
     </div>
-    <div class='col s6 valign-wrapper card horizontal small  red lighten-4 grey-text text-darken-4'>
-        <i class=" material-icons  small red-text text-darken-2   left">timer</i> {} &nbsp;more
+    <div class='col s6 valign-wrapper card horizontal small stats   deep-orange darken-4 white-text'>
+        <i class=" material-icons  medium white-text text-darken-2   left">timer</i> {} more
     </div>
     </row></div>
     """.format(average_remaining, str(ngettext("%s minute", "%s minutes", minutes) % (minutes)))
 
     total_row="""
     <div class='row'>
-        <div class='col s12 valign-wrapper card horizontal small light-blue lighten-4 grey-text text-darken-4'>
+        <div class='col s12 valign-wrapper card horizontal small stats light-blue darken-2 white-text'>
     {}
     </div>
 
@@ -158,7 +158,7 @@ def deckRow(self, node, depth, cnt, nameMap , _old):
     else:
         extraclass = ""
     buf += """
-          <img src="assets/deck_icons/%s.png" alt="" class="circle">
+          <img src="assets/deck_icons/%s.png"  onerror="this.src='assets/deck_icons/default.png'" alt="" class="circle">
     <span  class='col s7 decktd ' colspan=5>%s%s<a class="deck padding %s"
     href=# onclick="return pycmd('open:%d')">%s</a></span>""" % (
         name,

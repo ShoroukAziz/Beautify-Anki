@@ -6,8 +6,3 @@ from .materialize_deck_page import updateRenderingDeckOverview
 updateStatsMethod()
 updateRenderingMethods()
 updateRenderingDeckOverview()
-
-
-
-
-

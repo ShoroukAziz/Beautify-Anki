@@ -10,7 +10,8 @@ from aqt.utils import shortcut
 from copy import deepcopy
 
 from .helpers import *
-from .styles import *
+
+
 
 def renderDeckTree(self, nodes,depth, _old,):
     if not nodes:
@@ -122,22 +123,13 @@ def drawButtons(self,_old):
 
 
 Toolbar. _body = """
-<link rel="stylesheet" type="text/css" href="assets/css/materialize.css">
-<style>
-{}
-</style>
-
 <nav class='teal lighten-2'  width=100%%>
 <tr>
 <td class=tdcenter align=center>%s</td>
 </tr></nav>
-""".format(toolbar_style)
-
+"""
 DeckBrowser._body = """'
-<link rel="stylesheet" type="text/css" href="assets/css/materialize.css">
-<style>
-{}
-</style>
+
 <center class="container">
 
 <div class=row>
@@ -154,19 +146,14 @@ DeckBrowser._body = """'
 
 </div>
 </center>
-<script src="assets/script.js"></script>
 
-""".format(style)
+"""
 
 
-BottomBar._centerBody = """
-<style>
-{}
-</style>
-<link rel="stylesheet" type="text/css" href="assets/css/materialize.css">
-<center id=outer><div width=100%% id=header><td align=center>
-%s</td></div></center>
-""".format(bottom_bar_style)
+# BottomBar._centerBody = """
+# <center id=outer><div width=100%% id=header><td align=center>
+# %s</td></div></center>
+# """
 
 
 def updateRenderingMethods():   

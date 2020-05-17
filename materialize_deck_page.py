@@ -21,40 +21,76 @@ from aqt.utils import showInfo
 
 from copy import deepcopy
 from .helpers import *
-from .styles import *
-
-is_Finished = False
-
 
 
 
 # add my css and js to the deck overview page
-def on_webview_will_set_content (web_content: aqt.webview.WebContent, context: Optional[Any]):
-    web_content.css.append ("../assets/css/materialize.css")
-    web_content.css.append ("../assets/css/overview.css")
-    web_content.js.append ("../assets/js/canvasjs.min.js")
+def on_webview_will_set_content (web_content: aqt.webview.WebContent,  context: Optional[Any]):
+    # showInfo(str(context))
+    if  isinstance(context, (
+        aqt.deckbrowser.DeckBrowser ,aqt.overview.Overview,aqt.toolbar.TopToolbar ,
+         aqt.deckbrowser.DeckBrowserBottomBar , aqt.overview.OverviewBottomBar)):        
+        web_content.js.append ("../assets/js/canvasjs.min.js")
+        web_content.js.append ("../assets/js/script.js")
+        web_content.css.append ("../assets/css/font.css")
+        web_content.css.append ("../assets/css/animate.css")
+        web_content.css.append ("../assets/css/materialize.css")
+
+    if  isinstance(context, aqt.overview.Overview):        
+        web_content.css.append ("../assets/css/overview.css")
+    if  isinstance(context, aqt.deckbrowser.DeckBrowser):        
+        web_content.css.append ("../assets/css/deckbrowser.css")
+    if isinstance (context , ( aqt.deckbrowser.DeckBrowserBottomBar,aqt.overview.OverviewBottomBar)):         
+        web_content.css.append ("../assets/css/bottombar.css")
+    if isinstance (context ,  aqt.toolbar.TopToolbar):
+        web_content.css.append ("../assets/css/toolbar.css")
+
+        
+        
+        
 
 
 
 
 def desc(self, deck , _old):
-    if deck["dyn"]:
-        desc = _(
-            """\
-This is a special deck for studying outside of the normal schedule."""
-        )
-        desc += " " + _(
-            """\
-Cards will be automatically returned to their original decks after you review \
-them."""
-        )
-        desc += " " + _(
-            """\
-Deleting this deck from the deck list will return all remaining cards \
-to their original deck."""
-        )
+    button = mw.button
+    desc=""
+
+    counts = list(self.mw.col.sched.counts())
+    finished = not sum(counts)
+    if finished:
+        finish_msg = u'''
+      <div style="white-space: pre-wrap;"> {:s}</div>
+    '''.format(self.mw.col.sched.finishedMsg())
+        btn=""
+        desc = finish_msg
     else:
-        desc = deck.get("desc", "")
+        finish_msg =""
+        btn = u'''      
+            {button:s} 
+            '''.format(button=button('study', _('<i class=\" material-icons right\">exit_to_app</i>  Study Now'), id='study', class_='waves-effect waves-light btn-large'))
+
+
+
+
+    if deck["dyn"]:
+        desc += """
+<div class='card-panel animate__animated animate__fadeInUp animate__slow amber amber lighten-4'>This is a special deck for studying outside of the normal schedule.
+Cards will be automatically returned to their original decks after you review 
+them.Deleting this deck from the deck list will return all remaining cards 
+to their original deck.</div>"""
+        
+    else:
+        desc+="<div class=''>"
+        desc += deck.get("desc", "")
+        desc +="""
+        </div>
+        <br>
+        <br>
+        <div>
+        {}
+        </div>
+        """.format(btn)
     if not desc:
         return "<p>"
     if deck["dyn"]:
@@ -68,11 +104,6 @@ to their original deck."""
 bg_path = "assets/deck_backgrounds/"+"%(deck)s.jpg"
 background_style="body{ background-image:linear-gradient(311deg,#9E9E9E, #033155cc), url('"+ bg_path +"'); }"
 
-
-table= """
-%(table)s
-"""
-heatMap = Overview._body.split(table)[1]
 
 button = mw.button
 
@@ -191,25 +222,6 @@ def table(self):
     cards['daysLeft'] = '{} days'.format(daysUntilDone)
 
 
-  output =''
-
-  if deck_is_finished:
-    if (not 'options' in settings) or (settings['options'].get(
-        'show_table_for_finished_decks', True)):
-      # output += output_table
-      output += u'''
-        </div>
-       
-      '''
-
-    
-    finish_msg = u'''
-      <div style="white-space: pre-wrap;">{:s}</div>
-    '''.format(self.mw.col.sched.finishedMsg())
-    is_Finished = True
-  else:
-    finish_msg=""
-
   output = u'''
     <div class="conatiner" ><div class='row'>
 
@@ -298,22 +310,19 @@ chart.render();
     <div class='col s6 charts' id="chartContainer" style="width: 50%;height:360px; ">
     </div>
 
-  <div class="finished" style='display:none'>
-    {finish_msg}
-   </div> 
 
   </div> 
 
   
 
-  '''.format(cards=cards,finish_msg=finish_msg)
+  '''.format(cards=cards,)
 
   
 
   return  output
 
 
-# Overview._body =s
+
 Overview._body = """
 
 <style>
@@ -322,37 +331,23 @@ Overview._body = """
 <center class='container  grey-text text-darken-4'>
 <div class = 'row flex' >
 <div class=' col s5 '>
-
+<div class='container'>
 <h1>%(deck)s</h1>
 %(shareLink)s
 %(desc)s
-<br>
-<div>
-{}
 </div>
 </div>
 <div class=' col s7 right-col'>
 %(table)s
-<div class='row card'>
-<div class="card-content">
-{}
-</div>
-</div>
+
 </div>
 </div>
 
 </center>
 
-<script>
 
-  finished = document.querySelector('.finished')
-  newEl = document.createElement('div')
-  newEl.innerHTML=finished.innerHTML
-  document.querySelector('h1').parentElement.appendChild(newEl)
-  finished.parentElement.removeChild(finished)
-</script>
 
-""".format(background_style ,btn,heatMap,)
+""".format(background_style ,)
 
 
 
@@ -383,6 +378,15 @@ def renderDeckBottom(self,_old):
 
 #####################################################################################################################
 
+def finishedMsg(self,_old) -> str:
+    return (
+        "<div class='finish-msg animate__animated animate__rubberBand amber card-panel'>"
+        + _("Congratulations! You have finished this deck for now.")
+        + "<br></div>"
+        + self._nextDueMsg()
+    )
+
+
 def nextDueMsg(self,_old) -> str:
     line = []
 
@@ -396,9 +400,10 @@ def nextDueMsg(self,_old) -> str:
         line.append(
             _(
                 """\
+<div class='card-panel animate__animated animate__fadeInUp animate__slow amber amber lighten-4'>
 Today's review limit has been reached, but there are still cards
 waiting to be reviewed. For optimum memory, consider increasing
-the daily limit in the options."""
+the daily limit in the options.</div>"""
             ).replace("\n", " ")
         )
     if self.newDue():
@@ -430,15 +435,9 @@ Some related or buried cards were delayed until a later session."""
 To study outside of the normal schedule, click the Custom Study button below."""
             )
         )
-    return "<p>".join(line) 
+    return "<p class='card-panel animate__animated animate__fadeInUp animate__slow amber lighten-4'>".join(line) 
 
-def _finishedMsg(self,_old) -> str:
-        return (
-            "<b>"
-            + _("Congratulations! You have finished this deck for now.")
-            + "</b><br><br>"
-            + self._nextDueMsg()
-        )
+
 
 #####################################################################################################################
 
@@ -447,10 +446,9 @@ def updateRenderingDeckOverview():
     Overview._desc = wrap(Overview._desc  , desc, "around")    
     Overview._table = table
     Overview._renderBottom = wrap(Overview._renderBottom  , renderDeckBottom, "around")
+    
     Scheduler._nextDueMsg=wrap(Scheduler._nextDueMsg , nextDueMsg , "around")
-    Scheduler.finishedMsg= wrap(Scheduler.finishedMsg,_finishedMsg,"around")
+    Scheduler.finishedMsg=wrap(Scheduler.finishedMsg , finishedMsg , "around")
     
     # add my css and js to the deck overview page
     gui_hooks.webview_will_set_content.append(on_webview_will_set_content)
-
-

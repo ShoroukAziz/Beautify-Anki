@@ -1,0 +1,63 @@
+
+  body{
+    
+   background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
+   height: 100vh;
+  }
+  
+  .padding{
+      padding-left: 10px; 
+  }
+  .decktd {
+      text-align:left
+  }
+  .gears {
+      width: 2em;
+      height: 2em;
+      opacity: 1;
+      padding-top: 0.2em;
+  }
+  
+  .review-count {
+    color: #fff;
+    background-color: #4caf50;
+    padding: 5px 15px;
+    border-radius: 10px;
+  }
+  
+  
+  .new-count {
+    color: #fff;
+    background-color:#3f51b5;
+    padding: 5px 15px;
+    border-radius: 10px;
+  }
+  
+  .learn-count {
+    color: #fff;
+    background-color:rgb(195, 43, 23);
+    padding: 5px 15px;
+    border-radius: 10px;
+  
+  }
+  
+  .zero-count {
+    color: #fff;
+    background-color: #9e9e9e;
+    padding: 5px 15px;
+    border-radius: 10px;
+  
+  }
+  
+  .card.small {
+       height: 55px; 
+  }
+  
+  .card .card-content {
+      padding: 10px;
+      border-radius: 0 0 2px 2px;
+  }
+  
+  .row {
+      margin-bottom: 0;
+      }

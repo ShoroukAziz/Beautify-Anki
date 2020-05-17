@@ -53,45 +53,46 @@ def updateStatsMethod():
 
         
         
-        stats = _old(self).split('card)')[0]+'card)'
+        stats = _old(self)
         
         
-        
-        def getHeatMapData():
-            heat_map = _old(self).split('card)')[1]      
-            heat_map = """
-        <div class="row">
-        <div class="card">
-        <div class="card-content">
-        {}
-        </div>
-        </div>
-        </div>
-        """.format(heat_map)               
-            longest_streak = heat_map.split('Longest streak')[1].split('day')[0].split('">')[1]
-            longest_streak_icon='stars'
-            longest_streak_color = 'amber-text'
-
-            if int(longest_streak) >= 2:
-                longest_streak +=" days"
-            else :
-                if int(longest_streak) == 0:
-                    longest_streak_icon = 'sentiment_very_dissatisfied'
-                    longest_streak_color = ' grey-text text-darken-3'
-                longest_streak +=" day"
-        
-            current_streak = heat_map.split('Current streak')[1].split('day')[0].split('">')[1]
-            current_streak_icon = 'grade'
-            current_streak_color = 'amber-text'
-            if int(current_streak) >= 2:
-                current_streak +=" days"            
-            else :       
-                if int(current_streak) == 0:
-                    current_streak_icon = 'sentiment_very_dissatisfied'
-                    current_streak_color = ' grey-text text-darken-3'
-                current_streak +=" day"
+        # def getHeatMapData():
+        #     heat_map = _old(self).split('card)')[1]      
+        #     heat_map = """
+        # <div class="row">
+        # <div class="card">
+        # <div class="card-content">
+        # {}
+        # </div>
+        # </div>
+        # </div>
+        # """.format(heat_map)   
+        #     return ("" , "" , "","" , "" , "" ,heat_map)
             
-            return (current_streak_color,current_streak_icon,current_streak,longest_streak_color,longest_streak_icon ,longest_streak,heat_map)
+            # longest_streak = heat_map.split('Longest streak')[1].split('day')[0].split('">')[1]
+            # longest_streak_icon='stars'
+            # longest_streak_color = 'amber-text'
+
+            # if int(longest_streak) >= 2:
+            #     longest_streak +=" days"
+            # else :
+            #     if int(longest_streak) == 0:
+            #         longest_streak_icon = 'sentiment_very_dissatisfied'
+            #         longest_streak_color = ' grey-text text-darken-3'
+            #     longest_streak +=" day"
+        
+            # current_streak = heat_map.split('Current streak')[1].split('day')[0].split('">')[1]
+            # current_streak_icon = 'grade'
+            # current_streak_color = 'amber-text'
+            # if int(current_streak) >= 2:
+            #     current_streak +=" days"            
+            # else :       
+            #     if int(current_streak) == 0:
+            #         current_streak_icon = 'sentiment_very_dissatisfied'
+            #         current_streak_color = ' grey-text text-darken-3'
+            #     current_streak +=" day"
+            
+            # return (current_streak_color,current_streak_icon,current_streak,longest_streak_color,longest_streak_icon ,longest_streak,heat_map)
 
         
        
@@ -119,18 +120,18 @@ def updateStatsMethod():
         </div>
         """.format(new_cards,due_cards)
 
-        HeatMapData = getHeatMapData()
-        streak_row="""
-         <div class="row">
-        <div class='col s6 valign-wrapper card horizontal small  grey lighten-3  grey-text text-darken-4'>
-         <i class=" material-icons  small  {}  left">{}</i> Current Streak <br>
-            {}
-        </div>
-        <div class='col s6 valign-wrapper card horizontal small   grey lighten-3  grey-text text-darken-4'>
-           <i class=" material-icons  small  {}  left">{}</i> Longest Streak <br> {} 
-        </div>
-        </row></div>
-        """.format(HeatMapData[0],HeatMapData[1],HeatMapData[2],HeatMapData[3],HeatMapData[4],HeatMapData[5])
+
+        # streak_row="""
+        #  <div class="row">
+        # <div class='col s6 valign-wrapper card horizontal small  grey lighten-3  grey-text text-darken-4'>
+        #  <i class=" material-icons  small  {}  left">{}</i> Current Streak <br>
+        #     {}
+        # </div>
+        # <div class='col s6 valign-wrapper card horizontal small   grey lighten-3  grey-text text-darken-4'>
+        #    <i class=" material-icons  small  {}  left">{}</i> Longest Streak <br> {} 
+        # </div>
+        # </row></div>
+        # """.format(HeatMapData[0],HeatMapData[1],HeatMapData[2],HeatMapData[3],HeatMapData[4],HeatMapData[5])
         
         original_stats_row="""
         <div class="row">
@@ -164,7 +165,7 @@ def updateStatsMethod():
         """.format(totals_cards)
 
         
-        buf = streak_row+original_stats_row+ average_remaining_row+new_due_row+total_row+HeatMapData[6]
+        buf = original_stats_row+ average_remaining_row+new_due_row+total_row
         return buf
 
 

@@ -14,8 +14,14 @@ from aqt import AnkiQt, gui_hooks
 from aqt.utils import shortcut 
 from copy import deepcopy
 from .helpers import *
+from .config import *
 
 
+def init(self, mw: AnkiQt) -> None:
+    self.mw = mw
+    self.web = mw.web
+    # self.bottom = BottomBar(mw, mw.bottomWeb)
+    self.scrollPos = QPoint(0, 0)
 
 CountTimesNew = 2
 def renderStats(self, _old):
@@ -41,80 +47,55 @@ def renderStats(self, _old):
     thetime = thetime or 0
 
     speed   = cards * 60 / max(1, thetime)
-    minutes = int(total / max(1, speed))
+    minutes = int(total / max(1, speed))             
 
     
-    
-    stats = _old(self)
-            
-    
-    new_cards = " <i class=' material-icons  medium white-text   left'>fiber_new</i>   New Cards :  &nbsp;  %(d)s" % dict(d=new)
-    
-    learn_cards = " Learn : &nbsp;  %(c)s <br> "% dict(c=lrn)
-    review_cards = " Review : &nbsp; %(c)s  "% dict(c=due)       
-    due_cards = "<i class=' material-icons  medium white-text   left'>schedule</i>   Due  :  &nbsp;   %(c)s<br> " %dict(c=(lrn+due))
-    due_cards+= learn_cards +review_cards 
-    
-    totals_cards = "<i class=' material-icons  medium white-text left'>donut_small </i> Total :  &nbsp;  %(c)s" % dict(c=(totalDisplay))
-    
-    average_remaining =   _("%.01f") % (speed) + "<br>" + (_("Cards") + "/" + _("Minutes").replace("s", "")).lower()  
-
-
-    new_due_row="""
+    buf="""
     <div class="row">
-    <div class='col s6 valign-wrapper card horizontal small stats  indigo darken-1 white-text'>
-    {}
+    <div class='col s12 valign-wrapper card horizontal small stats  {STATS[label-bg1]}  {STATS[labels-color]}'>
+            <i class=" material-icons  medium {STATS[labels-color]}   left">{STATS[icon1]}</i>
+        {old_stats}
     </div>
-    <div class='col s6 valign-wrapper card horizontal small stats white-text  cyan darken-4 white-text'>
-    {}
     </div>
-
-    </div>
-    """.format(new_cards,due_cards)
-
-
-    
-    original_stats_row="""
     <div class="row">
-    <div class='col s12 valign-wrapper card horizontal small stats white-text green  white-text'>
-            <i class=" material-icons  medium white-text   left">playlist_add_check</i>
-        {}
+    <div class='col s6 valign-wrapper card horizontal small stats  {STATS[label-bg2]} {STATS[labels-color]}'>
+        <i class=" material-icons  medium {STATS[labels-color]} left">{STATS[icon2]}</i> Average:
+        {speed:.2f} <br> cards/minute
+    </div>
+    <div class='col s6 valign-wrapper card horizontal small stats   {STATS[label-bg3]} {STATS[labels-color]}'>
+        <i class=" material-icons  medium {STATS[labels-color]} left">{STATS[icon3]}</i> {} more
     </div>
     </div>
-    """.format(stats)
-
-    average_remaining_row="""
     <div class="row">
-    <div class='col s6 valign-wrapper card horizontal small stats  yellow darken-4 white-text'>
-        <i class=" material-icons  medium white-text   left">access_alarm</i> Average:
-        {}
+    <div class='col s6 valign-wrapper card horizontal small stats  {STATS[label-bg4]} {STATS[labels-color]}'>
+    <i class=' material-icons  medium {STATS[labels-color]}   left'>{STATS[icon4]}</i>   New Cards :  &nbsp; {new_count}
     </div>
-    <div class='col s6 valign-wrapper card horizontal small stats   deep-orange darken-4 white-text'>
-        <i class=" material-icons  medium white-text text-darken-2   left">timer</i> {} more
+    <div class='col s6 valign-wrapper card horizontal small stats  {STATS[label-bg5]} {STATS[labels-color]}'>
+    <i class=' material-icons  medium {STATS[labels-color]}   left'>{STATS[icon5]}</i>   Due  :  &nbsp; {due_count}<br>
+    Learn : &nbsp; {learn_count} <br> 
+    Review : &nbsp; {review_count} 
     </div>
-    </row></div>
-    """.format(average_remaining, str(ngettext("%s minute", "%s minutes", minutes) % (minutes)))
-
-    total_row="""
+    </div>
     <div class='row'>
-        <div class='col s12 valign-wrapper card horizontal small stats light-blue darken-2 white-text'>
-    {}
+        <div class='col s12 valign-wrapper card horizontal small stats {STATS[label-bg6]} {STATS[labels-color]}'>
+    <i class=' material-icons  medium {STATS[labels-color]} left'>{STATS[icon6]} </i> Total :  &nbsp;  {total_cards}
     </div>
 
     </div>
     </div></div>
-    """.format(totals_cards)
-
+    """.format( str(ngettext("%s minute", "%s minutes", minutes) % (minutes)),
+        old_stats=_old(self), speed=speed,
+        new_count=new,due_count=lrn+due,learn_count=lrn,review_count=due,
+        total_cards=totalDisplay,STATS=STATS)
     
-    buf = original_stats_row+ average_remaining_row+new_due_row+total_row
+  
     return buf
 
 
 def renderDeckTree(self, nodes,depth, _old,):
     if not nodes:
         return ""
-    else:
-        buf = ""
+    buf = ""
     nameMap = self.mw.col.decks.nameMap()
     for node in nodes:
         buf += self._deckRow(node, depth, len(nodes), nameMap)
@@ -132,9 +113,9 @@ def deckRow(self, node, depth, cnt, nameMap , _old):
         if parent["collapsed"]:
             buff = ""
             return buff
-    prefix = "-"
+    prefix = " - "
     if self.mw.col.decks.get(did)["collapsed"]:
-        prefix = "+"
+        prefix = " + "
     due += lrn
 
     def indent():
@@ -189,8 +170,6 @@ def deckRow(self, node, depth, cnt, nameMap , _old):
     buf += self._renderDeckTree(children, depth + 1)
     return buf
 
-    def _topLevelDragRow(self):
-        return "<tr class='top-level-drag-row'><span colspan='6'>&nbsp;</span></tr>"
 
 
 
@@ -207,10 +186,11 @@ def drawButtons(self,_old):
         if b[0]:
             b[0] = _("Shortcut key: %s") % shortcut(b[0])
         buf += """
-<a class='waves-effect waves-light btn-small' title='%s' onclick='pycmd(\"%s\");'> %s </a>""" % tuple(
+<a class='{MAIN[bg-color]} waves-effect waves-light btn-small' title='%s' onclick='pycmd(\"%s\");'> %s </a>""".format(MAIN=MAIN) %  tuple(
             b
         )
     self.bottom.draw(
+        
         buf=buf,
         link_handler=self._linkHandler,
         web_context=DeckBrowserBottomBar(self),
@@ -220,11 +200,11 @@ def drawButtons(self,_old):
 
 
 Toolbar. _body = """
-<nav class='teal lighten-2'  width=100%%>
+<nav class='{MAIN[bg-color]}'  width=100%%>
 <tr>
 <td class=tdcenter align=center>%s</td>
 </tr></nav>
-"""
+""".format(MAIN=MAIN)
 
 DeckBrowser._body = """'
 <center class="container">
@@ -238,7 +218,6 @@ DeckBrowser._body = """'
 %(stats)s
 </div>
 </center>
-
 """
 
 def updateRenderingMethods():   

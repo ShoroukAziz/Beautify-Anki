@@ -21,6 +21,7 @@ from aqt.utils import showInfo
 
 from copy import deepcopy
 from .helpers import *
+from .config import *
 
 
         
@@ -41,7 +42,7 @@ def desc(self, deck , _old):
         finish_msg =""
         btn = u'''      
             {button:s} 
-            '''.format(button=button('study', _('<i class=\" material-icons right\">exit_to_app</i>  Study Now'), id='study', class_='waves-effect waves-light btn-large'))
+            '''.format(button=button('study', _('<i class=\"  material-icons right\">exit_to_app</i>  Study Now'), id='study', class_='waves-effect waves-light {MAIN[bg-color]} btn-large'.format(MAIN=MAIN)))
 
     if deck["dyn"]:
         desc += """
@@ -329,7 +330,7 @@ def renderDeckBottom(self,_old):
         if b[0]:
             b[0] = _("Shortcut key: %s") % shortcut(b[0])
         buf += """
-<button class='btn-small' title="%s" onclick='pycmd("%s")'>%s</button>""" % tuple(
+<button class='{MAIN[bg-color]} btn-small' title="%s" onclick='pycmd("%s")'>%s</button>""".format(MAIN=MAIN) % tuple(
             b
         )
       

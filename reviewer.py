@@ -3,6 +3,7 @@ from aqt import  gui_hooks
 from aqt.reviewer import Reviewer
 from aqt.utils import *
 import json
+from .config import *
 
 
 def bottomHTML(self):
@@ -12,12 +13,12 @@ def bottomHTML(self):
 <tr>
 <td align=left width=50 valign=top class=stat>
 <br>
-<a class='waves-effect waves-light btn-small'title="%(editkey)s" onclick="pycmd('edit');">%(edit)s</a></td>
+<a class='{MAIN[bg-color]} waves-effect waves-light btn-small'title="%(editkey)s" onclick="pycmd('edit');">%(edit)s</a></td>
 <td align=center valign=top id=middle>
 </td>
 <td width=50 align=right valign=top class=stat><span id=time class=stattxt>
 </span><br>
-<a class='waves-effect waves-light btn-small' onclick="pycmd('more');">%(more)s %(downArrow)s</a>
+<a class='{MAIN[bg-color]} waves-effect waves-light btn-small' onclick="pycmd('more');">%(more)s %(downArrow)s</a>
 </td>
 </tr>
 </table>
@@ -25,7 +26,7 @@ def bottomHTML(self):
 <script>
 time = %(time)d;
 </script>
-""" % dict(
+""".format(MAIN=MAIN) % dict(
         rem=self._remaining(),
         edit=_("Edit"),
         editkey=_("Shortcut key: %s") % "E",
@@ -39,7 +40,7 @@ def showAnswerButton(self):
         self.bottom.web.setFocus()
     middle = """
 <span class=stattxt>%s</span><br>
-<a class='waves-effect waves-light btn-small' title="%s" id=ansbut onclick='pycmd("ans");'>%s</a>""" % (
+<a class='{MAIN[bg-color]} waves-effect waves-light btn-small' title="%s" id=ansbut onclick='pycmd("ans");'>%s</a>""".format(MAIN=MAIN) % (
         self._remaining(),
         _("Shortcut key: %s") % _("Space"),
         _("Show Answer"),

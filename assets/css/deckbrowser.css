@@ -1,8 +1,9 @@
 
   body{
     
-   background-image: linear-gradient(-20deg, #e9defa8f 0%, #fbfcdb81 100%) , url('../background.jpg');
+   background-image: linear-gradient(20deg,#1f6d66b8, #033155cc) , url('../background.jpg');
    height: 100vh;
+   background-size: 100%;
   }
   
   .padding{

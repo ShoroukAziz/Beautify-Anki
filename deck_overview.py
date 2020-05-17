@@ -23,35 +23,8 @@ from copy import deepcopy
 from .helpers import *
 
 
-
-# add my css and js to the deck overview page
-def on_webview_will_set_content (web_content: aqt.webview.WebContent,  context: Optional[Any]):
-    # showInfo(str(context))
-    if  isinstance(context, (
-        aqt.deckbrowser.DeckBrowser ,aqt.overview.Overview,aqt.toolbar.TopToolbar ,
-         aqt.deckbrowser.DeckBrowserBottomBar , aqt.overview.OverviewBottomBar)):        
-        web_content.js.append ("../assets/js/canvasjs.min.js")
-        web_content.js.append ("../assets/js/script.js")
-        web_content.css.append ("../assets/css/font.css")
-        web_content.css.append ("../assets/css/animate.css")
-        web_content.css.append ("../assets/css/materialize.css")
-
-    if  isinstance(context, aqt.overview.Overview):        
-        web_content.css.append ("../assets/css/overview.css")
-    if  isinstance(context, aqt.deckbrowser.DeckBrowser):        
-        web_content.css.append ("../assets/css/deckbrowser.css")
-    if isinstance (context , ( aqt.deckbrowser.DeckBrowserBottomBar,aqt.overview.OverviewBottomBar)):         
-        web_content.css.append ("../assets/css/bottombar.css")
-    if isinstance (context ,  aqt.toolbar.TopToolbar):
-        web_content.css.append ("../assets/css/toolbar.css")
-
         
         
-        
-
-
-
-
 def desc(self, deck , _old):
     button = mw.button
     desc=""
@@ -69,9 +42,6 @@ def desc(self, deck , _old):
         btn = u'''      
             {button:s} 
             '''.format(button=button('study', _('<i class=\" material-icons right\">exit_to_app</i>  Study Now'), id='study', class_='waves-effect waves-light btn-large'))
-
-
-
 
     if deck["dyn"]:
         desc += """
@@ -103,15 +73,6 @@ to their original deck.</div>"""
 
 bg_path = "assets/deck_backgrounds/"+"%(deck)s.jpg"
 background_style="body{ background-image:linear-gradient(311deg,#9E9E9E, #033155cc), url('"+ bg_path +"'); }"
-
-
-button = mw.button
-
-
-btn = u'''      
-    {button:s} 
-    '''.format(button=button('study', _('<i class=\" material-icons right\">exit_to_app</i>  Study Now'), id='study', class_='waves-effect waves-light btn-large'))
-
 
 
 def table(self):
@@ -368,7 +329,7 @@ def renderDeckBottom(self,_old):
         if b[0]:
             b[0] = _("Shortcut key: %s") % shortcut(b[0])
         buf += """
-<button class='btn' title="%s" onclick='pycmd("%s")'>%s</button>""" % tuple(
+<button class='btn-small' title="%s" onclick='pycmd("%s")'>%s</button>""" % tuple(
             b
         )
       
@@ -410,10 +371,11 @@ the daily limit in the options.</div>"""
         line.append(
             _(
                 """\
+<div class='card-panel animate__animated animate__fadeInUp animate__slow amber amber lighten-4'>
 There are more new cards available, but the daily limit has been
 reached. You can increase the limit in the options, but please
 bear in mind that the more new cards you introduce, the higher
-your short-term review workload will become."""
+your short-term review workload will become.</div>"""
             ).replace("\n", " ")
         )
     if self.haveBuried():
@@ -424,7 +386,8 @@ your short-term review workload will become."""
         line.append(
             _(
                 """\
-Some related or buried cards were delayed until a later session."""
+<div class='card-panel animate__animated animate__fadeInUp animate__slow amber amber lighten-4'>
+Some related or buried cards were delayed until a later session.</div>"""
             )
             + now
         )
@@ -432,10 +395,11 @@ Some related or buried cards were delayed until a later session."""
         line.append(
             _(
                 """\
-To study outside of the normal schedule, click the Custom Study button below."""
+<div class='card-panel animate__animated animate__fadeInUp animate__slow amber amber lighten-4'>
+ To study outside of the normal schedule, click the Custom Study button below.</div>"""
             )
         )
-    return "<p class='card-panel animate__animated animate__fadeInUp animate__slow amber lighten-4'>".join(line) 
+    return "".join(line) 
 
 
 
@@ -450,5 +414,4 @@ def updateRenderingDeckOverview():
     Scheduler._nextDueMsg=wrap(Scheduler._nextDueMsg , nextDueMsg , "around")
     Scheduler.finishedMsg=wrap(Scheduler.finishedMsg , finishedMsg , "around")
     
-    # add my css and js to the deck overview page
-    gui_hooks.webview_will_set_content.append(on_webview_will_set_content)
+

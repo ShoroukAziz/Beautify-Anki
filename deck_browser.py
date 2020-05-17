@@ -2,15 +2,112 @@
 from anki.errors import DeckRenameError
 from anki.hooks import wrap
 import anki.sched, anki.schedv2
+from anki.lang import _, ngettext
 from aqt import mw
 from aqt.deckbrowser import DeckBrowser , DeckBrowserBottomBar
 from aqt.toolbar import Toolbar , BottomBar
+from aqt.reviewer import Reviewer
+from aqt.utils import *
+
+
 from aqt import AnkiQt, gui_hooks
 from aqt.utils import shortcut 
 from copy import deepcopy
-
 from .helpers import *
 
+
+
+CountTimesNew = 2
+def renderStats(self, _old):
+    # Get due and new cards
+    new = 0
+    lrn = 0
+    due = 0
+
+    for tree in self.mw.col.sched.deckDueTree():
+        new += tree[4]
+        lrn += tree[3]
+        due += tree[2]
+
+    total = (CountTimesNew*new) + lrn + due
+    totalDisplay = new + lrn + due
+
+    # Get studdied cards
+    cards, thetime = self.mw.col.db.first(
+            """select count(), sum(time)/1000 from revlog where id > ?""",
+            (self.mw.col.sched.dayCutoff - 86400) * 1000)
+
+    cards   = cards or 0
+    thetime = thetime or 0
+
+    speed   = cards * 60 / max(1, thetime)
+    minutes = int(total / max(1, speed))
+
+    
+    
+    stats = _old(self)
+            
+    
+    new_cards = " <i class=' material-icons  small indigo-text   left'>fiber_new</i>   New Cards :  &nbsp;  %(d)s" % dict(d=new)
+    
+    learn_cards = " Learn : &nbsp;  %(c)s <br> "% dict(c=lrn)
+    review_cards = " Review : &nbsp; %(c)s  "% dict(c=due)       
+    due_cards = "<i class=' material-icons  small red-text text-darken-2  left'>schedule</i>   Due  :  &nbsp;   %(c)s<br> " %dict(c=(lrn+due))
+    due_cards+= learn_cards +review_cards 
+    
+    totals_cards = "<i class=' material-icons  small light-blue-text left'>donut_small </i> Total :  &nbsp;  %(c)s" % dict(c=(totalDisplay))
+    
+    average_remaining =   _("%.01f") % (speed) + "&nbsp;" + (_("Cards") + "/" + _("Minutes").replace("s", "")).lower()  
+
+
+    new_due_row="""
+    <div class="row">
+    <div class='col s6 valign-wrapper card horizontal small red-text indigo lighten-4 grey-text text-darken-4'>
+    {}
+    </div>
+    <div class='col s6 valign-wrapper card horizontal small white-text red lighten-4 grey-text text-darken-4'>
+    {}
+    </div>
+
+    </div>
+    """.format(new_cards,due_cards)
+
+
+    
+    original_stats_row="""
+    <div class="row">
+    <div class='col s12 valign-wrapper card horizontal small white-text green lighten-4 grey-text text-darken-4'>
+            <i class=" material-icons  small green-text   left">playlist_add_check</i>
+        {}
+    </div>
+    </div>
+    """.format(stats)
+
+    average_remaining_row="""
+    <div class="row">
+    <div class='col s6 valign-wrapper card horizontal small lime lighten-4 grey-text text-darken-4'>
+        <i class=" material-icons  small lime-text   left">access_alarm</i> Average:
+        {}
+    </div>
+    <div class='col s6 valign-wrapper card horizontal small  red lighten-4 grey-text text-darken-4'>
+        <i class=" material-icons  small red-text text-darken-2   left">timer</i> {} &nbsp;more
+    </div>
+    </row></div>
+    """.format(average_remaining, str(ngettext("%s minute", "%s minutes", minutes) % (minutes)))
+
+    total_row="""
+    <div class='row'>
+        <div class='col s12 valign-wrapper card horizontal small light-blue lighten-4 grey-text text-darken-4'>
+    {}
+    </div>
+
+    </div>
+    </div></div>
+    """.format(totals_cards)
+
+    
+    buf = original_stats_row+ average_remaining_row+new_due_row+total_row
+    return buf
 
 
 def renderDeckTree(self, nodes,depth, _old,):
@@ -128,36 +225,27 @@ Toolbar. _body = """
 <td class=tdcenter align=center>%s</td>
 </tr></nav>
 """
+
 DeckBrowser._body = """'
-
 <center class="container">
-
 <div class=row>
-
 <div class="col s8">
 <ul class=" card collection highlight" cellspacing=0 cellpading=3>
 %(tree)s
 </ul>
 </div>
-
 <div class="col s4">
 %(stats)s
-
-
 </div>
 </center>
 
 """
 
-
-# BottomBar._centerBody = """
-# <center id=outer><div width=100%% id=header><td align=center>
-# %s</td></div></center>
-# """
-
-
 def updateRenderingMethods():   
 
     DeckBrowser._renderDeckTree = wrap(DeckBrowser._renderDeckTree , renderDeckTree, "around")
-    DeckBrowser._deckRow = anki.hooks.wrap(DeckBrowser._deckRow, deckRow, 'around')
-    DeckBrowser._drawButtons = anki.hooks.wrap(DeckBrowser._drawButtons, drawButtons, 'around')
+    DeckBrowser._deckRow = wrap(DeckBrowser._deckRow, deckRow, 'around')
+    DeckBrowser._drawButtons = wrap(DeckBrowser._drawButtons, drawButtons, 'around')
+    DeckBrowser._renderStats = wrap(DeckBrowser._renderStats, renderStats, 'around')
+    
+    

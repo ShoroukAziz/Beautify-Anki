@@ -23,7 +23,7 @@ For feature request and bug report please post a [new issue](https://github.com/
 
 
 ## ⚙️ Configuration and Customization 
-Checkout the [addon's wiki](https://github.com/my-Anki/Beautify-Anki/wiki) for custmoization options
+Checkout the [addon's wiki](https://github.com/my-Anki/Beautify-Anki/wiki/Customizing-Beautify-Anki) for custmoization options
 
 ## 🙏 Acknowledgments
 * This Addon uses the following CSS and Javascript libraries
@@ -40,7 +40,6 @@ Checkout the [addon's wiki](https://github.com/my-Anki/Beautify-Anki/wiki) for c
 
 ## 📄 License 
 Beautify Anki n is released under  GNU AGPL, version 3 or later Copyright (c) 2020 Shorouk Abdelaziz
-
 
 
 ## ❤️ Support

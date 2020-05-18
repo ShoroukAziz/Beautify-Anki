@@ -27,12 +27,14 @@ h1{
   border-radius:5px;
 }
 
-.total{
-  width: 92.4% !important;
-  margin-left: 1% !important;
+.top{
+  /* width: 92.4% !important;
+  margin-left: 1% !important; */
   height:60px;
   padding:15px;
   border-radius:5px;
+  height: 80px;
+
 
 }
 

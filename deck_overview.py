@@ -164,6 +164,7 @@ def table(self):
   cards['new'] = scheduled_counts[0]
   cards['learning'] = scheduled_counts[1]
   cards['review'] = scheduled_counts[2]
+  cards['todo'] = cards['new'] + cards['learning'] + cards['review']
 
   try:
     daysUntilDone = math.ceil(cards['unseen'] / learn_per_day)
@@ -207,7 +208,7 @@ window.onload = function () {{
 
 var layout = {{
   showlegend: true,
-  height: 360,
+  height: 387,
   width: 350,
   margin: {{"t": 0, "b": 0, "l": 0, "r": 0}},
 	legend: {{"orientation": "h"  }}  
@@ -223,10 +224,18 @@ Plotly.newPlot('myDiv', data, layout);
   
 <div class='row'>
 
-  <div class= 'col s12 teal darken-1 white-text total'>
+  <div class= 'col s6 teal darken-1 white-text top'>
   
-   <span class='number'> {cards[total]:d} </span> Total Cards
+   <span class='number'> {cards[total]:d}<br> </span> Total Cards
   </div>
+
+        <div class='top amber darken-3 white-text col s6 flex'>
+      <i class=" material-icons">timer</i>
+      done in 
+      {cards[daysLeft]:s} 
+      
+      {cards[doneDate]:s}      
+      </div>
 
       <div class='number-container indigo darken-1 white-text col s6 '>
       <div class='number'>
@@ -252,22 +261,23 @@ Plotly.newPlot('myDiv', data, layout);
       Review      
       </div>
 
-
-      <div class='number-container amber darken-3 white-text col s6 flex'>
-      <i class=" material-icons">timer</i><br>
-      done in 
+      <div class='number-container  deep-purple darken-1 white-text col s6 '>
       <div class='number'>
-      {cards[daysLeft]:s} 
+      <i class=" material-icons">donut_small</i><br>
+      {cards[todo]:d}
       </div>
-      {cards[doneDate]:s}      
+      Total      
       </div>
+
+
+
 
       </div>
   
 
 </div>  
 
-    <div id='myDiv' class='col s6 charts'  style="height:360px;width: 50%; ">
+    <div id='myDiv' class='col s6'  style="height:387px;width: 50%; ">
 
   </div> 
 
@@ -289,7 +299,7 @@ Overview._body = """
 <div class = 'row flex' >
 <div class=' col s5 '>
 <div class='container'>
-<h1>%(deck)s</h1>
+<h1 class="animate__animated  animate__delay animate__backInDown">%(deck)s</h1>
 %(shareLink)s
 %(desc)s
 </div>

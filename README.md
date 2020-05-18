@@ -11,7 +11,7 @@ Beautify Anki is an Anki addon that attempts to give Anki's deck browser and dec
 **Join the discussion at [reddit]() or my [blog]()**
 
 ---
-
+## Features
 
 ## 📥 Download 
 Download the latest version from [Ankiweb]() or select a version manually from [here](https://github.com/my-Anki/Beautify-Anki/releases)

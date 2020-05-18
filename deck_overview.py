@@ -73,7 +73,7 @@ to their original deck.</div>"""
 
 
 bg_path = "assets/deck_backgrounds/"+"%(deck)s.jpg"
-background_style="body{ background-image:linear-gradient(311deg,#9E9E9E, #033155cc), url('"+ bg_path +"') ,url('assets/background.jpg'); }"
+background_style="body{ background-image:linear-gradient(311deg,#9E9E9E, #033155cc), url('"+ bg_path +"') ,url('assets/background.jpg');background-size:100%% }"
 
 
 def table(self):
@@ -184,43 +184,41 @@ def table(self):
     cards['daysLeft'] = '{} days'.format(daysUntilDone)
 
 
+
   output = u'''
     <div class="conatiner" ><div class='row'>
 
 <script type="text/javascript">
 
 window.onload = function () {{
+    var data = [{{
+  type: "pie",
+  hole: .5,
+  automargin: true,
+  values: [{cards[mature]:d}, {cards[young]:d}, {cards[unseen]:d},  {cards[suspended]:d}],
+  labels: ["Mature", "Young", "Unseen", "Suspended"],
+  marker: {{
+  colors:["#2e7d32","#a5d6a7","#424242","#dd2c00"]
 
+  }},
+  textinfo: "label+percent",
+  insidetextorientation: "radial"
+}}]
 
-var chart = new CanvasJS.Chart("chartContainer", {{
-	animationEnabled: true,
-	title:{{
-		text: "Card Types",
-		horizontalAlign: "left"
-	}},
-	data: [{{
-		type: "doughnut",
-		//startAngle: 60,
-		innerRadius: 60,
-		indexLabelFontSize: 12,
-		indexLabel: "{{label}} - #percent%",
-		toolTipContent: "<b>{{label}}:</b> {{y}} (#percent%)",
-		dataPoints: [
-			{{ y: {cards[mature]:d} , label: "Matured" ,color: "#2e7d32" }},
-			{{ y: {cards[young]:d}, label: "Young",color: "#81c784"  }},
-			{{ y: {cards[unseen]:d}, label: "Unseen" ,color: "black" }},
-			{{ y: {cards[suspended]:d}, label: "suspended",color: "#c62828" }}
-		]
-	}}]
-}});
-chart.render();
-
+var layout = {{
+  showlegend: true,
+  height: 360,
+  width: 350,
+  margin: {{"t": 0, "b": 0, "l": 0, "r": 0}},
+	legend: {{"orientation": "h"  }}  
+  }};
+ 
+Plotly.newPlot('myDiv', data, layout);
 }}
 
-
     </script>
-  
-
+  '''.format(cards=cards,)
+  output+='''
   <div class='col s6 '>
   
 <div class='row'>
@@ -269,13 +267,11 @@ chart.render();
 
 </div>  
 
-    <div class='col s6 charts' id="chartContainer" style="width: 50%;height:360px; ">
-    </div>
-
+    <div id='myDiv' class='col s6 charts'  style="height:360px;width: 50%; ">
 
   </div> 
 
-  
+  </div>
 
   '''.format(cards=cards,)
 
@@ -286,7 +282,6 @@ chart.render();
 
 
 Overview._body = """
-
 <style>
 {}
 </style>

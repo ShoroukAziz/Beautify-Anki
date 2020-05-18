@@ -1,7 +1,6 @@
 
 
 body {
-	animation: gradient 30s ease infinite;
   height:100vh;
 }
 h1{
@@ -11,29 +10,6 @@ h1{
   font-variant: petite-caps;
   word-break: break-word
 }
-@keyframes gradient {
-	0% {
-        
-		background-position: 0% 50%;
-	}
-    25% {
-        
-		background-position: 50% 50%;
-	}
-	50% {
-        
-		background-position: 100% 50%;
-	}
-    75% {
-        
-		background-position: 50% 50%;
-	}
-	100% {
-        
-		background-position: 0% 50%;
-	}
-}
-
 .flex {
   display: flex;
   flex-wrap: wrap;
@@ -52,7 +28,8 @@ h1{
 }
 
 .total{
- width: 92.5% !important;
+  width: 92.4% !important;
+  margin-left: 1% !important;
   height:60px;
   padding:15px;
   border-radius:5px;
@@ -81,7 +58,7 @@ h1{
 }
 
 .row .col.s6 {
-    width: 45% !important ;
+    width: 45%  ;
     margin: 1% !important ;
 } 
 

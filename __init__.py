@@ -26,7 +26,7 @@ def on_webview_will_set_content (web_content: aqt.webview.WebContent,  context: 
     if  isinstance(context, (
         aqt.deckbrowser.DeckBrowser ,aqt.overview.Overview,aqt.toolbar.TopToolbar ,
          aqt.deckbrowser.DeckBrowserBottomBar , aqt.overview.OverviewBottomBar, aqt.reviewer.ReviewerBottomBar)):        
-        web_content.js.append ("../assets/js/canvasjs.min.js")
+        # web_content.js.append ("../assets/js/canvasjs.min.js")
         web_content.js.append ("../assets/js/script.js")
         web_content.css.append ("../assets/css/font.css")
         web_content.css.append ("../assets/css/animate.css")
@@ -34,11 +34,16 @@ def on_webview_will_set_content (web_content: aqt.webview.WebContent,  context: 
 
     if  isinstance(context, aqt.overview.Overview):        
         web_content.css.append ("../assets/css/overview.css")
+        web_content.js.append ("../assets/js/plotly-latest.min.js")
+
+        
+
     if  isinstance(context, aqt.deckbrowser.DeckBrowser):        
         web_content.css.append ("../assets/css/deckbrowser.css")
         # web_content.css.append ("../assets/css/{}".format(deckbrowser_dark))
     if isinstance (context , ( aqt.deckbrowser.DeckBrowserBottomBar,aqt.overview.OverviewBottomBar)):         
         web_content.css.append ("../assets/css/bottombar.css")
+
     if isinstance (context ,  aqt.toolbar.TopToolbar):
         web_content.css.append ("../assets/css/toolbar.css")
     if isinstance (context , aqt.reviewer.ReviewerBottomBar):

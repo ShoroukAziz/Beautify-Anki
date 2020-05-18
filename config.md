@@ -1,0 +1,1 @@
+check out [The addon github wiki](https://github.com/my-Anki/Beautify-Anki/wiki/Customizing-Beautify-Anki)

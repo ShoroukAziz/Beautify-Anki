@@ -81,6 +81,8 @@ i.medium{
 .stats{
   font-weight: lighter;
   font-size: 0.9rem;
+  text-align: justify;
+
 }
 
 figure{
@@ -101,7 +103,7 @@ figure{
     position: absolute;
     top: 0px;
     width: 100%;
-    z-index: 0;
+    z-index: -500;
   }
   
 
@@ -150,5 +152,5 @@ imageAnimation {  0% {
 }
 
 .rh-container{
-  width: 90%;
+  width: 98%;
 }

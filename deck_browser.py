@@ -71,22 +71,22 @@ def renderStats(self, _old):
     </div>
     <div class="row">
     <div class='col s6 valign-wrapper card horizontal small stats  {STATS[label-bg4]} {STATS[labels-color]}'>
-    <i class=' material-icons  medium {STATS[labels-color]}   left'>{STATS[icon4]}</i>   New Cards :  &nbsp; {new_count}
+    <i class=' material-icons  medium {STATS[labels-color]}   left'>{STATS[icon4]}</i>  {new_count} <br>  New
     </div>
     <div class='col s6 valign-wrapper card horizontal small stats  {STATS[label-bg5]} {STATS[labels-color]}'>
-    <i class=' material-icons  medium {STATS[labels-color]}   left'>{STATS[icon5]}</i>   Due  :  &nbsp; {due_count}<br>
-    Learn : &nbsp; {learn_count} <br> 
-    Review : &nbsp; {review_count} 
+    <i class=' material-icons  medium {STATS[labels-color]}   left'>{STATS[icon5]}</i> {due_count}  &nbsp; Due    <br>
+       {learn_count} &nbsp; Learn <br> 
+    {review_count}  &nbsp;  Review 
     </div>
     </div>
     <div class='row'>
         <div class='col s12 valign-wrapper card horizontal small stats {STATS[label-bg6]} {STATS[labels-color]}'>
-    <i class=' material-icons  medium {STATS[labels-color]} left'>{STATS[icon6]} </i> Total :  &nbsp;  {total_cards}
+    <i class=' material-icons  medium {STATS[labels-color]} left'>{STATS[icon6]} </i>  {total_cards} <br> Total
     </div>
 
     </div>
     </div></div>
-    """.format( str(ngettext("%s minute", "%s minutes", minutes) % (minutes)),
+    """.format( str(ngettext("%s <br> minute", "%s <br> minutes", minutes) % (minutes)),
         old_stats=_old(self), speed=speed,
         new_count=new,due_count=lrn+due,learn_count=lrn,review_count=due,
         total_cards=totalDisplay,STATS=STATS)

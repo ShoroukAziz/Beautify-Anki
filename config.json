@@ -1,31 +1,57 @@
 {
     
     "MAIN":{
-        "bg-color" : "teal"
+        "bg-color" : "teal",
+        "date_format": "%d.%m.%Y",
+        "note_correction_factors": {
+            "Fr": 2,
+            "English": 2
+          }
     },
     "DECK-BROWSER": {
+        
 
         "STATS" : {
 
             "labels-color" : "white-text" ,
 
-            "label-bg1" : "green" ,
+            "label-bg1" : "cyan darken-3" ,
             "label-bg2" : "yellow darken-4" ,
             "label-bg3" : "deep-orange darken-4" ,
             "label-bg4" : "indigo darken-1" ,
-            "label-bg5" : "cyan darken-4" ,
-            "label-bg6" : "light-blue darken-2" ,
+            "label-bg5" : "green" ,
+            "label-bg6" : "deep-purple darken-1" ,
 
             "icon1": "playlist_add_check" ,
             "icon2": "access_alarm" ,
             "icon3": "timer" ,
-            "icon4": "fiber_new" ,
-            "icon5": "schedule" ,
+            "icon4": "card_giftcard" ,
+            "icon5": "edit" ,
             "icon6": "donut_small" 
 
         } 
 
         
+    },
+    "DECK-OVERVIEW" :{
+        "DECK-STATS" : {
+            "labels-color" : "white-text",
+
+            "label-bg1" : "teal darken-1" ,
+            "label-bg2" : "amber darken-3" ,
+            "label-bg3" : "indigo darken-1" ,
+            "label-bg4" : "deep-orange darken-3" ,
+            "label-bg5" : "green darken-3" ,
+            "label-bg6" : "deep-purple darken-1" ,
+
+            
+            "icon2": "timer" ,
+            "icon3": "card_giftcard" ,
+            "icon4": "description" ,
+            "icon5": "edit" ,
+            "icon6": "donut_small" 
+
+        }
     }
    
 }

@@ -5,3 +5,4 @@ import os , sys
 CONFIG = mw.addonManager.getConfig(__name__)
 STATS = CONFIG["DECK-BROWSER"]["STATS"]
 MAIN = CONFIG["MAIN"]
+DECKSTATS = CONFIG["DECK-OVERVIEW"]["DECK-STATS"]

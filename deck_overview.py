@@ -2,13 +2,14 @@ from typing import Optional, Any
 
 from anki.errors import DeckRenameError
 from anki.hooks import wrap
-import anki.sched, anki.schedv2
+import anki.sched
+import anki.schedv2
 from anki.schedv2 import Scheduler
 from aqt import mw
-from aqt.overview import Overview , OverviewContent , OverviewBottomBar
-from aqt.toolbar import Toolbar , BottomBar
+from aqt.overview import Overview, OverviewContent, OverviewBottomBar
+from aqt.toolbar import Toolbar, BottomBar
 from aqt import AnkiQt, gui_hooks
-from aqt.utils import shortcut 
+from aqt.utils import shortcut
 import aqt
 
 import json
@@ -24,11 +25,9 @@ from .helpers import *
 from .config import *
 
 
-        
-        
-def desc(self, deck , _old):
+def desc(self, deck, _old):
     button = mw.button
-    desc=""
+    desc = ""
 
     counts = list(self.mw.col.sched.counts())
     finished = not sum(counts)
@@ -36,10 +35,10 @@ def desc(self, deck , _old):
         finish_msg = u'''
       <div style="white-space: pre-wrap;"> {:s}</div>
     '''.format(self.mw.col.sched.finishedMsg())
-        btn=""
+        btn = ""
         desc = finish_msg
     else:
-        finish_msg =""
+        finish_msg = ""
         btn = u'''      
             {button:s} 
             '''.format(button=button('study', _('<i class=\"  material-icons right\">exit_to_app</i>  Study Now'), id='study', class_='waves-effect waves-light {MAIN[bg-color]} btn-large'.format(MAIN=MAIN)))
@@ -50,11 +49,11 @@ def desc(self, deck , _old):
 Cards will be automatically returned to their original decks after you review 
 them.Deleting this deck from the deck list will return all remaining cards 
 to their original deck.</div>"""
-        
+
     else:
-        desc+="<div class=''>"
+        desc += "<div class=''>"
         desc += deck.get("desc", "")
-        desc +="""
+        desc += """
         </div>
         <br>
         <br>
@@ -71,61 +70,50 @@ to their original deck.</div>"""
     return '<div class=" %s">%s</div>' % (dyn, desc)
 
 
-
 bg_path = "assets/deck_backgrounds/"+"%(deck)s.jpg"
-background_style="body{ background-image:linear-gradient(311deg,#9E9E9E, #033155cc), url('"+ bg_path +"') ,url('assets/background.jpg');background-size:100%% }"
+background_style = "body{ background-image:linear-gradient(311deg,#9E9E9E, #033155cc), url('" + \
+    bg_path + "') ,url('assets/background.jpg');background-size:100%% }"
 
 
 def table(self):
+    current_deck_name = self.mw.col.decks.current()['name']
 
+    try:
+        learn_per_day = self.mw.col.decks.confForDid(
+            self.mw.col.decks.current()['id'])['new']['perDay']
+    except:
+        learn_per_day = 0
 
-  json_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "config.json")
+    correction_for_notes = 1
+    count_label = "Cards"
+    last_match_length = 0
 
-  if os.path.isfile(json_file):
-    with open(json_file, mode='r') as f:
-      try:
-        settings = json.load(f)
-      except:
-        showInfo("Could not load config.json file. Make sure it is correctly formatted or delete the file if you don't need it.", type="warning", title="More Overview Stats 2.1 Warning")
-        settings = {}
-  else:
-    settings = {}
+    if 'note_correction_factors' in CONFIG['MAIN']:
+        for fragment, factor in CONFIG['MAIN']['note_correction_factors'].items():
+            if current_deck_name.startswith(fragment):
+                if len(fragment) > last_match_length:
+                    correction_for_notes = int(factor)
+                    count_label = "Notes"
+                    last_match_length = len(fragment)
 
-  current_deck_name = self.mw.col.decks.current()['name']
+        # prevent division by zero and negative results
+        if correction_for_notes <= 0:
+            correction_for_notes = 1
 
-  try:
-    learn_per_day = self.mw.col.decks.confForDid(self.mw.col.decks.current()['id'])['new']['perDay']
-  except:
-    learn_per_day = 0
-
-  correction_for_notes = 1
-  last_match_length = 0
-
-  if 'note_correction_factors' in settings:
-    for fragment, factor in settings['note_correction_factors'].items():
-      if current_deck_name.startswith(fragment):
-        if len(fragment) > last_match_length:
-          correction_for_notes = int(factor)
-          last_match_length = len(fragment)
-
-    # prevent division by zero and negative results
-    if correction_for_notes <= 0:
-      correction_for_notes = 1
-
-  if 'date_format' in settings:
-    if settings['date_format'].strip().lower() == 'us':
-      date_format = "%m/%d/%Y"
-    elif settings['date_format'].strip().lower() == 'asia':
-      date_format = "%Y/%m/%d"
-    elif settings['date_format'].strip().lower() == 'eu':
-      date_format = "%d.%m.%Y"
+    if 'date_format' in CONFIG['MAIN']:
+        if CONFIG['MAIN']['date_format'].strip().lower() == 'us':
+            date_format = "%m/%d/%Y"
+        elif CONFIG['MAIN']['date_format'].strip().lower() == 'asia':
+            date_format = "%Y/%m/%d"
+        elif CONFIG['MAIN']['date_format'].strip().lower() == 'eu':
+            date_format = "%d.%m.%Y"
+        else:
+            date_format = CONFIG['MAIN']['date_format']
     else:
-      date_format = settings['date_format']
-  else:
-    date_format = "%d.%m.%Y"
+        date_format = "%d.%m.%Y"
 
-  total, mature, young, unseen, suspended, due = self.mw.col.db.first(
-    u'''
+    total, mature, young, unseen, suspended, due = self.mw.col.db.first(
+        u'''
       select
       -- total
       count(id),
@@ -146,47 +134,46 @@ def table(self):
            then 1 else 0 end)
       from cards where did in {:s}
     '''.format(self.mw.col.sched._deckLimit()),
-    round(time.time()))
+        round(time.time()))
 
-  if not total:
-    return u'<p>No cards found.</p>'
+    if not total:
+        return u'<p>No cards found.</p>'
 
-  scheduled_counts = list(self.mw.col.sched.counts())
-  deck_is_finished = not sum(scheduled_counts)
+    scheduled_counts = list(self.mw.col.sched.counts())
+    cards = {}
 
-  cards = {}
+    cards['mature'] = mature // int(correction_for_notes)
+    cards['young'] = young // int(correction_for_notes)
+    cards['unseen'] = unseen // int(correction_for_notes)
+    cards['suspended'] = suspended // int(correction_for_notes)
+    cards['total'] = total // int(correction_for_notes)
+    cards['new'] = scheduled_counts[0]
+    cards['learning'] = scheduled_counts[1]
+    cards['review'] = scheduled_counts[2]
+    cards['todo'] = cards['new'] + cards['learning'] + cards['review']
+    cards['count_label'] = count_label
 
-  cards['mature'] = mature // int(correction_for_notes)
-  cards['young'] = young // int(correction_for_notes)
-  cards['unseen'] = unseen // int(correction_for_notes)
-  cards['suspended'] = suspended // int(correction_for_notes)
-  cards['total'] = total // int(correction_for_notes)
-  cards['new'] = scheduled_counts[0]
-  cards['learning'] = scheduled_counts[1]
-  cards['review'] = scheduled_counts[2]
-  cards['todo'] = cards['new'] + cards['learning'] + cards['review']
+    try:
+        daysUntilDone = math.ceil(cards['unseen'] / learn_per_day)
+    except:
+        daysUntilDone = 0
 
-  try:
-    daysUntilDone = math.ceil(cards['unseen'] / learn_per_day)
-  except:
-    daysUntilDone = 0
-    
-  try:
-    cards['doneDate'] = (date.today()+timedelta(days=daysUntilDone)).strftime(date_format)
-  except:
-    showInfo("Unsupported date format. Defaulting to Day.Month.Year instead. Use one of the shorthands: \"us\", \"asia\" or \"eu\", or specify the date like \"\%d.\%m.\%Y\", \"\%m/\%d/\%Y\" etc.\n For more information check the table at: https://docs.python.org/2/library/datetime.html#strftime-and-strptime-behavior", type="warning", title="More Overview Stats 2.1 Warning")
-    cards['doneDate'] = (date.today()+timedelta(days=daysUntilDone)).strftime("%d.%m.%Y")
+    try:
+        cards['doneDate'] = (
+            date.today()+timedelta(days=daysUntilDone)).strftime(date_format)
+    except:
+        showInfo("Unsupported date format. Defaulting to Day.Month.Year instead. Use one of the shorthands: \"us\", \"asia\" or \"eu\", or specify the date like \"\%d.\%m.\%Y\", \"\%m/\%d/\%Y\" etc.\n For more information check the table at: https://docs.python.org/2/library/datetime.html#strftime-and-strptime-behavior", type="warning", title="More Overview Stats 2.1 Warning")
+        cards['doneDate'] = (
+            date.today()+timedelta(days=daysUntilDone)).strftime("%d.%m.%Y")
 
-  cards['daysLeft'] = daysUntilDone
+    cards['daysLeft'] = daysUntilDone
 
-  if(daysUntilDone == 1):
-    cards['daysLeft'] = '{} day'.format(daysUntilDone)
-  else:
-    cards['daysLeft'] = '{} days'.format(daysUntilDone)
+    if(daysUntilDone == 1):
+        cards['daysLeft'] = '{} day'.format(daysUntilDone)
+    else:
+        cards['daysLeft'] = '{} days'.format(daysUntilDone)
 
-
-
-  output = u'''
+    output = u'''
     <div class="conatiner" ><div class='row'>
 
 <script type="text/javascript">
@@ -217,53 +204,50 @@ var layout = {{
 Plotly.newPlot('myDiv', data, layout);
 }}
 
-    </script>
-  '''.format(cards=cards,)
-  output+='''
+</script>
+
   <div class='col s6 '>
   
-<div class='row'>
+    <div class='row'>
 
-  <div class= 'col s6 teal darken-1 white-text top'>
-  
-   <span class='number'> {cards[total]:d}<br> </span> Total Cards
-  </div>
-
-        <div class='top amber darken-3 white-text col s6 flex'>
-      <i class=" material-icons">timer</i>
-      done in 
-      {cards[daysLeft]:s} 
+      <div class= 'col s6 {DECKSTATS[label-bg1]} {DECKSTATS[labels-color]} top'>
       
-      {cards[doneDate]:s}      
+      <span class='number'> {cards[total]:d}<br> </span> Total {cards[count_label]}
       </div>
 
-      <div class='number-container indigo darken-1 white-text col s6 '>
+      <div class='top {DECKSTATS[label-bg2]} {DECKSTATS[labels-color]} col s6 flex'>
+      <i class=" material-icons">{DECKSTATS[icon2]}</i>
+      done in 
+      {cards[daysLeft]:s} {cards[doneDate]:s} 
+      </div>
+
+      <div class='number-container {DECKSTATS[label-bg3]} {DECKSTATS[labels-color]} col s6 '>
       <div class='number'>
-      <i class=" material-icons">card_giftcard</i><br>
+      <i class=" material-icons">{DECKSTATS[icon3]}</i><br>
       {cards[new]:d}
       </div>
       New 
       </div>
 
-      <div class='number-container deep-orange darken-3 white-text col s6 '>
+      <div class='number-container {DECKSTATS[label-bg4]} {DECKSTATS[labels-color]} col s6 '>
       <div class='number'>
-        <i class=" material-icons">description</i><br>
+        <i class=" material-icons">{DECKSTATS[icon4]}</i><br>
       {cards[learning]:d}
       </div>
       Learning
       </div>
 
-      <div class='number-container  green darken-3 white-text col s6 '>
+      <div class='number-container  {DECKSTATS[label-bg5]} {DECKSTATS[labels-color]} col s6 '>
       <div class='number'>
-      <i class=" material-icons">edit</i><br>
+      <i class=" material-icons">{DECKSTATS[icon5]}</i><br>
       {cards[review]:d}
       </div>
       Review      
       </div>
 
-      <div class='number-container  deep-purple darken-1 white-text col s6 '>
+      <div class='number-container  {DECKSTATS[label-bg6]} {DECKSTATS[labels-color]} col s6 '>
       <div class='number'>
-      <i class=" material-icons">donut_small</i><br>
+      <i class=" material-icons">{DECKSTATS[icon6]}</i><br>
       {cards[todo]:d}
       </div>
       Total      
@@ -283,12 +267,9 @@ Plotly.newPlot('myDiv', data, layout);
 
   </div>
 
-  '''.format(cards=cards,)
+  '''.format(cards=cards, DECKSTATS=DECKSTATS)
 
-  
-
-  return  output
-
+    return output
 
 
 Overview._body = """
@@ -314,22 +295,26 @@ Overview._body = """
 
 
 
-""".format(background_style ,)
+""".format(background_style,)
 
 
-
-def renderDeckBottom(self,_old):
+def renderDeckBottom(self, _old):
     links = [
-        ["O", "opts", _("<i class=\" material-icons left\">settings_applications</i> Options")],
+        ["O", "opts", _(
+            "<i class=\" material-icons left\">settings_applications</i> Options")],
     ]
     if self.mw.col.decks.current()["dyn"]:
-        links.append(["R", "refresh", _("<i class=\" material-icons left\">build</i> Rebuild")])
-        links.append(["E", "empty", _("<i class=\" material-icons left\">delete</i> Empty")])
+        links.append(
+            ["R", "refresh", _("<i class=\" material-icons left\">build</i> Rebuild")])
+        links.append(
+            ["E", "empty", _("<i class=\" material-icons left\">delete</i> Empty")])
     else:
-        links.append(["C", "studymore", _("<i class=\" material-icons left\">event</i>Custom Study")])
+        links.append(["C", "studymore", _(
+            "<i class=\" material-icons left\">event</i>Custom Study")])
         # links.append(["F", "cram", _("Filter/Cram")])
     if self.mw.col.sched.haveBuried():
-        links.append(["U", "unbury", _("<i class=\" material-icons left\">do_not_disturb_off</i>Unbury")])
+        links.append(["U", "unbury", _(
+            "<i class=\" material-icons left\">do_not_disturb_off</i>Unbury")])
     buf = ""
     for b in links:
         if b[0]:
@@ -338,14 +323,16 @@ def renderDeckBottom(self,_old):
 <button class='{MAIN[bg-color]} btn-small' title="%s" onclick='pycmd("%s")'>%s</button>""".format(MAIN=MAIN) % tuple(
             b
         )
-      
+
     self.bottom.draw(
-        buf=buf, link_handler=self._linkHandler, web_context=OverviewBottomBar(self)
+        buf=buf, link_handler=self._linkHandler, web_context=OverviewBottomBar(
+            self)
     )
 
 #####################################################################################################################
 
-def finishedMsg(self,_old) -> str:
+
+def finishedMsg(self, _old) -> str:
     return (
         "<div class='finish-msg animate__animated animate__rubberBand amber card-panel'>"
         + _("Congratulations! You have finished this deck for now.")
@@ -354,7 +341,7 @@ def finishedMsg(self,_old) -> str:
     )
 
 
-def nextDueMsg(self,_old) -> str:
+def nextDueMsg(self, _old) -> str:
     line = []
 
     learn_msg = self.next_learn_msg()
@@ -405,19 +392,17 @@ Some related or buried cards were delayed until a later session.</div>"""
  To study outside of the normal schedule, click the Custom Study button below.</div>"""
             )
         )
-    return "".join(line) 
-
+    return "".join(line)
 
 
 #####################################################################################################################
 
 def updateRenderingDeckOverview():
-    
-    Overview._desc = wrap(Overview._desc  , desc, "around")    
-    Overview._table = table
-    Overview._renderBottom = wrap(Overview._renderBottom  , renderDeckBottom, "around")
-    
-    Scheduler._nextDueMsg=wrap(Scheduler._nextDueMsg , nextDueMsg , "around")
-    Scheduler.finishedMsg=wrap(Scheduler.finishedMsg , finishedMsg , "around")
-    
 
+    Overview._desc = wrap(Overview._desc, desc, "around")
+    Overview._table = table
+    Overview._renderBottom = wrap(
+        Overview._renderBottom, renderDeckBottom, "around")
+
+    Scheduler._nextDueMsg = wrap(Scheduler._nextDueMsg, nextDueMsg, "around")
+    Scheduler.finishedMsg = wrap(Scheduler.finishedMsg, finishedMsg, "around")

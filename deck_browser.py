@@ -51,6 +51,9 @@ def renderStats(self, _old):
 
     
     buf="""
+    
+
+
     <div class="row">
     <div class='col s12 valign-wrapper card horizontal small stats  {STATS[label-bg1]}  {STATS[labels-color]}'>
             <i class=" material-icons  medium {STATS[labels-color]}   left">{STATS[icon1]}</i>
@@ -207,6 +210,13 @@ Toolbar. _body = """
 """.format(MAIN=MAIN)
 
 DeckBrowser._body = """'
+<div class="crossfade">
+  <figure></figure>
+  <figure></figure>
+  <figure></figure>
+  <figure></figure>
+  <figure></figure>
+</div>
 <center class="container">
 <div class=row>
 <div class="col s8">

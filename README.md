@@ -12,16 +12,17 @@ Beautify Anki is an Anki addon that attempts to give Anki's deck browser and dec
 
 ---
 
-## ⚠️ Disclamer
-This is a beta version that has only been tested on Anki 2.1.22. It propably conflicts with other addons that does similar things.
-For feature request and bug report please post a [new issue](https://github.com/cjdduarte/Little_Anki/issues) 
-
 
 ## 📥 Download 
 Download the latest version from [Ankiweb]() or select a version manually from [here](https://github.com/my-Anki/Beautify-Anki/releases)
 
 
-## ⚙️ Customization 
+## ⚠️ Disclamer
+This is a beta version that has only been tested on Anki 2.1.22. It propably conflicts with other addons that does similar things.
+For feature request and bug report please post a [new issue](https://github.com/cjdduarte/Little_Anki/issues) 
+
+
+## ⚙️ Configuration and Customization 
 Checkout the [addon's wiki](https://github.com/my-Anki/Beautify-Anki/wiki) for custmoization options
 
 ## 🙏 Acknowledgments
@@ -37,13 +38,13 @@ Checkout the [addon's wiki](https://github.com/my-Anki/Beautify-Anki/wiki) for c
 "](https://ankiweb.net/shared/info/738807903) which is based on the More Overview Stats 2 add-on by [Martin Zuther](http://www.mzuther.de/) which is in turn based on "More Overview Stats" by [Calumks](calumks@gmail.com)
 
 
-## License 
+## 📄 License 
 Beautify Anki n is released under  GNU AGPL, version 3 or later Copyright (c) 2020 Shorouk Abdelaziz
 
 
 
-## Support
-If you like this addon please rate it on [Ankiweb]() or <br><br>
+## ❤️ Support
+If you like this addon please rate it on [Ankiweb]() ,  share it with other Ankiers and maybe <br><br>
 <a href='https://ko-fi.com/B0B51L5RI' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://cdn.ko-fi.com/cdn/kofi2.png?v=2' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
 
 <br>

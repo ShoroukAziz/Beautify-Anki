@@ -399,10 +399,9 @@ Some related or buried cards were delayed until a later session.</div>"""
 
 def updateRenderingDeckOverview():
 
-    Overview._desc = wrap(Overview._desc, desc, "around")
+    Overview._desc = wrap(Overview._desc, desc)
     Overview._table = table
-    Overview._renderBottom = wrap(
-        Overview._renderBottom, renderDeckBottom, "around")
+    Overview._renderBottom = wrap(Overview._renderBottom, renderDeckBottom)
 
-    Scheduler._nextDueMsg = wrap(Scheduler._nextDueMsg, nextDueMsg, "around")
-    Scheduler.finishedMsg = wrap(Scheduler.finishedMsg, finishedMsg, "around")
+    Scheduler._nextDueMsg = wrap(Scheduler._nextDueMsg, nextDueMsg)
+    Scheduler.finishedMsg = wrap(Scheduler.finishedMsg, finishedMsg)

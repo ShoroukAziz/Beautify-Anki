@@ -37,7 +37,7 @@ Checkout the [addon's wiki](https://github.com/my-Anki/Beautify-Anki/wiki/Custom
   * [Animate.css](https://animate.style/)
   * [plotly](https://plotly.com/)
 
-* The Statistics part in the Deck Browser is based on Carlos Duarte  addon ["More Decks Stats and Time Left"](https://ankiweb.net/shared/info/1556734708) which is based on Dmitry Mikheev code, in add-on "More decks overview stats" and 
+* The Statistics part in the Deck Browser is based on [Carlos Duarte](https://github.com/cjdduarte)  addon ["More Decks Stats and Time Left"](https://ankiweb.net/shared/info/1556734708) which is based on Dmitry Mikheev code, in add-on "More decks overview stats" and 
 [calumks](calumks@gmail.com) code, in add-on "Deck Stats"
 
 * The Statistics  part in The Deck Overview pages is based on Kazuwuqt addon ["More Overview Stats 2.1

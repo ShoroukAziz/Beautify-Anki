@@ -24,7 +24,7 @@ Download the latest version from [Ankiweb](https://ankiweb.net/shared/info/11508
 
 
 ## ⚠️ Disclaimer
-This is a beta version that has only been tested on Anki 2.1.22. It propably conflicts with other addons that does similar things.
+This is a beta version that has only been tested on Anki 2.1.22. It probably conflicts with other addons that do similar things.
 For feature request and bug report please post a [new issue](https://github.com/cjdduarte/Little_Anki/issues) 
 
 

@@ -13,11 +13,11 @@ Beautify Anki is an Anki addon that attempts to give Anki's deck browser and dec
 ---
 ## 🌟 Features
 * Material design look
-* Five alternating image background for the home screen
-* An icon for each deck
-* A background for each deck
-* Enhanced look of the statistics 
-* colourful buttons in the reviewer
+* Five alternating backgrounds for the home screen.
+* An icon for each deck.
+* A background for each deck.
+* Enhanced look for the statistics.
+* Colourful buttons in the reviewer.
 
 ## 📥 Download 
 Download the latest version from [Ankiweb]() or select a version manually from [here](https://github.com/my-Anki/Beautify-Anki/releases)

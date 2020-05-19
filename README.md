@@ -20,7 +20,7 @@ Beautify Anki is an Anki addon that attempts to give Anki's deck browser and dec
 * Colourful buttons in the reviewer.
 
 ## 📥 Download 
-Download the latest version from [Ankiweb]() or select a version manually from [here](https://github.com/my-Anki/Beautify-Anki/releases)
+Download the latest version from [Ankiweb](https://ankiweb.net/shared/info/1150874988) or select a version manually from [here](https://github.com/my-Anki/Beautify-Anki/releases)
 
 
 ## ⚠️ Disclamer

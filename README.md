@@ -23,7 +23,7 @@ Beautify Anki is an Anki addon that attempts to give Anki's deck browser and dec
 Download the latest version from [Ankiweb](https://ankiweb.net/shared/info/1150874988) or select a version manually from [here](https://github.com/my-Anki/Beautify-Anki/releases)
 
 
-## ⚠️ Disclamer
+## ⚠️ Disclaimer
 This is a beta version that has only been tested on Anki 2.1.22. It propably conflicts with other addons that does similar things.
 For feature request and bug report please post a [new issue](https://github.com/cjdduarte/Little_Anki/issues) 
 

@@ -8,7 +8,7 @@
  
 Beautify Anki is an Anki addon that attempts to give Anki's deck browser and deck overview pages a material design look.
 
-**Join the discussion at [reddit]() or my [blog]()**
+**Join the discussion at [reddit]() or my [blog](https://blog.shorouk.dev/2020/05/beautifing-anki.html)**
 
 ---
 ## 🌟 Features

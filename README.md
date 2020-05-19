@@ -3,7 +3,7 @@
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/) 
 <a title="Rate on AnkiWeb" href="add link"><img src="https://glutanimate.com/logos/ankiweb-rate.svg"></a> <a title="Buy me a coffee :)" href="https://ko-fi.com/B0B51L5RI"><img src="https://img.shields.io/badge/ko--fi-contribute-%23579ebd.svg"></a>
 
-
+![](https://1.bp.blogspot.com/-lMss5YFCkag/XsMpxhiu0EI/AAAAAAAA-L4/EU4sZI1YfIsrIzYg2lyw8smRlK8BGX1KQCLcBGAsYHQ/s1600/record.gif)
   
  
 Beautify Anki is an Anki addon that attempts to give Anki's deck browser and deck overview pages a material design look.

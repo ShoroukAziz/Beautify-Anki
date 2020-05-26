@@ -97,14 +97,7 @@ def answerButtons(self):
         else:
             extra = ""
         due = self._buttonTime(i)
-        if label == 'Good':
-            color= 'green'
-        elif label == 'Again' :
-            color ='red'
-        elif label == 'Easy' :
-            color ='blue'
-        elif label == 'Hard' :
-            color ='yellow darken-3'
+        
         return """
 <td align=center>%s<a class='waves-effect waves-light btn-small ' %s title="%s" data-ease="%s" onclick='pycmd("ease%d");'>\
 %s</a></td>""" % (

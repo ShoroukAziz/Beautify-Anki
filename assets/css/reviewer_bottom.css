@@ -11,3 +11,22 @@
   
   tr {
     border-bottom: 0}
+
+
+  #defease {
+      background-color: #4CAF50 !important;
+  }
+  
+  a[onclick*="ease1"]:not(#defease) {
+      background-color: #b71c1c !important;
+  }
+  
+  a[onclick*="ease2"]:not(#defease) {
+      background-color:#ff6f00 !important;
+  }
+  
+  a[onclick*="ease3"]:not(#defease),
+  a[onclick*="ease4"]:not(#defease) {
+      background-color: #1976d2  !important;
+  }
+     

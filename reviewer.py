@@ -106,10 +106,9 @@ def answerButtons(self):
         elif label == 'Hard' :
             color ='yellow darken-3'
         return """
-<td align=center>%s<a class='waves-effect waves-light btn-small %s' %s title="%s" data-ease="%s" onclick='pycmd("ease%d");'>\
+<td align=center>%s<a class='waves-effect waves-light btn-small ' %s title="%s" data-ease="%s" onclick='pycmd("ease%d");'>\
 %s</a></td>""" % (
             due,
-            color,
             extra,
             _("Shortcut key: %s") % i,
             i,

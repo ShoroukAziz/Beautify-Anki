@@ -1,9 +1,16 @@
 
   body{
     
-   background : linear-gradient(20deg,#1f6d66b8, #033155cc) ;
+   /* background : linear-gradient(20deg,#1f6d66b8, #033155cc) ; */
    height: 100vh;
    background-size: 100%;
+  }
+
+  .overlay{
+
+    background : linear-gradient(20deg,#1f6d66b8, #033155cc) ;
+    height: 100vh;
+    background-size: 100%;
   }
   
   .padding{
@@ -108,25 +115,25 @@ figure{
   
 
   .crossfade > figure:nth-child(1) {
-     background-image:linear-gradient(20deg,#1f6d66b8, #033155cc) , url('../background.jpg'); }
+   background: url('../background.jpg'); }
 .crossfade > figure:nth-child(2) {
   animation-delay: 6s;
-  background-image:linear-gradient(20deg,#1f6d66b8, #033155cc) , url('../background5.jpg');
-}
+  background: url('../background5.jpg'); }
+
 .crossfade > figure:nth-child(3) {
   animation-delay: 12s;
-  background-image:linear-gradient(20deg,#1f6d66b8, #033155cc) , url('../background2.jpg');
-}
+  background: url('../background2.jpg'); }
+
  
 .crossfade > figure:nth-child(4) {
   animation-delay: 18s;
-  background-image:linear-gradient(20deg,#1f6d66b8, #033155cc) , url('../background3.jpg');
-}
+  background: url('../background3.jpg'); }
+
 .crossfade > figure:nth-child(5) {
   animation-delay: 24s;
-  background-image:linear-gradient(20deg,#1f6d66b8, #033155cc) , url('../background4.jpg');
+  background: url('../background4.jpg'); }
 
-}
+
 
 
 @keyframes

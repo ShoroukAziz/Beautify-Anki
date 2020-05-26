@@ -236,7 +236,8 @@ Toolbar. _body = """
 </tr></nav>
 """.format(MAIN=MAIN)
 
-DeckBrowser._body = """'
+DeckBrowser._body = """
+<div class="overlay">
 <div class="crossfade">
   <figure></figure>
   <figure></figure>
@@ -255,6 +256,7 @@ DeckBrowser._body = """'
 %(stats)s
 </div>
 </center>
+</div>
 """
 
 def updateRenderingMethods():   

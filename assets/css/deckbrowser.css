@@ -1,14 +1,12 @@
 
   body{
-    
-   /* background : linear-gradient(20deg,#1f6d66b8, #033155cc) ; */
+    background: url('../background.jpg'); 
    height: 100vh;
    background-size: 100%;
   }
 
   .overlay{
 
-    background : linear-gradient(20deg,#1f6d66b8, #033155cc) ;
     height: 100vh;
     background-size: 100%;
   }

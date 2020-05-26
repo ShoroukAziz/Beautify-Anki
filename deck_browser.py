@@ -44,6 +44,8 @@ from .helpers import *
 from .config import *
 
 
+bg_animation = MAIN["animation"]
+
 def init(self, mw: AnkiQt) -> None:
     self.mw = mw
     self.web = mw.web
@@ -229,6 +231,7 @@ def drawButtons(self,_old):
 
 
 
+
 Toolbar. _body = """
 <nav class='{MAIN[bg-color]}'  width=100%%>
 <tr>
@@ -236,15 +239,23 @@ Toolbar. _body = """
 </tr></nav>
 """.format(MAIN=MAIN)
 
+animation = ""
+if bg_animation :
+    animation = """
+    <div class="crossfade">
+        <figure></figure>
+        <figure></figure>
+        <figure></figure>
+        <figure></figure>
+        <figure></figure>
+    </div>
+
+    """
+
+
 DeckBrowser._body = """
-<div class="overlay">
-<div class="crossfade">
-  <figure></figure>
-  <figure></figure>
-  <figure></figure>
-  <figure></figure>
-  <figure></figure>
-</div>
+<div class="overlay" style="background : linear-gradient(20deg,{MAIN[overlay-color1]}, {MAIN[overlay-color2]}) ;" >
+{animation}
 <center class="container">
 <div class=row>
 <div class="col s8">
@@ -257,7 +268,7 @@ DeckBrowser._body = """
 </div>
 </center>
 </div>
-"""
+""".format(animation=animation,MAIN=MAIN)
 
 def updateRenderingMethods():   
 

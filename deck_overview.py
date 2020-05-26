@@ -76,7 +76,7 @@ def desc(self, deck, _old):
 <div class='card-panel animate__animated animate__fadeInUp animate__slow amber amber lighten-4'>This is a special deck for studying outside of the normal schedule.
 Cards will be automatically returned to their original decks after you review 
 them.Deleting this deck from the deck list will return all remaining cards 
-to their original deck.</div>"""
+to their original deck.</div>"""+btn
 
     else:
         desc += "<div class=''>"

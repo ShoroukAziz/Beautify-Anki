@@ -5,6 +5,7 @@
         "overlay-color1":"#1f6d66b8",
         "overlay-color2":"#033155cc",
         "animation":false,
+        "change answer buttons":true,
         "date_format": "eu",
         "note_correction_factors": {
             "Fr": 2,

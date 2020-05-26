@@ -37,12 +37,9 @@ from .config import *
 
 updateRenderingMethods()
 updateRenderingDeckOverview()
-renderReviewer()
+if MAIN["change answer buttons"]:
+    renderReviewer()
 
-# if CONFIG['DARK_MODE']:
-#     deckbrowser_dark = "deckbrowser_dark.css"
-# else :
-#     deckbrowserCSS = ""
 
 # add my css and js to the deck overview page
 def on_webview_will_set_content (web_content: aqt.webview.WebContent,  context: Optional[Any]):

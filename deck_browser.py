@@ -143,9 +143,9 @@ def deckRow(self, node, depth, cnt, nameMap , _old):
         if parent["collapsed"]:
             buff = ""
             return buff
-    prefix = " - "
+    prefix = "-"
     if self.mw.col.decks.get(did)["collapsed"]:
-        prefix = " + "
+        prefix = "+"
     due += lrn
 
     def indent():
@@ -159,7 +159,7 @@ def deckRow(self, node, depth, cnt, nameMap , _old):
     # deck link
     if children:
         collapse = (
-            "<a class='collapse padding' href=# onclick='return pycmd(\"collapse:%d\")'>%s</a>"
+            "<a class='collapse ' href=# onclick='return pycmd(\"collapse:%d\")'>%s</a>"
             % (did, prefix)
         )
     else:

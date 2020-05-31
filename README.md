@@ -3,33 +3,35 @@
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/) 
 <a title="Rate on AnkiWeb" href="add link"><img src="https://glutanimate.com/logos/ankiweb-rate.svg"></a> <a title="Buy me a coffee :)" href="https://ko-fi.com/B0B51L5RI"><img src="https://img.shields.io/badge/ko--fi-contribute-%23579ebd.svg"></a>
 
-![](https://github.com/my-Anki/Beautify-Anki/blob/master/screenshots/record.gif?raw=true)
+![](https://gblobscdn.gitbook.com/assets%2F-M8bIX1VrL7AvQYQHy62%2F-M8bU0Cd_2bCQQXOfPpF%2F-M8bYnu8pXKuV1GQ4lC-%2Fezgif.com-crop.gif?alt=media&token=d2c9feb9-118f-48ea-90da-d2f6e145e6c0)
   
  
-Beautify Anki is an Anki addon that attempts to give Anki's deck browser and deck overview pages a material design look.
+Beautify Anki is an [Anki](https://apps.ankiweb.net/) addon that attempts to give Anki's deck browser and deck overview pages a modern material design look. Giving the user total control over the settings and with preset themes for those who don't like tempering with configuration files.
 
 **Join the discussion at [reddit](https://www.reddit.com/r/Anki/comments/gmg0d6/new_addon_beautify_anki_material_design_deck/) or my [blog](https://blog.shorouk.dev/2020/05/beautifing-anki.html)**
 
 ---
 ## 🌟 Features
 * Material design look
+* 4 themes and the ability to create user themes.
 * Five alternating backgrounds for the home screen.
 * An icon for each deck.
 * A background for each deck.
 * Enhanced look for the statistics.
-* Colourful buttons in the reviewer.
+* Colorful buttons in the reviewer.
+* Complete control over the colors
 
 ## 📥 Download 
+<b>Be sure to read [THIS](https://beautify-anki.shorouk.dev/before-install) first before installing this addon.</b><br>
 Download the latest version from [Ankiweb](https://ankiweb.net/shared/info/1150874988) or select a version manually from [here](https://github.com/my-Anki/Beautify-Anki/releases)
 
 
 ## ⚠️ Disclaimer
-This is a beta version that has only been tested on Anki 2.1.22. It probably conflicts with other addons that do similar things.
-For feature request and bug report please post a [new issue](https://github.com/my-Anki/Beautify-Anki/issues) 
+This is a beta version that has only been tested on Anki 2.1.22. and 2.1.26 It probably conflicts with other addons that do similar things [(check the list of known conflicting addons)](https://beautify-anki.shorouk.dev/before-install). For feature request and bug report please post an a [new issue](https://github.com/my-Anki/Beautify-Anki/issues) 
 
 
 ## ⚙️ Configuration and Customization 
-Checkout the [addon's wiki](https://github.com/my-Anki/Beautify-Anki/wiki/Customizing-Beautify-Anki) for custmoization options
+Checkout the [addon's Homebage](https://beautify-anki.shorouk.dev/) for custmoization options
 
 ## 🙏 Acknowledgments
 * This Addon uses the following CSS and Javascript libraries

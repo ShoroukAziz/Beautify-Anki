@@ -1,13 +1,13 @@
 {
     
-    "animation":false,
+    "animation":true,
     "change answer buttons":true,
     "date_format": "eu",
     "note_correction_factors": {
         "Fr": 2,
         "English": 2
         },
-    "theme" : "starry"
+    "theme" : "default"
 
     
    

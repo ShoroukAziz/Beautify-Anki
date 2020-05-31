@@ -1,7 +1,7 @@
-#outer{
+/* #outer{
   background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
 }
-
+ */
 
 
 td{
@@ -10,4 +10,6 @@ td{
 }
 
 tr {
-  border-bottom: 0
+  border-bottom: 0;}
+
+

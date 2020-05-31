@@ -1,0 +1,62 @@
+{
+
+    "overlay-color1"    : "rgba(41, 41, 43,0.8)",
+    "overlay-color2"    : "rgba(41, 41, 43,0.8)",
+    "heatmap-background":true,
+
+    "gear-icon-color"   :" rgba(171, 189, 198,1)",
+    "buttons-color"     : "rgba(66, 66, 66,1)",
+    "bottombar-color"   : "rgba(47, 47, 49,1)",
+    "topbar-color"      : "rgba(66, 66, 66,1)",
+    "topbar-position"   : "left",
+
+
+    "large-areas-color"     : "rgba(56, 56, 58 , 0.7) ",
+    "decks-border-color"    : "rgba(56, 56, 58 , 1) ",
+    "decks-font-color"      : "rgba(255,255,255,1)",
+    "filtered-deck-color"   : "rgba(130, 187, 240,1)",
+    "DECK-BROWSER": {
+
+        "wedgits-font-color" : "rgba(238, 238, 238,1)" ,
+
+        "overview-wedgit-bg"    : "rgba(0, 96, 100,1)" ,
+        "average-wedgit-bg"     : "rgba(136, 14, 79,1)" ,
+        "remaining-wedgit-bg"   : "rgba(183, 28, 28,1)" ,
+        "new-wedgit-bg"         : "rgba(13, 71, 161,1)" ,
+        "due-wedgit-bg"         : "rgba(27, 94, 32,1)" ,
+        "total-wedgit-bg"       : "rgba(74, 20, 140,1)" ,
+
+        "overview-wedgit-icon"  : "playlist_add_check" ,
+        "average-wedgit-icon"   : "access_alarm" ,
+        "remaining-wedgit-icon" : "timer" ,
+        "new-wedgit-icon"       : "card_giftcard" ,
+        "due-wedgit-icon"       : "edit" ,
+        "total-wedgit-icon"     : "donut_small" 
+        
+    } ,
+    "DECK-OVERVIEW" :{
+        "wedgits-font-color" : "rgba(256,256,256,1)",
+
+        "total-notes-wedgit-bg" : "rgba(0, 96, 100,1)" ,
+        "remaining-wedgit-bg"   : "rgba(245, 127, 23,1)" ,
+        "new-wedgit-bg"         : "rgba(1, 87, 155,1)" ,
+        "learning-wedgit-bg"    : "rgba(191, 54, 12,1)" ,
+        "review-wedgit-bg"      : "rgba(27, 94, 32,1)" ,
+        "total-wedgit-bg"       : "rgba(49, 27, 146,1)" ,
+
+        
+        "remaining-wedgit-icon" : "timer" ,
+        "new-wedgit-icon"       : "card_giftcard" ,
+        "learning-wedgit-icon"  : "description" ,
+        "review-wedgit-icon"    : "edit" ,
+        "total-wedgit-icon"     : "donut_small" ,
+
+    
+    
+    "PIE-CHART":{
+        "wedgits-font-color" : "rgba(224, 97, 0,1)"
+
+    }
+    }
+
+}

@@ -1,9 +1,4 @@
-#outer{
-    background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
-  }
-  
-  
-  
+
   td{
     text-align: center !important;
     padding: 1px 5px;;
@@ -29,4 +24,10 @@
   a[onclick*="ease4"]:not(#defease) {
       background-color: #1976d2  !important;
   }
-     
+  body.nightMode {
+    background: #2f2f31;
+}
+
+.nightMode a {
+  color: white;
+}

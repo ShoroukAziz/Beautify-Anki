@@ -69,7 +69,7 @@ def desc(self, deck, _old):
         finish_msg = ""
         btn = u'''      
             {button:s} 
-            '''.format(button=button('study', _('<i class=\"  material-icons right\">exit_to_app</i>  Study Now'), id='study', class_='waves-effect waves-light {MAIN[bg-color]} btn-large'.format(MAIN=MAIN)))
+            '''.format(button=button('study', _('<i class=\"  material-icons right\">exit_to_app</i>  Study Now'), id='study', class_='waves-effect waves-light btn-large', extra='style=\'background:{THEME[buttons-color]}\''.format(THEME=THEME)))
 
     if deck["dyn"]:
         desc += """
@@ -98,10 +98,6 @@ to their original deck.</div>"""+btn
     return '<div class=" %s">%s</div>' % (dyn, desc)
 
 
-bg_path = "assets/deck_backgrounds/"+"%(deck)s.jpg"
-background_style = "body{ background-image:linear-gradient(311deg,#9E9E9E, #033155cc), url('" + \
-    bg_path + "') ,url('assets/background.jpg');background-size:100%% }"
-
 
 def table(self):
     current_deck_name = self.mw.col.decks.current()['name']
@@ -116,8 +112,8 @@ def table(self):
     count_label = "Cards"
     last_match_length = 0
 
-    if 'note_correction_factors' in CONFIG['MAIN']:
-        for fragment, factor in CONFIG['MAIN']['note_correction_factors'].items():
+    if 'note_correction_factors' in CONFIG:
+        for fragment, factor in CONFIG['note_correction_factors'].items():
             if current_deck_name.startswith(fragment):
                 if len(fragment) > last_match_length:
                     correction_for_notes = int(factor)
@@ -128,15 +124,15 @@ def table(self):
         if correction_for_notes <= 0:
             correction_for_notes = 1
 
-    if 'date_format' in CONFIG['MAIN']:
-        if CONFIG['MAIN']['date_format'].strip().lower() == 'us':
+    if 'date_format' in CONFIG:
+        if CONFIG['date_format'].strip().lower() == 'us':
             date_format = "%m/%d/%Y"
-        elif CONFIG['MAIN']['date_format'].strip().lower() == 'asia':
+        elif CONFIG['date_format'].strip().lower() == 'asia':
             date_format = "%Y/%m/%d"
-        elif CONFIG['MAIN']['date_format'].strip().lower() == 'eu':
+        elif CONFIG['date_format'].strip().lower() == 'eu':
             date_format = "%d.%m.%Y"
         else:
-            date_format = CONFIG['MAIN']['date_format']
+            date_format = CONFIG['date_format']
     else:
         date_format = "%d.%m.%Y"
 
@@ -214,7 +210,7 @@ window.onload = function () {{
   values: [{cards[mature]:d}, {cards[young]:d}, {cards[unseen]:d},  {cards[suspended]:d}],
   labels: ["Mature", "Young", "Unseen", "Suspended"],
   marker: {{
-  colors:["#2e7d32","#a5d6a7","#424242","#dd2c00"]
+  colors:["#2e7d32","#a5d6a7","#707070","#941b1b"]
 
   }},
   textinfo: "label+percent",
@@ -225,8 +221,14 @@ var layout = {{
   showlegend: true,
   height: 387,
   width: 350,
+  paper_bgcolor:"{THEME[large-areas-color]}",
   margin: {{"t": 0, "b": 0, "l": 0, "r": 0}},
-	legend: {{"orientation": "h"  }}  
+	legend: {{"orientation": "h" ,
+    font: {{
+        "color": "{PIE[wedgits-font-color]}"
+    }}
+    
+     }}  
   }};
  
 Plotly.newPlot('myDiv', data, layout);
@@ -236,46 +238,46 @@ Plotly.newPlot('myDiv', data, layout);
 
   <div class='col s6 '>
   
-    <div class='row'>
+    <div class='row' style="color:{OVERVIEW[wedgits-font-color]}">
 
-      <div class= 'col s6 {DECKSTATS[label-bg1]} {DECKSTATS[labels-color]} top'>
+      <div class= 'col s6  top' style="background-color:{OVERVIEW[total-notes-wedgit-bg]} ">
       
       <span class='number'> {cards[total]:d}<br> </span> Total {cards[count_label]}
       </div>
 
-      <div class='top {DECKSTATS[label-bg2]} {DECKSTATS[labels-color]} col s6 flex'>
-      <i class=" material-icons">{DECKSTATS[icon2]}</i>
+      <div class='top col s6 flex'  style="background-color: {OVERVIEW[remaining-wedgit-bg]} ">
+      <i class=" material-icons">{OVERVIEW[remaining-wedgit-icon]}</i>
       done in 
       {cards[daysLeft]:s} {cards[doneDate]:s} 
       </div>
 
-      <div class='number-container {DECKSTATS[label-bg3]} {DECKSTATS[labels-color]} col s6 '>
+      <div class='number-container col s6 '  style="background-color:{OVERVIEW[new-wedgit-bg]}  ">
       <div class='number'>
-      <i class=" material-icons">{DECKSTATS[icon3]}</i><br>
+      <i class=" material-icons">{OVERVIEW[new-wedgit-icon]}</i><br>
       {cards[new]:d}
       </div>
       New 
       </div>
 
-      <div class='number-container {DECKSTATS[label-bg4]} {DECKSTATS[labels-color]} col s6 '>
+      <div class='number-container  col s6 '  style="background-color:{OVERVIEW[learning-wedgit-bg]}">
       <div class='number'>
-        <i class=" material-icons">{DECKSTATS[icon4]}</i><br>
+        <i class=" material-icons">{OVERVIEW[learning-wedgit-icon]}</i><br>
       {cards[learning]:d}
       </div>
       Learning
       </div>
 
-      <div class='number-container  {DECKSTATS[label-bg5]} {DECKSTATS[labels-color]} col s6 '>
+      <div class='number-container col s6 '  style="background-color: {OVERVIEW[review-wedgit-bg]} ">
       <div class='number'>
-      <i class=" material-icons">{DECKSTATS[icon5]}</i><br>
+      <i class=" material-icons">{OVERVIEW[review-wedgit-icon]}</i><br>
       {cards[review]:d}
       </div>
       Review      
       </div>
 
-      <div class='number-container  {DECKSTATS[label-bg6]} {DECKSTATS[labels-color]} col s6 '>
+      <div class='number-container col s6 '  style="background-color: {OVERVIEW[total-wedgit-bg]}  ">
       <div class='number'>
-      <i class=" material-icons">{DECKSTATS[icon6]}</i><br>
+      <i class=" material-icons">{OVERVIEW[total-wedgit-icon]}</i><br>
       {cards[todo]:d}
       </div>
       Total      
@@ -295,14 +297,25 @@ Plotly.newPlot('myDiv', data, layout);
 
   </div>
 
-  '''.format(cards=cards, DECKSTATS=DECKSTATS)
+  '''.format(cards=cards, OVERVIEW=OVERVIEW , THEME=THEME , PIE=PIE)
 
     return output
 
 
+f = "%(deck)s" 
+
 Overview._body = """
+<div class="overlay" style="background : linear-gradient(20deg,{THEME[overlay-color1]}, {THEME[overlay-color2]}) ;" >
 <style>
-{}
+body{{
+     background-image: url('assets/deck_backgrounds/%(deck)s.jpg') , url('assets/background.jpg') !important;
+     height: 100vh;background-size:100%%
+     }}
+
+.card{{
+background-color:{THEME[large-areas-color]} ;
+}}
+
 </style>
 <center class='container  grey-text text-darken-4'>
 <div class = 'row flex' >
@@ -320,10 +333,10 @@ Overview._body = """
 </div>
 
 </center>
+</div>
 
 
-
-""".format(background_style,)
+""".format(THEME=THEME)
 
 
 def renderDeckBottom(self, _old):
@@ -343,12 +356,17 @@ def renderDeckBottom(self, _old):
     if self.mw.col.sched.haveBuried():
         links.append(["U", "unbury", _(
             "<i class=\" material-icons left\">do_not_disturb_off</i>Unbury")])
-    buf = ""
+    buf = """<style> 
+    
+    #outer{{
+     background-color: {THEME[bottombar-color]};
+    }}
+     </style>""".format(THEME=THEME)
     for b in links:
         if b[0]:
             b[0] = _("Shortcut key: %s") % shortcut(b[0])
         buf += """
-<button class='{MAIN[bg-color]} btn-small' title="%s" onclick='pycmd("%s")'>%s</button>""".format(MAIN=MAIN) % tuple(
+<button style="background:{THEME[buttons-color]}" class=' btn-small' title="%s" onclick='pycmd("%s")'>%s</button>""".format(THEME=THEME) % tuple(
             b
         )
 

@@ -1,8 +1,18 @@
-
-
-body {
-  height:100vh;
+body{
+  word-break: break-word;
 }
+
+body.nightMode {
+  color: white;
+  background:rgba(0,0,0,0);
+  background-size: 100%;
+
+}
+   .overlay{
+
+    height: 100vh;
+    background-size: 100%;
+  } 
 h1{
   font-size:5rem ;
   color: #fff;

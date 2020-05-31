@@ -1,0 +1,67 @@
+{
+    "overlay-color1"    :"rgba(31, 109, 102, 0.75)",
+    "overlay-color2"    :"rgba(3, 49, 85, 0.8)",
+    "heatmap-background":true,
+    
+    "gear-icon-color"   : "rgba(1, 93, 84,1);",
+    "buttons-color"     : "rgba(0, 150, 136,1)",
+    "bottombar-color"   : "rgba(224, 242, 241,1)",
+    "topbar-color"      : "rgba(0, 150, 136,1)",
+    "topbar-position" : "left",
+
+    "large-areas-color"  : "rgba(255,255,255,0.4)" ,
+    "decks-border-color" : "rgba(227, 227, 227 , 0.6)",
+    "decks-font-color"   : "rgba(0,0,0,1)",
+    "filtered-deck-color" :"rgba(255, 193, 7,1)",
+
+    "DECK-BROWSER": {
+
+        "wedgits-font-color" : "rgba(256,256,256,1)" ,
+
+        "overview-wedgit-bg"  : "rgba(0, 131, 143,1)" ,
+        "average-wedgit-bg"   : "rgba(245, 127, 23,1)" ,
+        "remaining-wedgit-bg" : "rgba(191, 54, 12,1)" ,
+        "new-wedgit-bg"       : "rgba(57, 73, 171,1)" ,
+        "due-wedgit-bg"       : "rgba(76, 175, 80,1)" ,
+        "total-wedgit-bg"     : "rgba(94, 53, 177,1)" ,
+
+        "overview-wedgit-icon"  : "playlist_add_check" ,
+        "average-wedgit-icon"   : "access_alarm" ,
+        "remaining-wedgit-icon" : "timer" ,
+        "new-wedgit-icon"       : "card_giftcard" ,
+        "due-wedgit-icon"       : "edit" ,
+        "total-wedgit-icon"     : "donut_small" 
+
+    },
+    "DECK-OVERVIEW" :{
+        "wedgits-font-color"    : "rgba(256,256,256,1)" ,
+
+        "total-notes-wedgit-bg" : "rgba(0, 137, 123,1)" ,
+        "remaining-wedgit-bg"   : "rgba(255, 143, 0,1)" ,
+        "new-wedgit-bg"         : "rgba(57, 73, 171,1)" ,
+        "learning-wedgit-bg"    : "rgba(216, 67, 21,1)" ,
+        "review-wedgit-bg"      : "rgba(46, 125, 50,1)" ,
+        "total-wedgit-bg"       : "rgba(94, 53, 177,1)" ,
+
+        
+        "remaining-wedgit-icon" : "timer" ,
+        "new-wedgit-icon"       : "card_giftcard" ,
+        "learning-wedgit-icon"  : "description" ,
+        "review-wedgit-icon"    : "edit" ,
+        "total-wedgit-icon"     : "donut_small" ,
+
+    
+    "PIE-CHART":{
+        "wedgits-font-color" : "rgba(0,0,0,1)"
+    }
+    },
+
+    "night":{
+        "large-areas-color"     : "rgba(56, 56, 58 , 0.8) ",
+        "decks-border-color"    : "rgba(56, 56, 58 , 1) ",
+        "decks-color"           : "rgba(255, 255, 255, 1)",
+        "filtered-deck-color"   : "rgba(130, 187, 240,1)"
+    }
+   
+
+}

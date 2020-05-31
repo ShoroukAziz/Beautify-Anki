@@ -1,14 +1,17 @@
 
   body{
-    background: url('../background.jpg'); 
-   height: 100vh;
    background-size: 100%;
   }
 
+  .collection {
+    border: 0px ;
+}
+
   .overlay{
 
-    height: 100vh;
+    min-height: 100vh;
     background-size: 100%;
+    padding-bottom: 2em;;
   }
   
   .padding{
@@ -22,8 +25,36 @@
       height: 2em;
       opacity: 1;
       padding-top: 0.2em;
+      cursor: pointer;
   }
   
+
+.nightMode  .review-count {
+    color: #fff;
+    background-color: #4caf50;
+  }
+  
+  
+  .nightMode .new-count {
+    color: #fff;
+    background-color:#3f51b5;
+  }
+  
+  .nightMode .learn-count {
+    color: #fff;
+    background-color:rgb(195, 43, 23);
+  
+  }
+  
+  .nightMode  .zero-count {
+    color: #bbb9b9;
+    /* background-color: #9e9e9e; */
+  
+  }
+
+
+
+
   .review-count {
     color: #fff;
     background-color: #4caf50;
@@ -48,15 +79,15 @@
   }
   
   .zero-count {
-    color: #bbb9b9;
+    color: #494949;
     /* background-color: #9e9e9e; */
     padding: 5px 15px;
     border-radius: 10px;
   
   }
   
-  .card.small {
-       height: 75px; 
+  .card-panel {
+      min-height: 75px !important; 
   }
   
   .card .card-content {
@@ -106,6 +137,7 @@ figure{
     left: 0px;
     opacity: 0;
     position: absolute;
+    background-repeat: repeat-y;
     top: 0px;
     width: 100%;
     z-index: -500;
@@ -113,23 +145,23 @@ figure{
   
 
   .crossfade > figure:nth-child(1) {
-   background: url('../background.jpg'); }
+   background-image: url('../background.jpg');  }
 .crossfade > figure:nth-child(2) {
   animation-delay: 6s;
-  background: url('../background5.jpg'); }
+  background-image: url('../background5.jpg');  }
 
 .crossfade > figure:nth-child(3) {
   animation-delay: 12s;
-  background: url('../background2.jpg'); }
+  background-image: url('../background2.jpg'); }
 
  
 .crossfade > figure:nth-child(4) {
   animation-delay: 18s;
-  background: url('../background3.jpg'); }
+  background-image: url('../background3.jpg');  }
 
 .crossfade > figure:nth-child(5) {
   animation-delay: 24s;
-  background: url('../background4.jpg'); }
+  background-image: url('../background4.jpg'); }
 
 
 

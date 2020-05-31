@@ -1,0 +1,19 @@
+#outer{
+  background-image: linear-gradient(-20deg, #2f2f31 0%, #2f2f31 100%) !important;
+}
+
+
+
+td{
+  text-align: center !important;
+  padding: 10px 5px;;
+}
+
+tr {
+  border-bottom: 0;
+
+}
+
+.nightMode a {
+  color: #fff;
+}

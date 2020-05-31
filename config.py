@@ -28,9 +28,29 @@ Copyright (c) 2020 Shorouk Abdelaziz (https://shorouk.dev)
 
 from aqt import mw
 import os , sys
+from aqt.utils import showInfo
+from aqt.theme import theme_manager
+import json
 
 
+
+NIHGT_MODE = theme_manager.night_mode
 CONFIG = mw.addonManager.getConfig(__name__)
-STATS = CONFIG["DECK-BROWSER"]["STATS"]
-MAIN = CONFIG["MAIN"]
-DECKSTATS = CONFIG["DECK-OVERVIEW"]["DECK-STATS"]
+
+ADDON = os.path.dirname(os.path.abspath(__file__)).replace("\\", "/")
+USERTHEMEFILE = ADDON+"/theme_settings/"+CONFIG["theme"]+'.json'
+
+with open(USERTHEMEFILE) as json_file:
+    THEME = json.load(json_file)
+
+    BROWSER = THEME["DECK-BROWSER"]
+    PIE = THEME["DECK-OVERVIEW"]["PIE-CHART"]
+    OVERVIEW =THEME["DECK-OVERVIEW"]
+    change_in_night = ["large-areas-color","decks-border-color","decks-color","filtered-deck-color"]
+    if CONFIG["theme"] == "default" and NIHGT_MODE:
+        for value in change_in_night :
+            THEME[value] = THEME["night"][value]
+
+
+
+

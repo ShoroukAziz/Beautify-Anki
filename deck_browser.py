@@ -44,12 +44,11 @@ from .helpers import *
 from .config import *
 
 
-bg_animation = MAIN["animation"]
+bg_animation = CONFIG["animation"]
 
 def init(self, mw: AnkiQt) -> None:
     self.mw = mw
     self.web = mw.web
-    # self.bottom = BottomBar(mw, mw.bottomWeb)
     self.scrollPos = QPoint(0, 0)
 
 CountTimesNew = 2
@@ -83,34 +82,34 @@ def renderStats(self, _old):
     
 
 
-    <div class="row">
-    <div class='col s12 valign-wrapper card horizontal small stats  {STATS[label-bg1]}  {STATS[labels-color]}'>
-            <i class=" material-icons  medium {STATS[labels-color]}   left">{STATS[icon1]}</i>
+    <div class="row" >
+    <div class='col s12 valign-wrapper card-panel stats' style="background-color: {BROWSER[overview-wedgit-bg]} ">
+            <i class=" material-icons  medium  left">{BROWSER[overview-wedgit-icon]}</i>
         {old_stats}
     </div>
     </div>
     <div class="row">
-    <div class='col s6 valign-wrapper card horizontal small stats  {STATS[label-bg2]} {STATS[labels-color]}'>
-        <i class=" material-icons  medium {STATS[labels-color]} left">{STATS[icon2]}</i> Average:
+    <div class='col s6 m6 valign-wrapper  card-panel  stats  ' style="background-color: {BROWSER[average-wedgit-bg]}">
+        <i class=" material-icons  medium  left">{BROWSER[average-wedgit-icon]}</i> Average:
         {speed:.2f} <br> cards/minute
     </div>
-    <div class='col s6 valign-wrapper card horizontal small stats   {STATS[label-bg3]} {STATS[labels-color]}'>
-        <i class=" material-icons  medium {STATS[labels-color]} left">{STATS[icon3]}</i> {} more
+    <div class='col s6  valign-wrapper  card-panel  stats ' style="background-color:  {BROWSER[remaining-wedgit-bg]}">
+        <i class=" material-icons  medium  left">{BROWSER[remaining-wedgit-icon]}</i> {} more
     </div>
     </div>
     <div class="row">
-    <div class='col s6 valign-wrapper card horizontal small stats  {STATS[label-bg4]} {STATS[labels-color]}'>
-    <i class=' material-icons  medium {STATS[labels-color]}   left'>{STATS[icon4]}</i>  {new_count} <br>  New
+    <div class='col s6 valign-wrapper  card-panel  stats  ' style="background-color:{BROWSER[new-wedgit-bg]}">
+    <i class=' material-icons  medium  left'>{BROWSER[new-wedgit-icon]}</i>  {new_count} <br>  New
     </div>
-    <div class='col s6 valign-wrapper card horizontal small stats  {STATS[label-bg5]} {STATS[labels-color]}'>
-    <i class=' material-icons  medium {STATS[labels-color]}   left'>{STATS[icon5]}</i> {due_count}  &nbsp; Due    <br>
+    <div class='col s6 valign-wrapper  card-panel  stats  'style="background-color: {BROWSER[due-wedgit-bg]}">
+    <i class=' material-icons  medium left'>{BROWSER[due-wedgit-icon]}</i> {due_count}  &nbsp; Due    <br>
        {learn_count} &nbsp; Learn <br> 
     {review_count}  &nbsp;  Review 
     </div>
     </div>
     <div class='row'>
-        <div class='col s12 valign-wrapper card horizontal small stats {STATS[label-bg6]} {STATS[labels-color]}'>
-    <i class=' material-icons  medium {STATS[labels-color]} left'>{STATS[icon6]} </i>  {total_cards} <br> Total
+        <div class='col s12 m6 valign-wrapper  card-panel  stats ' style="background-color:{BROWSER[total-wedgit-bg]} ">
+    <i class=' material-icons  medium  left'>{BROWSER[total-wedgit-icon]} </i>  {total_cards} <br> Total
     </div>
 
     </div>
@@ -118,7 +117,7 @@ def renderStats(self, _old):
     """.format( str(ngettext("%s <br> minute", "%s <br> minutes", minutes) % (minutes)),
         old_stats=_old(self), speed=speed,
         new_count=new,due_count=lrn+due,learn_count=lrn,review_count=due,
-        total_cards=totalDisplay,STATS=STATS)
+        total_cards=totalDisplay,BROWSER=BROWSER)
     
   
     return buf
@@ -196,7 +195,7 @@ def deckRow(self, node, depth, cnt, nameMap , _old):
     # options
     buf += (
         "<span align=center class='opts col s1'><a onclick='return pycmd(\"opts:%d\");'>"
-        "<img src='/assets/gears.svg' class=gears></a></span></li>" % did
+        "<i style=\"color:{THEME[gear-icon-color]}  \" class=\'gears material-icons\'>settings</i></a></span></li>".format(THEME=THEME) % did
     )
     # children
     buf += self._renderDeckTree(children, depth + 1)
@@ -212,13 +211,18 @@ DeckBrowser.drawLinks = [
     ]
 
 def drawButtons(self,_old):
-    buf = ""
+    buf = """<style> 
+    
+    #outer{{
+  background-color: {THEME[bottombar-color]};
+    }}
+     </style>""".format(THEME=THEME)
     drawLinks = deepcopy(self.drawLinks)
     for b in drawLinks:
         if b[0]:
             b[0] = _("Shortcut key: %s") % shortcut(b[0])
         buf += """
-<a class='{MAIN[bg-color]} waves-effect waves-light btn-small' title='%s' onclick='pycmd(\"%s\");'> %s </a>""".format(MAIN=MAIN) %  tuple(
+<a class='waves-effect waves-light btn-small' style="background:{THEME[buttons-color]} " title='%s' onclick='pycmd(\"%s\");'> %s </a>""".format(THEME=THEME) %  tuple(
             b
         )
     self.bottom.draw(
@@ -233,11 +237,11 @@ def drawButtons(self,_old):
 
 
 Toolbar. _body = """
-<nav class='{MAIN[bg-color]}'  width=100%%>
+<nav style="text-align:{THEME[topbar-position]};background-color:{THEME[topbar-color]}"  width=100%%>
 <tr>
-<td class=tdcenter align=center>%s</td>
+<td class=tdcenter'>%s</td>
 </tr></nav>
-""".format(MAIN=MAIN)
+""".format(THEME=THEME)
 
 animation = ""
 if bg_animation :
@@ -251,10 +255,44 @@ if bg_animation :
     </div>
 
     """
+else:
+    animation ="""
+    <style>
+    body{
+        background-image: url('./assets/background.jpg') ; 
+        
+    }
+    </style>
+    """
+
+main_bg = """
+.collection .collection-item {{
+background-color: rgba(0,0,0,0) ;
+border-bottom: 1px solid {THEME[decks-border-color]} 
+}}
+
+.card{{
+background-color:{THEME[large-areas-color]} ;
+}}
+
+a.deck , .collapse{{
+    color: {THEME[decks-font-color]};
+}}
+
+.filtered{{
+    color: {THEME[filtered-deck-color]} !important;;
+}}
+
+""".format(THEME=THEME)
 
 
 DeckBrowser._body = """
-<div class="overlay" style="background : linear-gradient(20deg,{MAIN[overlay-color1]}, {MAIN[overlay-color2]}) ;" >
+<style>
+{main_bg}
+
+</style>
+
+<div class="overlay" style="background : linear-gradient(20deg,{THEME[overlay-color1]}, {THEME[overlay-color2]}) ;" >
 {animation}
 <center class="container">
 <div class=row>
@@ -263,12 +301,12 @@ DeckBrowser._body = """
 %(tree)s
 </ul>
 </div>
-<div class="col s4">
+<div class="col s4" style="color:{BROWSER[wedgits-font-color]}">
 %(stats)s
 </div>
 </center>
 </div>
-""".format(animation=animation,MAIN=MAIN)
+""".format(animation=animation,THEME=THEME,main_bg=main_bg,BROWSER=BROWSER)
 
 def updateRenderingMethods():   
 

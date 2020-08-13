@@ -49,6 +49,10 @@
     },
     "DECK-OVERVIEW" :{
 
+        "deck-name-font-size":"70px",
+        "deck-name-font-family":"Pacifico",
+        "deck-name-font-src"        :"Pacifico.ttf",
+
         "wedgits-font-size"     :"12px",
         "wedgits-font-family"   :"inhirit",
         "wedgits-font-src"      :"",

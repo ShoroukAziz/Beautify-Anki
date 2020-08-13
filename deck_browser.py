@@ -86,37 +86,98 @@ def renderStats(self, _old):
     
 
 
-    <div class="row" >
-    <div class='col s12 valign-wrapper card-panel stats' style="background-color: {BROWSER[overview-wedgit-bg]} ">
-            <i class=" material-icons  medium  left">{BROWSER[overview-wedgit-icon]}</i>
-        {old_stats}
+    
+    <div class='row align-items-center full   stats' style="background-color: {BROWSER[overview-wedgit-bg]} ">
+            <div class="col col-sm-2 ">
+                    <i class=" material-icons  medium  left">{BROWSER[overview-wedgit-icon]}</i> 
+            </div>
+            <div class="col col-sm-10"> {old_stats} </div>
     </div>
-    </div>
-    <div class="row">
-    <div class='col s6 m6 valign-wrapper  card-panel  stats  ' style="background-color: {BROWSER[average-wedgit-bg]}">
-        <i class=" material-icons  medium  left">{BROWSER[average-wedgit-icon]}</i> {LOCALS[Average]}:
-        {speed:.2f} <br> {LOCALS[cards/minute]} 
-    </div>
-    <div class='col s6  valign-wrapper  card-panel  stats ' style="background-color:  {BROWSER[remaining-wedgit-bg]}">
-        <i class=" material-icons  medium  left">{BROWSER[remaining-wedgit-icon]}</i> {} {LOCALS[more]}
-    </div>
-    </div>
-    <div class="row">
-    <div class='col s6 valign-wrapper  card-panel  stats  ' style="background-color:{BROWSER[new-wedgit-bg]}">
-    <i class=' material-icons  medium  left'>{BROWSER[new-wedgit-icon]}</i>  {new_count} <br>   {LOCALS[New]}
-    </div>
-    <div class='col s6 valign-wrapper  card-panel  stats  'style="background-color: {BROWSER[due-wedgit-bg]}">
-    <i class=' material-icons  medium left'>{BROWSER[due-wedgit-icon]}</i> {due_count}  &nbsp;  {LOCALS[Due]}    <br>
-       {learn_count} &nbsp;  {LOCALS[Learn]} <br> 
-    {review_count}  &nbsp;   {LOCALS[Review]} 
-    </div>
-    </div>
-    <div class='row'>
-        <div class='col s12 m6 valign-wrapper  card-panel  stats ' style="background-color:{BROWSER[total-wedgit-bg]} ">
-    <i class=' material-icons  medium  left'>{BROWSER[total-wedgit-icon]} </i>  {total_cards} <br>  {LOCALS[Total]}
-    </div>
+    
+    <!------------------END ROW 1------------------------------->
+
+    <div class="row align-items-center full">
+
+        <div class='col col-sm-6  stats half left ' style="background-color: {BROWSER[average-wedgit-bg]}">
+            <div class="row align-items-center">
+                    <div class="col col-sm-3">
+                    <i class=" material-icons  medium  ">{BROWSER[average-wedgit-icon]}</i> 
+                    </div>
+
+                    <div class="col col-sm-9">{LOCALS[Average]}: {speed:.2f} <br> {LOCALS[cards/minute]} </div>
+            </div>   
+        </div>
+
+        <div class='col col-sm-6  stats half right ' style="background-color:  {BROWSER[remaining-wedgit-bg]}">
+            <div class="row align-items-center">
+                <div class="col col-sm-3">
+                <i class=" material-icons  medium  ">{BROWSER[remaining-wedgit-icon]}</i>
+                </div>
+                <div class="col col-sm-9">
+                {} {LOCALS[more]}
+                </div>
+             </div>
+        </div>
 
     </div>
+<!--------------------END ROW 2----------------------------->
+
+    <div class="row align-items-center full">
+
+        <div class='col col-sm-6  stats  half left' style="background-color:{BROWSER[new-wedgit-bg]}">
+
+        <div class="row align-items-center">
+        <div class="col col-sm-3">
+             <i class=' material-icons  medium  '>{BROWSER[new-wedgit-icon]}</i>
+             </div>
+              <div class="col col-sm-9">
+            {new_count} <br>   {LOCALS[New]}
+            </div>
+        </div>
+        </div>
+
+
+
+        <div class='col col-sm-6  stats  half right'style="background-color: {BROWSER[due-wedgit-bg]}">
+            <div class="row align-items-center">
+                <div class="col col-sm-3">
+                <i class=' material-icons  medium '>{BROWSER[due-wedgit-icon]}</i>
+                </div>
+
+                <div class="col col-sm-9">
+                {due_count}  &nbsp;  {LOCALS[Due]}    <br>
+                {learn_count} &nbsp;  {LOCALS[Learn]} <br> 
+                {review_count}  &nbsp;   {LOCALS[Review]}  
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+    </div>
+
+
+<!--------------------END ROW 3----------------------------->
+
+
+
+
+    <div class='row align-items-center full stats'  style="background-color:{BROWSER[total-wedgit-bg]} ">
+              <div class="col col-sm-2">
+                    <i class=' material-icons  medium  left'>{BROWSER[total-wedgit-icon]} </i>
+                    </div>
+                    <div class="col col-sm-10">
+                    {total_cards} <br>  {LOCALS[Total]}
+                    </div>
+           
+
+    </div>
+
+
     </div></div>
     """.format( str(ngettext("%s <br>  {LOCALS[minute]} ".format( LOCALS=LOCALS), "%s <br>  {LOCALS[minutes]}".format( LOCALS=LOCALS), minutes) % (minutes)),
         old_stats=_old(self), speed=speed,
@@ -155,23 +216,24 @@ def render_deck_node(self, node: DeckTreeNode, ctx: RenderDeckNodeContext,_old) 
     else:
         klass = "deck"
 
-    buf = "<li class='collection-item avatar row %s' id='%d'>" % (klass, node.deck_id)
+    buf = "<div class='deck-row row align-items-center %s' id='%d'>" % (klass, node.deck_id)
     # deck link
     if node.children:
         collapse = (
-            "<a class=collapse href=# onclick='return pycmd(\"collapse:%d\")'>%s</a>"
+            "<a class=collapseable href=# onclick='return pycmd(\"collapse:%d\")'>%s</a>"
             % (node.deck_id, prefix)
         )
     else:
-        collapse = "<span class=collapse></span>"
+        collapse = "<span class=collapseable></span>"
     if node.filtered:
         extraclass = "filtered"
     else:
         extraclass = ""
-    buf += """
-          <img src="%s/assets/deck_icons/%s.png" onerror="this.src='%s/assets/deck_icons/default.png'" alt="" class="circle">
-    <span  class='col s7 decktd ' colspan=5>%s%s<a class="deck padding %s"
-    href=# onclick="return pycmd('open:%d')">%s</a></span>""" % (
+    buf += """<div class="col col-sm-1">
+          <img src="%s/assets/deck_icons/%s.png" onerror="this.src='%s/assets/deck_icons/default.png'" alt="" class="circle"></div>
+
+    <div  class='col col-sm-8 decktd ' >%s%s<a class="align-middle deck padding %s"
+    href=# onclick="return pycmd('open:%d')">%s</a></div>""" % (
         base,
         node.name,
         base,
@@ -185,16 +247,16 @@ def render_deck_node(self, node: DeckTreeNode, ctx: RenderDeckNodeContext,_old) 
     def nonzeroColour(cnt, klass):
         if not cnt:
             klass = "zero-count"
-        return f'<span class="{klass}">{cnt}</span>'
+        return f'<div class="{klass}">{cnt}</div>'
 
-    buf += " <span class='col s2 ' align=center>%s</span><span class='col s2 ' align=center>%s</span> " % (
+    buf += " <div class='col col-sm-1 ' >%s</div><div class='col col-sm-1 ' >%s</div> " % (
         nonzeroColour(due, "review-count"),
         nonzeroColour(node.new_count, "new-count"),
     )
     # options
     buf += (
-        "<span align=center class='opts col s1'><a onclick='return pycmd(\"opts:%d\");'>"
-        "<i style=\"color:{THEME[gear-icon-color]}  \" class=\'gears material-icons\'>settings</i></a></span></li>".format(THEME=THEME) % node.deck_id
+        "<div  class='opts col col-sm-1'><a onclick='return pycmd(\"opts:%d\");'>"
+        "<i style=\"color:{THEME[gear-icon-color]}  \" class=\'gears material-icons\'>settings</i></a></div></div>".format(THEME=THEME) % node.deck_id
     )
     # children
     if not node.collapsed:
@@ -266,16 +328,17 @@ else:
     """%(base)
 
 main_bg = """
-.collection .collection-item {{
-background-color: rgba(0,0,0,0) ;
-border-bottom: 1px solid {THEME[decks-border-color]} 
+
+.deck-row{{
+    border-bottom: 1px solid {THEME[decks-border-color]} 
+
 }}
 
-.card{{
+.decks-container{{
 background-color:{THEME[large-areas-color]} ;
 }}
 
-a.deck , .collapse{{
+a.deck , .collapseable{{
     color: {THEME[decks-font-color]};
 }}
 
@@ -327,12 +390,12 @@ DeckBrowser._body = """
 {animation}
 <center class="container">
 <div class=row>
-<div class="col s8">
-<ul class=" card collection highlight" cellspacing=0 cellpading=3>
+<div class="col col-sm-12 col-md-7 col-lg-8">
+<div class="container decks-container">
 %(tree)s
-</ul>
 </div>
-<div class="col s4" style="color:{BROWSER[wedgits-font-color]}">
+</div>
+<div class="col col-sm-12 col-md-5 col-lg-4" style="color:{BROWSER[wedgits-font-color]}">
 %(stats)s
 </div>
 </center>

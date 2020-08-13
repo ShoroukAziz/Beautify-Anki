@@ -3,8 +3,21 @@
    background-size: 100%;
   }
 
-  .collection {
-    border: 0px ;
+.decks-container{
+  padding: 1%;
+
+}
+
+.deck-row{
+  padding-top: 5px;
+    padding-bottom: 5px;
+    min-height: 50px;
+    margin-bottom: 0;
+    border-bottom: 1px solid #8d8d8d;
+}
+
+.deck-row:last-child {
+  border-bottom: 0;
 }
 
   .overlay{
@@ -21,8 +34,7 @@
       text-align:left
   }
   .gears {
-      width: 2em;
-      height: 2em;
+
       opacity: 1;
       padding-top: 0.2em;
       cursor: pointer;
@@ -53,7 +65,7 @@
   }
 
 
-  .collapse{
+  .collapseable{
     padding-left: 4px;
     padding-right: 10px;
   }
@@ -61,7 +73,8 @@
   .review-count {
     color: #fff;
     background-color: #4caf50;
-    padding: 5px 15px;
+    padding: 5px 5px;
+    margin: 5px;
     border-radius: 10px;
   }
   
@@ -69,14 +82,16 @@
   .new-count {
     color: #fff;
     background-color:#3f51b5;
-    padding: 5px 15px;
+    padding: 5px 5px;
+    margin: 5px;
     border-radius: 10px;
   }
   
   .learn-count {
     color: #fff;
     background-color:rgb(195, 43, 23);
-    padding: 5px 15px;
+    padding: 5px 5px;
+    margin: 5px;
     border-radius: 10px;
   
   }
@@ -108,19 +123,19 @@
 
 }
 
-.row .col.s12 {
+.full {
   width: 96%;
   margin: 2%;
 }
 
 i.medium{
-  font-size: 3rem;
+  font-size: 3vw;
 }
 
 .stats{
-  font-weight: lighter;
-  font-size: 0.9rem;
-  text-align: justify;
+  text-align: left;
+  border-radius: 3px;
+  padding: 2%;
 
 }
 

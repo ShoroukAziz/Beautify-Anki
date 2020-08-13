@@ -65,7 +65,11 @@ def on_webview_will_set_content (web_content: aqt.webview.WebContent,  context: 
             web_content.css.append (base+"/assets/css/animate.css")
 
         web_content.css.append (base+"/assets/css/font.css")
-        web_content.css.append (base+"/assets/css/materialize.css")
+        # web_content.css.append (base+"/assets/css/materialize.css")
+        web_content.css.append (base+"/assets/css/bootstrap.min.css")
+        web_content.css.append (base+"/assets/css/universal.css")
+
+        
         
     # add css and js to deck overview
     if  isinstance(context, aqt.overview.Overview):        

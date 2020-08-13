@@ -2,7 +2,7 @@
 
     "overlay-color1"    : "rgba(41, 41, 43,0.8)",
     "overlay-color2"    : "rgba(41, 41, 43,0.8)",
-    "heatmap-background":true,
+    "heatmap-background":false,
 
     "gear-icon-color"   :" rgba(171, 189, 198,1)",
     "buttons-color"     : "rgba(66, 66, 66,1)",
@@ -51,6 +51,10 @@
         
     } ,
     "DECK-OVERVIEW" :{
+
+        "deck-name-font-size":"70px",
+        "deck-name-font-family":"Pacifico",
+        "deck-name-font-src"        :"Pacifico.ttf",
 
         "wedgits-font-size"     :"12px",
         "wedgits-font-family"   :"inhirit",

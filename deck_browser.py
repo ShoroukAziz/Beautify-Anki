@@ -239,7 +239,7 @@ def render_deck_node(self, node: DeckTreeNode, ctx: RenderDeckNodeContext,_old) 
     else:
         klass = "deck"
 
-    buf = "<tr class='%s' id='%d'>" % (klass, node.deck_id)
+    buf = "<li class='collection-item avatar row %s' id='%d'>" % (klass, node.deck_id)
     # deck link
     if node.children:
         collapse = (
@@ -271,14 +271,14 @@ def render_deck_node(self, node: DeckTreeNode, ctx: RenderDeckNodeContext,_old) 
             klass = "zero-count"
         return f'<span class="{klass}">{cnt}</span>'
 
-    buf += "<td align=right>%s</td><td align=right>%s</td>" % (
+    buf += " <span class='col s2 ' align=center>%s</span><span class='col s2 ' align=center>%s</span> " % (
         nonzeroColour(due, "review-count"),
         nonzeroColour(node.new_count, "new-count"),
     )
     # options
     buf += (
-        "<td align=center class=opts><a onclick='return pycmd(\"opts:%d\");'>"
-        "<img src='/_anki/imgs/gears.svg' class=gears></a></td></tr>" % node.deck_id
+        "<span align=center class='opts col s1'><a onclick='return pycmd(\"opts:%d\");'>"
+        "<i style=\"color:{THEME[gear-icon-color]}  \" class=\'gears material-icons\'>settings</i></a></span></li>".format(THEME=THEME) % node.deck_id
     )
     # children
     if not node.collapsed:

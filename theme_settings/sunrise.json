@@ -6,6 +6,7 @@
 
     "gear-icon-color"   :" rgba(157, 15, 107,1)",
     "buttons-color"     : "rgba(134, 32, 0,1)", 
+    "buttons-label-color"  : "rgba(255, 255, 255,1)", 
     "bottombar-color"   : "rgba(203, 173, 128,1)",
     "topbar-color"      : "rgba(203, 173, 128,1)" , 
     "topbar-position"   : "left",
@@ -55,7 +56,7 @@
         "deck-name-font-size":"70px",
         "deck-name-font-family":"Pacifico",
         "deck-name-font-src"        :"Pacifico.ttf",
-        
+
         "wedgits-font-size"     :"12px",
         "wedgits-font-family"   :"inhirit",
         "wedgits-font-src"      :"",

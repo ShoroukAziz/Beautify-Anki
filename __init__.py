@@ -47,7 +47,7 @@ addon = mw.addonManager.addonFromModule(__name__)
 base="/_addons/"+addon
 
 # add the assests folder to the media server
-mw.addonManager.setWebExports(__name__, r"assets/.+(\.png|\.css|\woff2|\.jpeg|\.gif|\.tiff|\.bmp|\.jpg|\.js|\.TTF|\.ttf|\.otf)")
+mw.addonManager.setWebExports(__name__, r"assets/.+(\.png|\.css|\.woff|\woff2|\.jpeg|\.gif|\.tiff|\.bmp|\.jpg|\.js|\.TTF|\.ttf|\.otf)")
 
 
 # add my css and js 
@@ -68,6 +68,8 @@ def on_webview_will_set_content (web_content: aqt.webview.WebContent,  context: 
         # web_content.css.append (base+"/assets/css/materialize.css")
         web_content.css.append (base+"/assets/css/bootstrap.min.css")
         web_content.css.append (base+"/assets/css/universal.css")
+        web_content.css.append (base+"/assets/open-iconic/font/css/open-iconic-bootstrap.css")
+        
 
         
         

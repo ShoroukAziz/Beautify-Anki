@@ -89,7 +89,7 @@ def renderStats(self, _old):
     
     <div class='row align-items-center full   stats' style="background-color: {BROWSER[overview-wedgit-bg]} ">
             <div class="col col-sm-2 ">
-                    <i class=" material-icons  medium  left">{BROWSER[overview-wedgit-icon]}</i> 
+            <span class="w-icon oi oi-{BROWSER[overview-wedgit-icon]}"></span>
             </div>
             <div class="col col-sm-10"> {old_stats} </div>
     </div>
@@ -100,20 +100,20 @@ def renderStats(self, _old):
 
         <div class='col col-sm-6  stats half left ' style="background-color: {BROWSER[average-wedgit-bg]}">
             <div class="row align-items-center">
-                    <div class="col col-sm-3">
-                    <i class=" material-icons  medium  ">{BROWSER[average-wedgit-icon]}</i> 
+                    <div class="col col-sm-4">
+                    <span class="w-icon oi oi-{BROWSER[average-wedgit-icon]}"></span>
                     </div>
 
-                    <div class="col col-sm-9">{LOCALS[Average]}: {speed:.2f} <br> {LOCALS[cards/minute]} </div>
+                    <div class="col col-sm-8">{LOCALS[Average]}: {speed:.2f} <br> {LOCALS[cards/minute]} </div>
             </div>   
         </div>
 
         <div class='col col-sm-6  stats half right ' style="background-color:  {BROWSER[remaining-wedgit-bg]}">
             <div class="row align-items-center">
-                <div class="col col-sm-3">
-                <i class=" material-icons  medium  ">{BROWSER[remaining-wedgit-icon]}</i>
+                <div class="col col-sm-4">
+                <span class="w-icon oi oi-{BROWSER[remaining-wedgit-icon]}"></span>
                 </div>
-                <div class="col col-sm-9">
+                <div class="col col-sm-8">
                 {} {LOCALS[more]}
                 </div>
              </div>
@@ -127,10 +127,10 @@ def renderStats(self, _old):
         <div class='col col-sm-6  stats  half left' style="background-color:{BROWSER[new-wedgit-bg]}">
 
         <div class="row align-items-center">
-        <div class="col col-sm-3">
-             <i class=' material-icons  medium  '>{BROWSER[new-wedgit-icon]}</i>
+        <div class="col col-sm-4">
+            <span class="w-icon oi oi-{BROWSER[new-wedgit-icon]}"></span>
              </div>
-              <div class="col col-sm-9">
+              <div class="col col-sm-8">
             {new_count} <br>   {LOCALS[New]}
             </div>
         </div>
@@ -140,11 +140,12 @@ def renderStats(self, _old):
 
         <div class='col col-sm-6  stats  half right'style="background-color: {BROWSER[due-wedgit-bg]}">
             <div class="row align-items-center">
-                <div class="col col-sm-3">
-                <i class=' material-icons  medium '>{BROWSER[due-wedgit-icon]}</i>
+                <div class="col col-sm-4">
+                    <span class="w-icon oi oi-{BROWSER[due-wedgit-icon]}"></span>
+
                 </div>
 
-                <div class="col col-sm-9">
+                <div class="col col-sm-8">
                 {due_count}  &nbsp;  {LOCALS[Due]}    <br>
                 {learn_count} &nbsp;  {LOCALS[Learn]} <br> 
                 {review_count}  &nbsp;   {LOCALS[Review]}  
@@ -168,7 +169,7 @@ def renderStats(self, _old):
 
     <div class='row align-items-center full stats'  style="background-color:{BROWSER[total-wedgit-bg]} ">
               <div class="col col-sm-2">
-                    <i class=' material-icons  medium  left'>{BROWSER[total-wedgit-icon]} </i>
+                    <span class="w-icon oi oi-{BROWSER[total-wedgit-icon]}"></span>
                     </div>
                     <div class="col col-sm-10">
                     {total_cards} <br>  {LOCALS[Total]}
@@ -256,7 +257,7 @@ def render_deck_node(self, node: DeckTreeNode, ctx: RenderDeckNodeContext,_old) 
     # options
     buf += (
         "<div  class='opts col col-sm-1'><a onclick='return pycmd(\"opts:%d\");'>"
-        "<i style=\"color:{THEME[gear-icon-color]}  \" class=\'gears material-icons\'>settings</i></a></div></div>".format(THEME=THEME) % node.deck_id
+        " <span style='color:{THEME[gear-icon-color]}' class='oi oi-cog'  aria-hidden='true'></span></a></div></div>".format(THEME=THEME) % node.deck_id
     )
     # children
     if not node.collapsed:
@@ -267,9 +268,9 @@ def render_deck_node(self, node: DeckTreeNode, ctx: RenderDeckNodeContext,_old) 
 
 
 DeckBrowser.drawLinks = [
-        ["", "shared", _("<i class='material-icons left'>cloud_download</i> Get Shared")],
-        ["", "create", _("<i class='material-icons left'>create_new_folder</i>Create Deck")],
-        ["Ctrl+I", "import", _("<i class='material-icons left'>file_upload</i>Import File")], 
+        ["", "shared", _("<span class='oi oi-external-link'  aria-hidden='true'></span> Get Shared")],
+        ["", "create", _("<span class='oi oi-plus'  aria-hidden='true'></span> Create Deck")],
+        ["Ctrl+I", "import", _("<span class='oi oi-cloud-download'  aria-hidden='true'></span> Import File")], 
     ]
 
 def drawButtons(self,_old):
@@ -284,7 +285,7 @@ def drawButtons(self,_old):
         if b[0]:
             b[0] = _("Shortcut key: %s") % shortcut(b[0])
         buf += """
-<a class='waves-effect waves-light btn-small' style="background:{THEME[buttons-color]} " title='%s' onclick='pycmd(\"%s\");'> %s </a>""".format(THEME=THEME) %  tuple(
+<button type="button" class='btn btn-sm' style="background:{THEME[buttons-color]}; color:{THEME[buttons-label-color]} " title='%s' onclick='pycmd(\"%s\");'> %s </button>""".format(THEME=THEME) %  tuple(
             b
         )
     self.bottom.draw(
@@ -299,7 +300,7 @@ def drawButtons(self,_old):
 
 
 Toolbar. _body = """
-<nav style="text-align:{THEME[topbar-position]};background-color:{THEME[topbar-color]}"  width=100%%>
+<nav style="font-size:12px ; text-align:{THEME[topbar-position]};background-color:{THEME[topbar-color]}"  width=100%%>
 <tr>
 <td class=tdcenter'>%s</td>
 </tr></nav>

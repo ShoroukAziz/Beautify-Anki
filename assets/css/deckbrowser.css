@@ -1,6 +1,7 @@
 
   body{
    background-size: 100%;
+   font-size: 12px;
   }
 
 .decks-container{
@@ -128,7 +129,7 @@
   margin: 2%;
 }
 
-i.medium{
+.w-icon{
   font-size: 3vw;
 }
 

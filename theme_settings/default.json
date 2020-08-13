@@ -5,6 +5,7 @@
     
     "gear-icon-color"   : "rgba(1, 93, 84,1);",
     "buttons-color"     : "rgba(0, 150, 136,1)",
+    "buttons-label-color"  : "rgba(255, 255, 255,1)", 
     "bottombar-color"   : "rgba(224, 242, 241,1)",
     "topbar-color"      : "rgba(0, 150, 136,1)",
     "topbar-position" : "left",

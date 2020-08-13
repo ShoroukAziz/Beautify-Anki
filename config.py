@@ -33,6 +33,9 @@ from aqt.theme import theme_manager
 import json
 
 
+addon = mw.addonManager.addonFromModule(__name__)
+base="/_addons/"+addon
+
 
 NIHGT_MODE = theme_manager.night_mode
 CONFIG = mw.addonManager.getConfig(__name__)

@@ -47,7 +47,7 @@ addon = mw.addonManager.addonFromModule(__name__)
 base="/_addons/"+addon
 
 # add the assests folder to the media server
-mw.addonManager.setWebExports(__name__, r"assets/.+(\.png|\.css|\woff2|\.jpeg|\.gif|\.tiff|\.bmp|\.jpg|\.js)")
+mw.addonManager.setWebExports(__name__, r"assets/.+(\.png|\.css|\woff2|\.jpeg|\.gif|\.tiff|\.bmp|\.jpg|\.js|\.TTF|\.ttf|\.otf)")
 
 
 # add my css and js 

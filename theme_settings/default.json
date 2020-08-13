@@ -12,11 +12,25 @@
     "large-areas-color"  : "rgba(255,255,255,0.4)" ,
     "decks-border-color" : "rgba(227, 227, 227 , 0.6)",
     "decks-font-color"   : "rgba(0,0,0,1)",
+    "decks-font-size"        :"12px",
+    "decks-font-family"        :"inherit",
+    "decks-font-src"        :"",
     "filtered-deck-color" :"rgba(255, 193, 7,1)",
 
     "DECK-BROWSER": {
 
+                
+        "review-count-background-color" : " #4caf50;",
+        "review-count-color" : "#ffffff",
+        "new-count-background-color" : "#3f51b5",
+        "new-count-color" : "#ffffff",
+
+
+        "wedgits-font-size"     :"12px",
+        "wedgits-font-family"   :"Noto",
+        "wedgits-font-src"      :"Noto.otf",
         "wedgits-font-color" : "rgba(256,256,256,1)" ,
+
 
         "overview-wedgit-bg"  : "rgba(0, 131, 143,1)" ,
         "average-wedgit-bg"   : "rgba(245, 127, 23,1)" ,
@@ -34,6 +48,10 @@
 
     },
     "DECK-OVERVIEW" :{
+
+        "wedgits-font-size"     :"12px",
+        "wedgits-font-family"   :"inhirit",
+        "wedgits-font-src"      :"",
         "wedgits-font-color"    : "rgba(256,256,256,1)" ,
 
         "total-notes-wedgit-bg" : "rgba(0, 137, 123,1)" ,

@@ -49,9 +49,6 @@ bg_animation = CONFIG["animation"]
 
 
 
-addon = mw.addonManager.addonFromModule(__name__)
-base="/_addons/"+addon
-
 
 def init(self, mw: AnkiQt) -> None:
     self.mw = mw
@@ -286,7 +283,38 @@ a.deck , .collapse{{
     color: {THEME[filtered-deck-color]} !important;;
 }}
 
-""".format(THEME=THEME)
+@font-face {{
+    font-family: '{THEME[decks-font-family]}';
+    src: url('{base}/assets/fonts/{THEME[decks-font-src]}');   
+}}
+
+@font-face {{
+    font-family: '{BROWSER[wedgits-font-family]}';
+    src: url('{base}/assets/fonts/{BROWSER[wedgits-font-src]}');   
+}}
+
+.decktd{{
+    font-size:{THEME[decks-font-size]};
+    font-family:{THEME[decks-font-family]};
+}}
+
+.stats{{
+    font-size:{BROWSER[wedgits-font-size]};
+    font-family:{BROWSER[wedgits-font-family]};
+}}
+
+.review-count{{
+    background-color:{BROWSER[review-count-background-color]} ;
+    color: {BROWSER[review-count-color]};
+}}
+
+
+.new-count{{
+    background-color:{BROWSER[new-count-background-color]} ;
+    color: {BROWSER[new-count-color]};
+}}
+
+""".format(THEME=THEME,BROWSER=BROWSER, base=base)
 
 
 DeckBrowser._body = """

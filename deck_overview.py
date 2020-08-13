@@ -241,20 +241,20 @@ Plotly.newPlot('myDiv', data, layout);
 
   <div class='col s6 '>
   
-    <div class='row' style="color:{OVERVIEW[wedgits-font-color]}">
+    <div class='row'">
 
-      <div class= 'col s6  top' style="background-color:{OVERVIEW[total-notes-wedgit-bg]} ">
+      <div class= 'widget col s6  top' style="background-color:{OVERVIEW[total-notes-wedgit-bg]} ">
       
       <span class='number'> {cards[total]:d}<br> </span>  {LOCALS[Total]} {cards[count_label]}
       </div>
 
-      <div class='top col s6 flex'  style="background-color: {OVERVIEW[remaining-wedgit-bg]} ">
+      <div class='widget top col s6 flex'  style="background-color: {OVERVIEW[remaining-wedgit-bg]} ">
       <i class=" material-icons">{OVERVIEW[remaining-wedgit-icon]}</i>
       {LOCALS[Done in]}
       {cards[daysLeft]:s} {cards[doneDate]:s} 
       </div>
 
-      <div class='number-container col s6 '  style="background-color:{OVERVIEW[new-wedgit-bg]}  ">
+      <div class='widget number-container col s6 '  style="background-color:{OVERVIEW[new-wedgit-bg]}  ">
       <div class='number'>
       <i class=" material-icons">{OVERVIEW[new-wedgit-icon]}</i><br>
       {cards[new]:d}
@@ -262,7 +262,7 @@ Plotly.newPlot('myDiv', data, layout);
       {LOCALS[New]} 
       </div>
 
-      <div class='number-container  col s6 '  style="background-color:{OVERVIEW[learning-wedgit-bg]}">
+      <div class='widget number-container  col s6 '  style="background-color:{OVERVIEW[learning-wedgit-bg]}">
       <div class='number'>
         <i class=" material-icons">{OVERVIEW[learning-wedgit-icon]}</i><br>
       {cards[learning]:d}
@@ -270,7 +270,7 @@ Plotly.newPlot('myDiv', data, layout);
       {LOCALS[Learning]} 
       </div>
 
-      <div class='number-container col s6 '  style="background-color: {OVERVIEW[review-wedgit-bg]} ">
+      <div class='widget number-container col s6 '  style="background-color: {OVERVIEW[review-wedgit-bg]} ">
       <div class='number'>
       <i class=" material-icons">{OVERVIEW[review-wedgit-icon]}</i><br>
       {cards[review]:d}
@@ -279,7 +279,7 @@ Plotly.newPlot('myDiv', data, layout);
             
       </div>
 
-      <div class='number-container col s6 '  style="background-color: {OVERVIEW[total-wedgit-bg]}  ">
+      <div class='widget number-container col s6 '  style="background-color: {OVERVIEW[total-wedgit-bg]}  ">
       <div class='number'>
       <i class=" material-icons">{OVERVIEW[total-wedgit-icon]}</i><br>
       {cards[todo]:d}
@@ -309,16 +309,40 @@ Plotly.newPlot('myDiv', data, layout);
 f = "%(deck)s" 
 
 Overview._body = """
-<div class="overlay" style="background : linear-gradient(20deg,{THEME[overlay-color1]}, {THEME[overlay-color2]}) ;" >
+<div class="overlay"  >
 <style>
 body{{
-     background-image: url('assets/deck_backgrounds/%(deck)s.jpg') , url('assets/background.jpg') !important;
-     height: 100vh;background-size:100%%
+     background: linear-gradient(20deg,{THEME[overlay-color1]}, {THEME[overlay-color2]}) fixed, url('{base}/assets/deck_backgrounds/%(deck)s.jpg'),url('{base}/assets/background.jpg') ;
+     background-size: 100%%;
      }}
 
 .card{{
 background-color:{THEME[large-areas-color]} ;
 }}
+
+
+@font-face {{
+    font-family: '{OVERVIEW[wedgits-font-family]}';
+    src: url('{base}/assets/fonts/{OVERVIEW[wedgits-font-src]}');   
+}}
+
+.widget{{
+font-size:{OVERVIEW[wedgits-font-size]};
+font-family:{OVERVIEW[wedgits-font-family]};
+color:{OVERVIEW[wedgits-font-color]};
+
+}}
+
+@font-face {{
+    font-family: '{OVERVIEW[deck-name-font-family]}';
+    src: url('{base}/assets/fonts/{OVERVIEW[deck-name-font-src]}');   
+}}
+
+h1{{
+font-family:{OVERVIEW[deck-name-font-family]};
+font-size:{OVERVIEW[deck-name-font-size]}
+}}
+
 
 </style>
 <center class='container  grey-text text-darken-4'>
@@ -340,7 +364,7 @@ background-color:{THEME[large-areas-color]} ;
 </div>
 
 
-""".format(THEME=THEME)
+""".format(THEME=THEME,OVERVIEW=OVERVIEW,base=base)
 
 
 def renderDeckBottom(self, _old):

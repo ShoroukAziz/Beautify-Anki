@@ -53,4 +53,5 @@ with open(USERTHEMEFILE) as json_file:
 
 
 
+LOCALS= CONFIG["local"]
 

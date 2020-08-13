@@ -112,7 +112,7 @@ def table(self):
         learn_per_day = 0
 
     correction_for_notes = 1
-    count_label = "Cards"
+    count_label = LOCALS["Cards"]
     last_match_length = 0
 
     if 'note_correction_factors' in CONFIG:
@@ -120,7 +120,7 @@ def table(self):
             if current_deck_name.startswith(fragment):
                 if len(fragment) > last_match_length:
                     correction_for_notes = int(factor)
-                    count_label = "Notes"
+                    count_label = LOCALS["Notes"]
                     last_match_length = len(fragment)
 
         # prevent division by zero and negative results
@@ -196,9 +196,9 @@ def table(self):
     cards['daysLeft'] = daysUntilDone
 
     if(daysUntilDone == 1):
-        cards['daysLeft'] = '{} day'.format(daysUntilDone)
+        cards['daysLeft'] = '{} {LOCALS[day]}'.format(daysUntilDone,LOCALS=LOCALS)
     else:
-        cards['daysLeft'] = '{} days'.format(daysUntilDone)
+        cards['daysLeft'] = '{} {LOCALS[days]}'.format(daysUntilDone,LOCALS=LOCALS)
 
     output = u'''
     <div class="conatiner" ><div class='row'>
@@ -211,7 +211,7 @@ window.onload = function () {{
   hole: .5,
   automargin: true,
   values: [{cards[mature]:d}, {cards[young]:d}, {cards[unseen]:d},  {cards[suspended]:d}],
-  labels: ["Mature", "Young", "Unseen", "Suspended"],
+  labels: ["{LOCALS[Mature]}", "{LOCALS[Young]}", "{LOCALS[Unseen]}", "{LOCALS[Suspended]}"],
   marker: {{
   colors:["#2e7d32","#a5d6a7","#707070","#941b1b"]
 
@@ -245,12 +245,12 @@ Plotly.newPlot('myDiv', data, layout);
 
       <div class= 'col s6  top' style="background-color:{OVERVIEW[total-notes-wedgit-bg]} ">
       
-      <span class='number'> {cards[total]:d}<br> </span> Total {cards[count_label]}
+      <span class='number'> {cards[total]:d}<br> </span>  {LOCALS[Total]} {cards[count_label]}
       </div>
 
       <div class='top col s6 flex'  style="background-color: {OVERVIEW[remaining-wedgit-bg]} ">
       <i class=" material-icons">{OVERVIEW[remaining-wedgit-icon]}</i>
-      done in 
+      {LOCALS[Done in]}
       {cards[daysLeft]:s} {cards[doneDate]:s} 
       </div>
 
@@ -259,7 +259,7 @@ Plotly.newPlot('myDiv', data, layout);
       <i class=" material-icons">{OVERVIEW[new-wedgit-icon]}</i><br>
       {cards[new]:d}
       </div>
-      New 
+      {LOCALS[New]} 
       </div>
 
       <div class='number-container  col s6 '  style="background-color:{OVERVIEW[learning-wedgit-bg]}">
@@ -267,7 +267,7 @@ Plotly.newPlot('myDiv', data, layout);
         <i class=" material-icons">{OVERVIEW[learning-wedgit-icon]}</i><br>
       {cards[learning]:d}
       </div>
-      Learning
+      {LOCALS[Learning]} 
       </div>
 
       <div class='number-container col s6 '  style="background-color: {OVERVIEW[review-wedgit-bg]} ">
@@ -275,7 +275,8 @@ Plotly.newPlot('myDiv', data, layout);
       <i class=" material-icons">{OVERVIEW[review-wedgit-icon]}</i><br>
       {cards[review]:d}
       </div>
-      Review      
+      {LOCALS[Review]} 
+            
       </div>
 
       <div class='number-container col s6 '  style="background-color: {OVERVIEW[total-wedgit-bg]}  ">
@@ -283,7 +284,7 @@ Plotly.newPlot('myDiv', data, layout);
       <i class=" material-icons">{OVERVIEW[total-wedgit-icon]}</i><br>
       {cards[todo]:d}
       </div>
-      Total      
+      {LOCALS[Total]} 
       </div>
 
 
@@ -300,7 +301,7 @@ Plotly.newPlot('myDiv', data, layout);
 
   </div>
 
-  '''.format(cards=cards, OVERVIEW=OVERVIEW , THEME=THEME , PIE=PIE)
+  '''.format(cards=cards, OVERVIEW=OVERVIEW , THEME=THEME , PIE=PIE , LOCALS=LOCALS)
 
     return output
 

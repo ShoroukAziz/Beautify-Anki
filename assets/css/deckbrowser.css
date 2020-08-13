@@ -53,7 +53,10 @@
   }
 
 
-
+  .collapse{
+    padding-left: 4px;
+    padding-right: 10px;
+  }
 
   .review-count {
     color: #fff;

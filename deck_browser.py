@@ -97,34 +97,34 @@ def renderStats(self, _old):
     </div>
     <div class="row">
     <div class='col s6 m6 valign-wrapper  card-panel  stats  ' style="background-color: {BROWSER[average-wedgit-bg]}">
-        <i class=" material-icons  medium  left">{BROWSER[average-wedgit-icon]}</i> Average:
-        {speed:.2f} <br> cards/minute
+        <i class=" material-icons  medium  left">{BROWSER[average-wedgit-icon]}</i> {LOCALS[Average]}:
+        {speed:.2f} <br> {LOCALS[cards/minute]} 
     </div>
     <div class='col s6  valign-wrapper  card-panel  stats ' style="background-color:  {BROWSER[remaining-wedgit-bg]}">
-        <i class=" material-icons  medium  left">{BROWSER[remaining-wedgit-icon]}</i> {} more
+        <i class=" material-icons  medium  left">{BROWSER[remaining-wedgit-icon]}</i> {} {LOCALS[more]}
     </div>
     </div>
     <div class="row">
     <div class='col s6 valign-wrapper  card-panel  stats  ' style="background-color:{BROWSER[new-wedgit-bg]}">
-    <i class=' material-icons  medium  left'>{BROWSER[new-wedgit-icon]}</i>  {new_count} <br>  New
+    <i class=' material-icons  medium  left'>{BROWSER[new-wedgit-icon]}</i>  {new_count} <br>   {LOCALS[New]}
     </div>
     <div class='col s6 valign-wrapper  card-panel  stats  'style="background-color: {BROWSER[due-wedgit-bg]}">
-    <i class=' material-icons  medium left'>{BROWSER[due-wedgit-icon]}</i> {due_count}  &nbsp; Due    <br>
-       {learn_count} &nbsp; Learn <br> 
-    {review_count}  &nbsp;  Review 
+    <i class=' material-icons  medium left'>{BROWSER[due-wedgit-icon]}</i> {due_count}  &nbsp;  {LOCALS[Due]}    <br>
+       {learn_count} &nbsp;  {LOCALS[Learn]} <br> 
+    {review_count}  &nbsp;   {LOCALS[Review]} 
     </div>
     </div>
     <div class='row'>
         <div class='col s12 m6 valign-wrapper  card-panel  stats ' style="background-color:{BROWSER[total-wedgit-bg]} ">
-    <i class=' material-icons  medium  left'>{BROWSER[total-wedgit-icon]} </i>  {total_cards} <br> Total
+    <i class=' material-icons  medium  left'>{BROWSER[total-wedgit-icon]} </i>  {total_cards} <br>  {LOCALS[Total]}
     </div>
 
     </div>
     </div></div>
-    """.format( str(ngettext("%s <br> minute", "%s <br> minutes", minutes) % (minutes)),
+    """.format( str(ngettext("%s <br>  {LOCALS[minute]} ".format( LOCALS=LOCALS), "%s <br>  {LOCALS[minutes]}".format( LOCALS=LOCALS), minutes) % (minutes)),
         old_stats=_old(self), speed=speed,
         new_count=new,due_count=lrn+due,learn_count=lrn,review_count=due,
-        total_cards=totalDisplay,BROWSER=BROWSER)
+        total_cards=totalDisplay,BROWSER=BROWSER , LOCALS=LOCALS)
     
   
     return buf

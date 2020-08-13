@@ -262,11 +262,11 @@ else:
     animation ="""
     <style>
     body{
-        background-image: url('./assets/background.jpg') !important ; 
+        background-image: url('%s/assets/background.jpg') !important ; 
 
     }
     </style>
-    """
+    """%(base)
 
 main_bg = """
 .collection .collection-item {{

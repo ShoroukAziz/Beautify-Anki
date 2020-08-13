@@ -1,1 +1,1 @@
-{"disabled": false, "mod": 0, "conflicts": [], "max_point_version": 0, "min_point_version": 0, "branch_index": 0, "config": {"animation": true, "change answer buttons": false, "date_format": "eu", "note_correction_factors": {"English": 2, "Fr": 2}, "theme": "flamingo"}}
+{"disabled": false, "mod": 0, "conflicts": [], "max_point_version": 0, "min_point_version": 0, "branch_index": 0, "config": {"animation": false, "change answer buttons": false, "date_format": "eu", "note_correction_factors": {"English": 2, "Fr": 2}, "theme": "flamingo"}}

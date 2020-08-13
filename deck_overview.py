@@ -49,7 +49,6 @@ from aqt.utils import showInfo
 
 
 from copy import deepcopy
-from .helpers import *
 from .config import *
 
 

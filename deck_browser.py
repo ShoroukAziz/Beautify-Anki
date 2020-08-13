@@ -31,7 +31,7 @@ from anki.hooks import wrap
 import anki.sched, anki.schedv2
 from anki.lang import _, ngettext
 from aqt import mw
-from aqt.deckbrowser import DeckBrowser , DeckBrowserBottomBar
+from aqt.deckbrowser import DeckBrowser , DeckBrowserBottomBar , RenderDeckNodeContext
 from aqt.toolbar import Toolbar , BottomBar
 from aqt.reviewer import Reviewer
 from aqt.utils import *
@@ -40,11 +40,18 @@ from aqt.utils import *
 from aqt import AnkiQt, gui_hooks
 from aqt.utils import shortcut 
 from copy import deepcopy
-from .helpers import *
 from .config import *
+
+from anki.rsbackend import TR, DeckTreeNode
 
 
 bg_animation = CONFIG["animation"]
+
+
+
+addon = mw.addonManager.addonFromModule(__name__)
+base="/_addons/"+addon
+
 
 def init(self, mw: AnkiQt) -> None:
     self.mw = mw
@@ -123,14 +130,27 @@ def renderStats(self, _old):
     return buf
 
 
-def renderDeckTree(self, nodes,depth, _old,):
-    if not nodes:
-        return ""
-    buf = ""
-    nameMap = self.mw.col.decks.nameMap()
-    for node in nodes:
-        buf += self._deckRow(node, depth, len(nodes), nameMap)
-    return buf
+# def renderDeckTree(self, nodes,depth, _old,):
+#     if not nodes:
+#         return ""
+#     buf = ""
+#     nameMap = self.mw.col.decks.nameMap()
+#     for node in nodes:
+#         buf += self._deckRow(node, depth, len(nodes), nameMap)
+#     return buf
+
+
+
+def renderDeckTree(self, top: DeckTreeNode,_old) -> str:
+        buf = ""
+
+        ctx = RenderDeckNodeContext(current_deck_id=self.mw.col.conf["curDeck"])
+
+        for child in top.children:
+            buf += self._render_deck_node(child, ctx)
+
+        return buf
+
 
 def deckRow(self, node, depth, cnt, nameMap , _old):
     name, did, due, lrn, new, children = node
@@ -170,7 +190,7 @@ def deckRow(self, node, depth, cnt, nameMap , _old):
     else:
         extraclass = ""
     buf += """
-          <img src="assets/deck_icons/%s.png"  onerror="this.src='assets/deck_icons/default.png'" alt="" class="circle">
+          <img src="/assets/deck_icons/%s.png"  onerror="this.src='assets/deck_icons/default.png'" alt="" class="circle">
     <span  class='col s7 decktd ' colspan=5>%s%s<a class="deck padding %s"
     href=# onclick="return pycmd('open:%d')">%s</a></span>""" % (
         name,
@@ -201,6 +221,70 @@ def deckRow(self, node, depth, cnt, nameMap , _old):
     buf += self._renderDeckTree(children, depth + 1)
     return buf
 
+
+
+def render_deck_node(self, node: DeckTreeNode, ctx: RenderDeckNodeContext,_old) -> str:
+    if node.collapsed:
+        prefix = "+"
+    else:
+        prefix = "-"
+
+    due = node.review_count + node.learn_count
+
+    def indent():
+        return "&nbsp;" * 6 * (node.level - 1)
+
+    if node.deck_id == ctx.current_deck_id:
+        klass = "deck current"
+    else:
+        klass = "deck"
+
+    buf = "<tr class='%s' id='%d'>" % (klass, node.deck_id)
+    # deck link
+    if node.children:
+        collapse = (
+            "<a class=collapse href=# onclick='return pycmd(\"collapse:%d\")'>%s</a>"
+            % (node.deck_id, prefix)
+        )
+    else:
+        collapse = "<span class=collapse></span>"
+    if node.filtered:
+        extraclass = "filtered"
+    else:
+        extraclass = ""
+    buf += """
+          <img src="%s/assets/deck_icons/%s.png" onerror="this.src='%s/assets/deck_icons/default.png'" alt="" class="circle">
+    <span  class='col s7 decktd ' colspan=5>%s%s<a class="deck padding %s"
+    href=# onclick="return pycmd('open:%d')">%s</a></span>""" % (
+        base,
+        node.name,
+        base,
+        indent(),
+        collapse,
+        extraclass,
+        node.deck_id,
+        node.name,
+    )
+    # due counts
+    def nonzeroColour(cnt, klass):
+        if not cnt:
+            klass = "zero-count"
+        return f'<span class="{klass}">{cnt}</span>'
+
+    buf += "<td align=right>%s</td><td align=right>%s</td>" % (
+        nonzeroColour(due, "review-count"),
+        nonzeroColour(node.new_count, "new-count"),
+    )
+    # options
+    buf += (
+        "<td align=center class=opts><a onclick='return pycmd(\"opts:%d\");'>"
+        "<img src='/_anki/imgs/gears.svg' class=gears></a></td></tr>" % node.deck_id
+    )
+    # children
+    if not node.collapsed:
+        for child in node.children:
+            buf += self._render_deck_node(child, ctx)
+    return buf
 
 
 
@@ -311,7 +395,7 @@ DeckBrowser._body = """
 def updateRenderingMethods():   
 
     DeckBrowser._renderDeckTree = wrap(DeckBrowser._renderDeckTree , renderDeckTree, "around")
-    DeckBrowser._deckRow = wrap(DeckBrowser._deckRow, deckRow, 'around')
+    DeckBrowser._render_deck_node = wrap(DeckBrowser._render_deck_node, render_deck_node, 'around')
     DeckBrowser._drawButtons = wrap(DeckBrowser._drawButtons, drawButtons, 'around')
     DeckBrowser._renderStats = wrap(DeckBrowser._renderStats, renderStats, 'around')
     

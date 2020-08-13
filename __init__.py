@@ -34,12 +34,20 @@ from aqt import  gui_hooks
 from typing import Optional, Any
 from .config import *
 
+from aqt import mw
+
 
 updateRenderingMethods()
 updateRenderingDeckOverview()
 if CONFIG["change answer buttons"]:
     renderReviewer()
 
+
+addon = mw.addonManager.addonFromModule(__name__)
+base="/_addons/"+addon
+
+# add the assests folder to the media server
+mw.addonManager.setWebExports(__name__, r"assets/.+(\.png|\.css|\woff2|\.jpeg|\.gif|\.tiff|\.bmp|\.jpg|\.js)")
 
 
 # add my css and js 
@@ -51,42 +59,42 @@ def on_webview_will_set_content (web_content: aqt.webview.WebContent,  context: 
          aqt.deckbrowser.DeckBrowserBottomBar , aqt.overview.OverviewBottomBar)) :        
       
         if THEME["heatmap-background"]:
-            web_content.js.append ("../assets/js/script.js")
+            web_content.js.append (base+"/assets/js/script.js")
         
         if CONFIG["animation"]:
-            web_content.css.append ("../assets/css/animate.css")
+            web_content.css.append (base+"/assets/css/animate.css")
 
-        web_content.css.append ("../assets/css/font.css")
-        web_content.css.append ("../assets/css/materialize.css")
+        web_content.css.append (base+"/assets/css/font.css")
+        web_content.css.append (base+"/assets/css/materialize.css")
         
     # add css and js to deck overview
     if  isinstance(context, aqt.overview.Overview):        
-        web_content.css.append ("../assets/css/overview.css")
+        web_content.css.append (base+"/assets/css/overview.css")
         web_content.css.remove("overview.css")
         web_content.css.remove("webview.css")
-        web_content.js.append ("../assets/js/plotly-latest.min.js")  
+        web_content.js.append (base+"/assets/js/plotly-latest.min.js")  
 
     # add css and js to deck browser
     if  isinstance(context, aqt.deckbrowser.DeckBrowser):        
-        web_content.css.append ("../assets/css/deckbrowser.css")
+        web_content.css.append (base+"/assets/css/deckbrowser.css")
         web_content.css.remove("deckbrowser.css")
     
     # add css and js to deck browser bottom bar
     if isinstance (context , ( aqt.deckbrowser.DeckBrowserBottomBar,aqt.overview.OverviewBottomBar)):        
-        web_content.css.append ("../assets/css/bottombar.css")
+        web_content.css.append (base+"/assets/css/bottombar.css")
         web_content.css.remove("webview.css")
 
         if NIHGT_MODE:         
-            web_content.css.append ("../assets/css/bottombar_dark.css")
+            web_content.css.append (base+"/assets/css/bottombar_dark.css")
 
     # add css and js to top bar
     if isinstance (context ,  aqt.toolbar.TopToolbar):
-        web_content.css.append ("../assets/css/toolbar.css")
+        web_content.css.append (base+"/assets/css/toolbar.css")
     
     # add css and js to reviewer bottom bar
     if isinstance (context , aqt.reviewer.ReviewerBottomBar) and CONFIG["change answer buttons"]:
-      web_content.css.append ("../assets/css/reviewer_bottom.css")
-      web_content.css.append ("../assets/css/font.css")
-      web_content.css.append ("../assets/css/materialize.css")
+      web_content.css.append (base+"/assets/css/reviewer_bottom.css")
+      web_content.css.append (base+"/assets/css/font.css")
+      web_content.css.append (base+"/assets/css/materialize.css")
 
 gui_hooks.webview_will_set_content.append(on_webview_will_set_content)

@@ -130,16 +130,6 @@ def renderStats(self, _old):
     return buf
 
 
-# def renderDeckTree(self, nodes,depth, _old,):
-#     if not nodes:
-#         return ""
-#     buf = ""
-#     nameMap = self.mw.col.decks.nameMap()
-#     for node in nodes:
-#         buf += self._deckRow(node, depth, len(nodes), nameMap)
-#     return buf
-
-
 
 def renderDeckTree(self, top: DeckTreeNode,_old) -> str:
         buf = ""
@@ -150,77 +140,6 @@ def renderDeckTree(self, top: DeckTreeNode,_old) -> str:
             buf += self._render_deck_node(child, ctx)
 
         return buf
-
-
-def deckRow(self, node, depth, cnt, nameMap , _old):
-    name, did, due, lrn, new, children = node
-    deck = self.mw.col.decks.get(did)
-    if did == 1 and cnt > 1 and not children:
-        # if the default deck is empty, hide it
-        if not self.mw.col.db.scalar("select 1 from cards where did = 1"):
-            return ""
-    # parent toggled for collapsing
-    for parent in self.mw.col.decks.parents(did, nameMap):
-        if parent["collapsed"]:
-            buff = ""
-            return buff
-    prefix = "-"
-    if self.mw.col.decks.get(did)["collapsed"]:
-        prefix = "+"
-    due += lrn
-
-    def indent():
-        return "&nbsp;" * 6 * depth
-
-    if did == self.mw.col.conf["curDeck"]:
-        klass = "deck current"
-    else:
-        klass = "deck"
-    buf = "<li class='collection-item avatar row %s' id='%d'>" % (klass, did)
-    # deck link
-    if children:
-        collapse = (
-            "<a class='collapse ' href=# onclick='return pycmd(\"collapse:%d\")'>%s</a>"
-            % (did, prefix)
-        )
-    else:
-        collapse = "<span class=collapse></span>"
-    if deck["dyn"]:
-        extraclass = "filtered"
-    else:
-        extraclass = ""
-    buf += """
-          <img src="/assets/deck_icons/%s.png"  onerror="this.src='assets/deck_icons/default.png'" alt="" class="circle">
-    <span  class='col s7 decktd ' colspan=5>%s%s<a class="deck padding %s"
-    href=# onclick="return pycmd('open:%d')">%s</a></span>""" % (
-        name,
-        indent(),
-        collapse,
-        extraclass,
-        did,
-        name,
-    )
-    # due counts
-    def nonzeroColour(cnt, klass):
-        if not cnt:
-            klass = "zero-count"
-        if cnt >= 1000:
-            cnt = "1000+"
-        return f'<span class="{klass}">{cnt}</span>'
-
-    buf += " <span class='col s2 ' align=center>%s</span><span class='col s2 ' align=center>%s</span> " % (
-        nonzeroColour(due, "review-count"),
-        nonzeroColour(new, "new-count"),
-    )
-    # options
-    buf += (
-        "<span align=center class='opts col s1'><a onclick='return pycmd(\"opts:%d\");'>"
-        "<i style=\"color:{THEME[gear-icon-color]}  \" class=\'gears material-icons\'>settings</i></a></span></li>".format(THEME=THEME) % did
-    )
-    # children
-    buf += self._renderDeckTree(children, depth + 1)
-    return buf
-
 
 
 def render_deck_node(self, node: DeckTreeNode, ctx: RenderDeckNodeContext,_old) -> str:

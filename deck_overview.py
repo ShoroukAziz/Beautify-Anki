@@ -56,14 +56,21 @@ def desc(self, deck, _old):
     button = mw.button
     desc = ""
 
+    if( deck.get("desc", "")!=""):
+        desc += "<div class='card-panel amber amber lighten-4'>"
+        desc += deck.get("desc", "")
+        desc += """
+        </div>"""
+
+
     counts = list(self.mw.col.sched.counts())
     finished = not sum(counts)
     if finished:
         finish_msg = u'''
-      <div style="white-space: pre-wrap;"> {:s}</div>
+      <div > {:s}</div>
     '''.format(self.mw.col.sched.finishedMsg())
         btn = ""
-        desc = finish_msg
+        desc += finish_msg
     else:
         finish_msg = ""
         btn = u'''      
@@ -78,10 +85,7 @@ them.Deleting this deck from the deck list will return all remaining cards
 to their original deck.</div>"""+btn
 
     else:
-        desc += "<div class=''>"
-        desc += deck.get("desc", "")
-        desc += """
-        </div>
+        desc+="""
         <br>
         <br>
         <div>

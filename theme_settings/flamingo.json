@@ -2,7 +2,7 @@
 
     "overlay-color1"    : "rgba(239, 83, 80, 0.55)",
     "overlay-color2"    : "rgba(4, 95, 95, 0.82)",
-    "heatmap-background": true,
+    "heatmap-background": false,
 
     "gear-icon-color"   :" rgba(55, 71, 79,1)",
     "buttons-color"     : "rgba(56, 70, 82,1)", 

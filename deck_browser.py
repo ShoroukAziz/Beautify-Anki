@@ -173,8 +173,12 @@ def renderStats(self, _old):
         </div>
 
 
+        
+
+
 
     </div>
+
 
 
 <!--------------------END ROW 3----------------------------->
@@ -196,6 +200,8 @@ def renderStats(self, _old):
 
     </div>
 
+    <div id="hm">
+    </div>
 
     </div></div>
     """.format( str(ngettext("%s <br>  {LOCALS[minute]} ".format( LOCALS=LOCALS), "%s <br>  {LOCALS[minutes]}".format( LOCALS=LOCALS), minutes) % (minutes)),
@@ -235,7 +241,7 @@ def render_deck_node(self, node: DeckTreeNode, ctx: RenderDeckNodeContext,_old) 
     else:
         klass = "deck"
 
-    buf = "<div class='deck-row row align-items-center %s' id='%d'>" % (klass, node.deck_id)
+    buf = "<div class='deck-row row align-items-center  %s' id='%d'>" % (klass, node.deck_id)
     # deck link
     if node.children:
         collapse = (
@@ -382,6 +388,22 @@ if THEME["heatmap-background"]:
         }}
      """.format(THEME=THEME)
      
+if HEATMAP_POSITION == "right":
+    heatmap_script = """
+<script>
+window.addEventListener('load', 
+  function() {{
+    child = document.querySelector(".rh-container")
+    //.classList.add({HEATMAP_WIDTH});
+    parent = document.querySelector("#hm")
+    parent.appendChild(child);
+
+  }}, false);
+
+</script>
+    """
+else:
+    heatmap_script =""
 
 
 main_bg = """
@@ -455,17 +477,23 @@ DeckBrowser._body = """
 {animation}
 <center class="container">
 <div class=row>
-<div class="col col-12 col-md-7 col-lg-8">
+<div class="col col-12 col-md-7 {TABLE_WIDTH}">
 <div class="container decks-container">
 %(tree)s
 </div>
 </div>
-<div class="col col-12 col-md-5 col-lg-4" style="color:{BROWSER[wedgits-font-color]}">
+<div class="col col-12 col-md-5 {STATS_WIDTH}" style="color:{BROWSER[wedgits-font-color]}">
 %(stats)s
+
+
 </div>
 </center>
 </div>
-""".format(animation=animation,THEME=THEME,main_bg=main_bg,BROWSER=BROWSER)
+
+{heatmap_script}
+
+
+""".format(animation=animation,THEME=THEME,main_bg=main_bg,BROWSER=BROWSER,TABLE_WIDTH=TABLE_WIDTH,STATS_WIDTH=STATS_WIDTH,HEATMAP_WIDTH=HEATMAP_WIDTH,heatmap_script=heatmap_script)
 
 def updateRenderingMethods():   
 

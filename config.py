@@ -58,3 +58,12 @@ with open(USERTHEMEFILE) as json_file:
 
 LOCALS= CONFIG["local"]
 
+HEATMAP_POSITION = CONFIG["heatmap_position"]
+if HEATMAP_POSITION == "right":
+    STATS_WIDTH = "col-lg-5"
+    TABLE_WIDTH = "col-lg-7"
+    HEATMAP_WIDTH = "\"col\", \"col-12\", \"col-md-5\""
+else:
+    STATS_WIDTH = "col-lg-4"
+    TABLE_WIDTH = "col-lg-8"
+    HEATMAP_WIDTH = ""

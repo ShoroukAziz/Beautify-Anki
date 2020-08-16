@@ -216,6 +216,7 @@ def renderStats(self, _old):
 
 def renderDeckTree(self, top: DeckTreeNode,_old) -> str:
         buf = ""
+        buf += self._topLevelDragRow()
 
         ctx = RenderDeckNodeContext(current_deck_id=self.mw.col.conf["curDeck"])
 
@@ -241,7 +242,7 @@ def render_deck_node(self, node: DeckTreeNode, ctx: RenderDeckNodeContext,_old) 
     else:
         klass = "deck"
 
-    buf = "<div class='deck-row row align-items-center  %s' id='%d'>" % (klass, node.deck_id)
+    buf = "<tr class='deck-row row align-items-center  %s' id='%d'>" % (klass, node.deck_id)
     # deck link
     if node.children:
         collapse = (
@@ -254,11 +255,11 @@ def render_deck_node(self, node: DeckTreeNode, ctx: RenderDeckNodeContext,_old) 
         extraclass = "filtered"
     else:
         extraclass = ""
-    buf += """<div class="col col-1">
-          <img src="%s/assets/deck_icons/%s.png" onerror="this.src='%s/assets/deck_icons/default.png'" alt="" class="circle"></div>
+    buf += """<td class="col col-1">
+          <img src="%s/assets/deck_icons/%s.png" onerror="this.src='%s/assets/deck_icons/default.png'" alt="" class="circle"></td>
 
-    <div  class='col col-8 decktd ' >%s%s<a class="align-middle deck padding %s"
-    href=# onclick="return pycmd('open:%d')">%s</a></div>""" % (
+    <td  class='col col-8 decktd ' >%s%s<a class="align-middle deck padding %s"
+    href=# onclick="return pycmd('open:%d')">%s</a></td>""" % (
         base,
         node.name,
         base,
@@ -272,21 +273,21 @@ def render_deck_node(self, node: DeckTreeNode, ctx: RenderDeckNodeContext,_old) 
     def nonzeroColour(cnt, klass):
         if not cnt:
             klass = "zero-count"
-        return f'<div class="{klass}">{cnt}</div>'
+        return f'<td class="col col-1 "><span class="{klass}">{cnt}</span></td>'
 
-    buf += " <div class='col col-1 ' >%s</div><div class='col col-1 ' >%s</div> " % (
+    buf += " <div >%s</div> <div >%s</div> " % (
         nonzeroColour(due, "review-count"),
         nonzeroColour(node.new_count, "new-count"),
     )
     # options
     buf += (
-        "<div  class='opts col col-1'><a onclick='return pycmd(\"opts:%d\");'>".format(THEME=THEME) % node.deck_id
+        "<td  class='opts col col-1'><a onclick='return pycmd(\"opts:%d\");'>".format(THEME=THEME) % node.deck_id
     )
     buf+= """
     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-gear-fill" fill="{THEME[gear-icon-color]}" xmlns="http://www.w3.org/2000/svg">
     <path fill-rule="evenodd" d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 0 0-5.86 2.929 2.929 0 0 0 0 5.858z"/>
     </svg>
-    </a></div></div>
+    </a></td></tr>
     """.format(THEME=THEME)
     # children
     if not node.collapsed:
@@ -478,9 +479,9 @@ DeckBrowser._body = """
 <center class="container">
 <div class=row>
 <div class="col col-12 col-md-7 {TABLE_WIDTH}">
-<div class="container decks-container">
+<table class="container decks-container">
 %(tree)s
-</div>
+</table>
 </div>
 <div class="col col-12 col-md-5 {STATS_WIDTH}" style="color:{BROWSER[wedgits-font-color]}">
 %(stats)s

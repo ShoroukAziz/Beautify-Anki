@@ -11,7 +11,7 @@ Copyright (c) 2020 Shorouk Abdelaziz (https://shorouk.dev)
 #                                                                               #
 # Acknowledgments                                                               #
 # This Addon uses the following CSS and Javascript libraries                    #
-#   - Materialize                                                               #
+#   - Bootstrap                                                                 #
 #   - Animate.css                                                               #
 #   - plotly                                                                    #
 # The Statistics part in the Deck Browser is based on Carlos Duarte             #
@@ -47,7 +47,7 @@ addon = mw.addonManager.addonFromModule(__name__)
 base="/_addons/"+addon
 
 # add the assests folder to the media server
-mw.addonManager.setWebExports(__name__, r"assets/.+(\.png|\.css|\.woff|\woff2|\.jpeg|\.gif|\.tiff|\.bmp|\.jpg|\.js|\.TTF|\.ttf|\.otf)")
+mw.addonManager.setWebExports(__name__, r"assets/.+(\.svg|\.png|\.css|\.woff|\woff2|\.jpeg|\.gif|\.tiff|\.bmp|\.jpg|\.js|\.TTF|\.ttf|\.otf)")
 
 
 # add my css and js 
@@ -58,17 +58,11 @@ def on_webview_will_set_content (web_content: aqt.webview.WebContent,  context: 
         aqt.deckbrowser.DeckBrowser ,aqt.overview.Overview,aqt.toolbar.TopToolbar ,
          aqt.deckbrowser.DeckBrowserBottomBar , aqt.overview.OverviewBottomBar)) :        
       
-        if THEME["heatmap-background"]:
-            web_content.js.append (base+"/assets/js/script.js")
-        
         if CONFIG["animation"]:
             web_content.css.append (base+"/assets/css/animate.css")
 
-        web_content.css.append (base+"/assets/css/font.css")
-        # web_content.css.append (base+"/assets/css/materialize.css")
         web_content.css.append (base+"/assets/css/bootstrap.min.css")
         web_content.css.append (base+"/assets/css/universal.css")
-        web_content.css.append (base+"/assets/open-iconic/font/css/open-iconic-bootstrap.css")
         
 
         
@@ -100,7 +94,6 @@ def on_webview_will_set_content (web_content: aqt.webview.WebContent,  context: 
     # add css and js to reviewer bottom bar
     if isinstance (context , aqt.reviewer.ReviewerBottomBar) and CONFIG["change answer buttons"]:
       web_content.css.append (base+"/assets/css/reviewer_bottom.css")
-      web_content.css.append (base+"/assets/css/font.css")
-      web_content.css.append (base+"/assets/css/materialize.css")
+      web_content.css.append (base+"/assets/css/bootstrap.min.css")
 
 gui_hooks.webview_will_set_content.append(on_webview_will_set_content)

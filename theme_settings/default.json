@@ -13,7 +13,7 @@
     "large-areas-color"  : "rgba(255,255,255,0.4)" ,
     "decks-border-color" : "rgba(227, 227, 227 , 0.6)",
     "decks-font-color"   : "rgba(0,0,0,1)",
-    "decks-font-size"        :"12px",
+    "decks-font-size"        :"13px",
     "decks-font-family"        :"inherit",
     "decks-font-src"        :"",
     "filtered-deck-color" :"rgba(255, 193, 7,1)",
@@ -21,58 +21,47 @@
     "DECK-BROWSER": {
 
                 
-        "review-count-background-color" : " #4caf50;",
-        "review-count-color" : "#ffffff",
-        "new-count-background-color" : "#3f51b5",
-        "new-count-color" : "#ffffff",
+        "review-count-background-color" : " rgba(76, 175, 80,1)",
+        "review-count-color" : "rgb(255, 255, 255,1)",
+        "new-count-background-color" : "rgba(63, 81, 181,1)",
+        "new-count-color" : "rgb(255, 255, 255,1)",
 
 
-        "wedgits-font-size"     :"12px",
-        "wedgits-font-family"   :"Noto",
-        "wedgits-font-src"      :"Noto.otf",
+        "wedgits-font-size"     :"13px",
+        "wedgits-font-family"   :"Raleway",
+        "wedgits-font-src"      :"Raleway.ttf",
         "wedgits-font-color" : "rgba(256,256,256,1)" ,
 
 
-        "overview-wedgit-bg"  : "rgba(0, 131, 143,1)" ,
-        "average-wedgit-bg"   : "rgba(245, 127, 23,1)" ,
-        "remaining-wedgit-bg" : "rgba(191, 54, 12,1)" ,
-        "new-wedgit-bg"       : "rgba(57, 73, 171,1)" ,
-        "due-wedgit-bg"       : "rgba(76, 175, 80,1)" ,
-        "total-wedgit-bg"     : "rgba(94, 53, 177,1)" ,
+        "overview-wedgit-bg"  : "rgba(0, 131, 143,0.8)" ,
+        "average-wedgit-bg"   : "rgba(245, 127, 23,0.8)" ,
+        "remaining-wedgit-bg" : "rgba(191, 54, 12,0.8)" ,
+        "new-wedgit-bg"       : "rgba(57, 73, 171,0.8)" ,
+        "due-wedgit-bg"       : "rgba(76, 175, 80,0.8)" ,
+        "total-wedgit-bg"     : "rgba(94, 53, 177,0.8)" 
 
-        "overview-wedgit-icon"  : "playlist_add_check" ,
-        "average-wedgit-icon"   : "access_alarm" ,
-        "remaining-wedgit-icon" : "timer" ,
-        "new-wedgit-icon"       : "card_giftcard" ,
-        "due-wedgit-icon"       : "edit" ,
-        "total-wedgit-icon"     : "donut_small" 
 
     },
     "DECK-OVERVIEW" :{
 
         "deck-name-font-size":"70px",
-        "deck-name-font-family":"Pacifico",
-        "deck-name-font-src"        :"Pacifico.ttf",
+        "deck-name-font-family":"fantasy",
+        "deck-name-font-src"        :"",
 
-        "wedgits-font-size"     :"12px",
-        "wedgits-font-family"   :"inhirit",
-        "wedgits-font-src"      :"",
-        "wedgits-font-color"    : "rgba(256,256,256,1)" ,
+        "wedgits-font-size"     :"13px",
+        "wedgits-font-family"   :"Raleway",
+        "wedgits-font-src"      :"Raleway.ttf",
+        "wedgits-font-color"    : "rgba(255, 255, 255,1)",
 
-        "total-notes-wedgit-bg" : "rgba(0, 137, 123,1)" ,
-        "remaining-wedgit-bg"   : "rgba(255, 143, 0,1)" ,
-        "new-wedgit-bg"         : "rgba(57, 73, 171,1)" ,
-        "learning-wedgit-bg"    : "rgba(216, 67, 21,1)" ,
-        "review-wedgit-bg"      : "rgba(46, 125, 50,1)" ,
-        "total-wedgit-bg"       : "rgba(94, 53, 177,1)" ,
+
+        "total-notes-wedgit-bg" : "rgba(0, 137, 123,0.8)" ,
+        "remaining-wedgit-bg"   : "rgba(255, 143, 0,0.8)" ,
+        "new-wedgit-bg"         : "rgba(57, 73, 171,0.8)" ,
+        "learning-wedgit-bg"    : "rgba(216, 67, 21,0.8)" ,
+        "review-wedgit-bg"      : "rgba(46, 125, 50,0.8)" ,
+        "total-wedgit-bg"       : "rgba(94, 53, 177,0.8)" ,
 
         
-        "remaining-wedgit-icon" : "timer" ,
-        "new-wedgit-icon"       : "card_giftcard" ,
-        "learning-wedgit-icon"  : "description" ,
-        "review-wedgit-icon"    : "edit" ,
-        "total-wedgit-icon"     : "donut_small" ,
-
     
     "PIE-CHART":{
         "wedgits-font-color" : "rgba(0,0,0,1)"

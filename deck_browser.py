@@ -88,32 +88,41 @@ def renderStats(self, _old):
 
     
     <div class='row align-items-center full   stats' style="background-color: {BROWSER[overview-wedgit-bg]} ">
-            <div class="col col-sm-2 ">
-            <span class="w-icon oi oi-{BROWSER[overview-wedgit-icon]}"></span>
+            <div class="col col-2 ">
+                <svg width="3vw" height="3vw" viewBox="0 0 16 16" class="bi bi-card-checklist" fill="#ffffff" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+                    <path fill-rule="evenodd" d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
+                </svg>
             </div>
-            <div class="col col-sm-10"> {old_stats} </div>
+            <div class="col col-10"> {old_stats} </div>
     </div>
     
     <!------------------END ROW 1------------------------------->
 
     <div class="row align-items-center full">
 
-        <div class='col col-sm-6  stats half left ' style="background-color: {BROWSER[average-wedgit-bg]}">
+        <div class='col col-6  stats half left ' style="background-color: {BROWSER[average-wedgit-bg]}">
             <div class="row align-items-center">
-                    <div class="col col-sm-4">
-                    <span class="w-icon oi oi-{BROWSER[average-wedgit-icon]}"></span>
+                    <div class="col col-4">
+                        <svg width="3vw" height="3vw" viewBox="0 0 16 16" class="bi bi-watch" fill="#ffffff" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M4 14.333v-1.86A5.985 5.985 0 0 1 2 8c0-1.777.772-3.374 2-4.472V1.667C4 .747 4.746 0 5.667 0h4.666C11.253 0 12 .746 12 1.667v1.86A5.985 5.985 0 0 1 14 8a5.985 5.985 0 0 1-2 4.472v1.861c0 .92-.746 1.667-1.667 1.667H5.667C4.747 16 4 15.254 4 14.333zM13 8A5 5 0 1 0 3 8a5 5 0 0 0 10 0z"/>
+                        <path d="M13.918 8.993A.502.502 0 0 0 14.5 8.5v-1a.5.5 0 0 0-.582-.493 6.044 6.044 0 0 1 0 1.986z"/>
+                        <path fill-rule="evenodd" d="M8 4.5a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-.5.5H6a.5.5 0 0 1 0-1h1.5V5a.5.5 0 0 1 .5-.5z"/>
+                        </svg>
                     </div>
 
-                    <div class="col col-sm-8">{LOCALS[Average]}: {speed:.2f} <br> {LOCALS[cards/minute]} </div>
+                    <div class="col col-8">{LOCALS[Average]}: {speed:.2f} <br> {LOCALS[cards/minute]} </div>
             </div>   
         </div>
 
-        <div class='col col-sm-6  stats half right ' style="background-color:  {BROWSER[remaining-wedgit-bg]}">
+        <div class='col col-6  stats half right ' style="background-color:  {BROWSER[remaining-wedgit-bg]}">
             <div class="row align-items-center">
-                <div class="col col-sm-4">
-                <span class="w-icon oi oi-{BROWSER[remaining-wedgit-icon]}"></span>
+                <div class="col col-4">
+                    <svg width="3vw" height="3vw" viewBox="0 0 16 16" class="bi bi-stopwatch-fill" fill="#fff" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M5.5.5A.5.5 0 0 1 6 0h4a.5.5 0 0 1 0 1H9v1.07A7.002 7.002 0 0 1 8 16 7 7 0 0 1 7 2.07V1H6a.5.5 0 0 1-.5-.5zm3 4.5a.5.5 0 0 0-1 0v3.5h-3a.5.5 0 0 0 0 1H8a.5.5 0 0 0 .5-.5V5z"/>
+                    </svg>
                 </div>
-                <div class="col col-sm-8">
+                <div class="col col-8">
                 {} {LOCALS[more]}
                 </div>
              </div>
@@ -124,13 +133,16 @@ def renderStats(self, _old):
 
     <div class="row align-items-center full">
 
-        <div class='col col-sm-6  stats  half left' style="background-color:{BROWSER[new-wedgit-bg]}">
+        <div class='col col-6  stats  half left' style="background-color:{BROWSER[new-wedgit-bg]}">
 
         <div class="row align-items-center">
-        <div class="col col-sm-4">
-            <span class="w-icon oi oi-{BROWSER[new-wedgit-icon]}"></span>
+        <div class="col col-4">
+            <svg width="3vw" height="3vw" viewBox="0 0 16 16" class="bi bi-layers-fill" fill="#fff" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M7.765 1.559a.5.5 0 0 1 .47 0l7.5 4a.5.5 0 0 1 0 .882l-7.5 4a.5.5 0 0 1-.47 0l-7.5-4a.5.5 0 0 1 0-.882l7.5-4z"/>
+            <path fill-rule="evenodd" d="M2.125 8.567l-1.86.992a.5.5 0 0 0 0 .882l7.5 4a.5.5 0 0 0 .47 0l7.5-4a.5.5 0 0 0 0-.882l-1.86-.992-5.17 2.756a1.5 1.5 0 0 1-1.41 0l.418-.785-.419.785-5.169-2.756z"/>
+            </svg>
              </div>
-              <div class="col col-sm-8">
+              <div class="col col-8">
             {new_count} <br>   {LOCALS[New]}
             </div>
         </div>
@@ -138,14 +150,17 @@ def renderStats(self, _old):
 
 
 
-        <div class='col col-sm-6  stats  half right'style="background-color: {BROWSER[due-wedgit-bg]}">
+        <div class='col col-6  stats  half right'style="background-color: {BROWSER[due-wedgit-bg]}">
             <div class="row align-items-center">
-                <div class="col col-sm-4">
-                    <span class="w-icon oi oi-{BROWSER[due-wedgit-icon]}"></span>
+                <div class="col col-4">
+                    <svg width="3vw" height="3vw" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="#fff" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                    </svg>
 
                 </div>
 
-                <div class="col col-sm-8">
+                <div class="col col-8">
                 {due_count}  &nbsp;  {LOCALS[Due]}    <br>
                 {learn_count} &nbsp;  {LOCALS[Learn]} <br> 
                 {review_count}  &nbsp;   {LOCALS[Review]}  
@@ -168,10 +183,13 @@ def renderStats(self, _old):
 
 
     <div class='row align-items-center full stats'  style="background-color:{BROWSER[total-wedgit-bg]} ">
-              <div class="col col-sm-2">
-                    <span class="w-icon oi oi-{BROWSER[total-wedgit-icon]}"></span>
+              <div class="col col-2">
+             
+                        <svg width="3vw" height="3vw" viewBox="0 0 16 16" class="bi bi-pie-chart-fill" fill="#fff" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15.985 8.5H8.207l-5.5 5.5a8 8 0 0 0 13.277-5.5zM2 13.292A8 8 0 0 1 7.5.015v7.778l-5.5 5.5zM8.5.015V7.5h7.485A8.001 8.001 0 0 0 8.5.015z"/>
+                        </svg>
                     </div>
-                    <div class="col col-sm-10">
+                    <div class="col col-10">
                     {total_cards} <br>  {LOCALS[Total]}
                     </div>
            
@@ -183,7 +201,7 @@ def renderStats(self, _old):
     """.format( str(ngettext("%s <br>  {LOCALS[minute]} ".format( LOCALS=LOCALS), "%s <br>  {LOCALS[minutes]}".format( LOCALS=LOCALS), minutes) % (minutes)),
         old_stats=_old(self), speed=speed,
         new_count=new,due_count=lrn+due,learn_count=lrn,review_count=due,
-        total_cards=totalDisplay,BROWSER=BROWSER , LOCALS=LOCALS)
+        total_cards=totalDisplay,BROWSER=BROWSER , LOCALS=LOCALS , base=base)
     
   
     return buf
@@ -230,10 +248,10 @@ def render_deck_node(self, node: DeckTreeNode, ctx: RenderDeckNodeContext,_old) 
         extraclass = "filtered"
     else:
         extraclass = ""
-    buf += """<div class="col col-sm-1">
+    buf += """<div class="col col-1">
           <img src="%s/assets/deck_icons/%s.png" onerror="this.src='%s/assets/deck_icons/default.png'" alt="" class="circle"></div>
 
-    <div  class='col col-sm-8 decktd ' >%s%s<a class="align-middle deck padding %s"
+    <div  class='col col-8 decktd ' >%s%s<a class="align-middle deck padding %s"
     href=# onclick="return pycmd('open:%d')">%s</a></div>""" % (
         base,
         node.name,
@@ -250,15 +268,20 @@ def render_deck_node(self, node: DeckTreeNode, ctx: RenderDeckNodeContext,_old) 
             klass = "zero-count"
         return f'<div class="{klass}">{cnt}</div>'
 
-    buf += " <div class='col col-sm-1 ' >%s</div><div class='col col-sm-1 ' >%s</div> " % (
+    buf += " <div class='col col-1 ' >%s</div><div class='col col-1 ' >%s</div> " % (
         nonzeroColour(due, "review-count"),
         nonzeroColour(node.new_count, "new-count"),
     )
     # options
     buf += (
-        "<div  class='opts col col-sm-1'><a onclick='return pycmd(\"opts:%d\");'>"
-        " <span style='color:{THEME[gear-icon-color]}' class='oi oi-cog'  aria-hidden='true'></span></a></div></div>".format(THEME=THEME) % node.deck_id
+        "<div  class='opts col col-1'><a onclick='return pycmd(\"opts:%d\");'>".format(THEME=THEME) % node.deck_id
     )
+    buf+= """
+    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-gear-fill" fill="{THEME[gear-icon-color]}" xmlns="http://www.w3.org/2000/svg">
+    <path fill-rule="evenodd" d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 0 0-5.86 2.929 2.929 0 0 0 0 5.858z"/>
+    </svg>
+    </a></div></div>
+    """.format(THEME=THEME)
     # children
     if not node.collapsed:
         for child in node.children:
@@ -266,11 +289,22 @@ def render_deck_node(self, node: DeckTreeNode, ctx: RenderDeckNodeContext,_old) 
     return buf
 
 
+sharedIcon = """
+<img src="{base}/assets/icons/deck browser icons/get shared.svg" style="margin-top: -5px; margin-right:5px">
+""".format(base=base)
+
+creatDeckIcon ="""
+<img src="{base}/assets/icons/deck browser icons/create deck.svg" style="margin-top: -5px; margin-right:5px">
+""".format(base=base)
+
+importFileIcon = """
+<img src="{base}/assets/icons/deck browser icons/import file.svg" style="margin-top: -5px; margin-right:5px">
+""".format(base=base)
 
 DeckBrowser.drawLinks = [
-        ["", "shared", _("<span class='oi oi-external-link'  aria-hidden='true'></span> Get Shared")],
-        ["", "create", _("<span class='oi oi-plus'  aria-hidden='true'></span> Create Deck")],
-        ["Ctrl+I", "import", _("<span class='oi oi-cloud-download'  aria-hidden='true'></span> Import File")], 
+        ["", "shared", _("{sharedIcon} Get Shared ".format(sharedIcon=sharedIcon))],
+        ["", "create", _("{creatDeckIcon}Create Deck".format(creatDeckIcon=creatDeckIcon))],
+        ["Ctrl+I", "import", _("{importFileIcon} Import File".format(importFileIcon=importFileIcon))], 
     ]
 
 def drawButtons(self,_old):
@@ -328,6 +362,27 @@ else:
     </style>
     """%(base)
 
+
+heatmapStyle=""
+if THEME["heatmap-background"]:
+    heatmapStyle="""
+        .rh-container{{
+            background-color: {THEME[large-areas-color]};
+            width:96.5%%;
+            min-width: max-content;
+            text-align: center;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+
+        }}
+        .streak{{
+            background-color: {THEME[large-areas-color]};
+            padding:10px;
+        }}
+     """.format(THEME=THEME)
+     
+
+
 main_bg = """
 
 .deck-row{{
@@ -337,6 +392,8 @@ main_bg = """
 
 .decks-container{{
 background-color:{THEME[large-areas-color]} ;
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
 }}
 
 a.deck , .collapseable{{
@@ -378,7 +435,9 @@ a.deck , .collapseable{{
     color: {BROWSER[new-count-color]};
 }}
 
-""".format(THEME=THEME,BROWSER=BROWSER, base=base)
+{heatmapStyle}
+
+""".format(THEME=THEME,BROWSER=BROWSER, base=base , heatmapStyle=heatmapStyle)
 
 
 DeckBrowser._body = """
@@ -391,12 +450,12 @@ DeckBrowser._body = """
 {animation}
 <center class="container">
 <div class=row>
-<div class="col col-sm-12 col-md-7 col-lg-8">
+<div class="col col-12 col-md-7 col-lg-8">
 <div class="container decks-container">
 %(tree)s
 </div>
 </div>
-<div class="col col-sm-12 col-md-5 col-lg-4" style="color:{BROWSER[wedgits-font-color]}">
+<div class="col col-12 col-md-5 col-lg-4" style="color:{BROWSER[wedgits-font-color]}">
 %(stats)s
 </div>
 </center>

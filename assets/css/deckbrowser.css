@@ -105,38 +105,19 @@
   
   }
   
-  .card-panel {
-      min-height: 75px !important; 
-  }
-  
-  .card .card-content {
-      padding: 10px;
-      border-radius: 0 0 2px 2px;
-  }
-  
-  .row {
-      margin-bottom: 0;
-      }
-
-.row .col.s6 {
-  width: 46%;
-  margin: 2%;
-
-}
 
 .full {
   width: 96%;
   margin: 2%;
 }
 
-.w-icon{
-  font-size: 3vw;
-}
-
 .stats{
   text-align: left;
   border-radius: 3px;
   padding: 2%;
+  height:70px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
 
 }
 
@@ -149,7 +130,7 @@ figure{
  
     animation: imageAnimation 30s linear infinite 0s;
     backface-visibility: hidden;
-    /* background-size: cover; */
+    background-size: cover;
     background-position: center center;
     color: transparent;
     height: 100%;
@@ -205,8 +186,4 @@ imageAnimation {  0% {
  opacity: 0
 }
 
-}
-
-.rh-container{
-  width: 98%;
 }

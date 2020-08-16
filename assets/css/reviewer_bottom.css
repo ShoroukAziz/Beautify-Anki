@@ -1,4 +1,7 @@
 
+  body{
+    font-size: 12px !important;
+  }
   td{
     text-align: center !important;
     padding: 1px 5px;;
@@ -12,16 +15,16 @@
       background-color: #4CAF50 !important;
   }
   
-  a[onclick*="ease1"]:not(#defease) {
+  button[onclick*="ease1"]:not(#defease) {
       background-color: #b71c1c !important;
   }
   
-  a[onclick*="ease2"]:not(#defease) {
+  button[onclick*="ease2"]:not(#defease) {
       background-color:#ff6f00 !important;
   }
   
-  a[onclick*="ease3"]:not(#defease),
-  a[onclick*="ease4"]:not(#defease) {
+  button[onclick*="ease3"]:not(#defease),
+  button[onclick*="ease4"]:not(#defease) {
       background-color: #1976d2  !important;
   }
   body.nightMode {

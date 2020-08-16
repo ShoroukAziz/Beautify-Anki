@@ -57,7 +57,7 @@ def desc(self, deck, _old):
     desc = ""
 
     if( deck.get("desc", "")!=""):
-        desc += "<div class='card-panel amber amber lighten-4'>"
+        desc += "<div class='deck-desc'  style='background-color:{THEME[large-areas-color]}'>".format(THEME=THEME)
         desc += deck.get("desc", "")
         desc += """
         </div>"""
@@ -75,7 +75,7 @@ def desc(self, deck, _old):
         finish_msg = ""
         btn = u'''      
             {button:s} 
-            '''.format(button=button('study', _('<i class=\"  material-icons right\">exit_to_app</i>  Study Now'), id='study', class_='waves-effect waves-light btn-large', extra='style=\'background:{THEME[buttons-color]}\''.format(THEME=THEME)))
+            '''.format(button=button('study', _('<span class=\"  oi oi-target\"></span>  Study Now'), id='study', class_='btn btn-lg', extra='style=\'background:{THEME[buttons-color]};color:{THEME[buttons-label-color]}\''.format(THEME=THEME)))
 
     if deck["dyn"]:
         desc += """
@@ -100,7 +100,7 @@ to their original deck.</div>"""+btn
         dyn = ""
     return '<div class=" %s">%s</div>' % (dyn, desc)
 
-
+#####################################################################################################################
 
 def table(self):
     current_deck_name = self.mw.col.decks.current()['name']
@@ -200,126 +200,188 @@ def table(self):
     else:
         cards['daysLeft'] = '{} {LOCALS[days]}'.format(daysUntilDone,LOCALS=LOCALS)
 
+ ####################### Writing Output HTML ########################## 
+
     output = u'''
-    <div class="conatiner" ><div class='row'>
-
-<script type="text/javascript">
-
-window.onload = function () {{
-    var data = [{{
-  type: "pie",
-  hole: .5,
-  automargin: true,
-  values: [{cards[mature]:d}, {cards[young]:d}, {cards[unseen]:d},  {cards[suspended]:d}],
-  labels: ["{LOCALS[Mature]}", "{LOCALS[Young]}", "{LOCALS[Unseen]}", "{LOCALS[Suspended]}"],
-  marker: {{
-  colors:["#2e7d32","#a5d6a7","#707070","#941b1b"]
-
-  }},
-  textinfo: "label+percent",
-  insidetextorientation: "radial"
-}}]
-
-var layout = {{
-  showlegend: true,
-  height: 387,
-  width: 350,
-  paper_bgcolor:"{THEME[large-areas-color]}",
-  margin: {{"t": 0, "b": 0, "l": 0, "r": 0}},
-	legend: {{"orientation": "h" ,
-    font: {{
-        "color": "{PIE[wedgits-font-color]}"
+    <!------------- Break subtitles script--------------->
+    <script>
+    window.addEventListener('load', function () {{
+    if(this.document.querySelector('h1')){{
+        document.querySelector('h1').innerText = document.querySelector('h1').innerText.split("::").join(" :: ")
     }}
-    
-     }}  
-  }};
+
+    }});
+    </script>
+
+    <!-----------END Break subtitles script--------------->
+
  
-Plotly.newPlot('myDiv', data, layout);
-}}
+    <!------------------ plotly script------------------>
+    <script type="text/javascript">
 
-</script>
+        window.onload = function () {{
+            var data = [{{
+        type: "pie",
+        hole: .5,
+        automargin: true,
+        values: [{cards[mature]:d}, {cards[young]:d}, {cards[unseen]:d},  {cards[suspended]:d}],
+        labels: ["{LOCALS[Mature]}", "{LOCALS[Young]}", "{LOCALS[Unseen]}", "{LOCALS[Suspended]}"],
+        marker: {{
+        colors:["#2e7d32","#a5d6a7","#707070","#941b1b"]
 
-  <div class='col s6 '>
-  
-    <div class='row'">
+        }},
+        textinfo: "label+percent",
+        insidetextorientation: "radial"
+        }}]
 
-      <div class= 'widget col s6  top' style="background-color:{OVERVIEW[total-notes-wedgit-bg]} ">
-      
-      <span class='number'> {cards[total]:d}<br> </span>  {LOCALS[Total]} {cards[count_label]}
-      </div>
-
-      <div class='widget top col s6 flex'  style="background-color: {OVERVIEW[remaining-wedgit-bg]} ">
-      <i class=" material-icons">{OVERVIEW[remaining-wedgit-icon]}</i>
-      {LOCALS[Done in]}
-      {cards[daysLeft]:s} {cards[doneDate]:s} 
-      </div>
-
-      <div class='widget number-container col s6 '  style="background-color:{OVERVIEW[new-wedgit-bg]}  ">
-      <div class='number'>
-      <i class=" material-icons">{OVERVIEW[new-wedgit-icon]}</i><br>
-      {cards[new]:d}
-      </div>
-      {LOCALS[New]} 
-      </div>
-
-      <div class='widget number-container  col s6 '  style="background-color:{OVERVIEW[learning-wedgit-bg]}">
-      <div class='number'>
-        <i class=" material-icons">{OVERVIEW[learning-wedgit-icon]}</i><br>
-      {cards[learning]:d}
-      </div>
-      {LOCALS[Learning]} 
-      </div>
-
-      <div class='widget number-container col s6 '  style="background-color: {OVERVIEW[review-wedgit-bg]} ">
-      <div class='number'>
-      <i class=" material-icons">{OVERVIEW[review-wedgit-icon]}</i><br>
-      {cards[review]:d}
-      </div>
-      {LOCALS[Review]} 
+        var layout = {{
+        showlegend: true,
+        height: 387,
+        width: 350,
+        paper_bgcolor:"{THEME[large-areas-color]}",
+        margin: {{"t": 0, "b": 0, "l": 0, "r": 0}},
+            legend: {{"orientation": "h" ,
+            font: {{
+                "color": "{PIE[wedgits-font-color]}"
+            }}
             
-      </div>
+            }}  
+        }};
+        
+        Plotly.newPlot('myDiv', data, layout);
+        }}
 
-      <div class='widget number-container col s6 '  style="background-color: {OVERVIEW[total-wedgit-bg]}  ">
-      <div class='number'>
-      <i class=" material-icons">{OVERVIEW[total-wedgit-icon]}</i><br>
-      {cards[todo]:d}
-      </div>
-      {LOCALS[Total]} 
-      </div>
+    </script>
+    <!------------------END  plotly script------------------>
+
+    <div class='row '>
+        <!-----------------------------stats Widgets ------------------------------>
+        <div class='col col-sm-12 col-lg-6 text-center'>
+
+            <div class='row'">
+
+                <div class= 'col col-sm-6 widget widget-top' style="background-color:{OVERVIEW[total-notes-wedgit-bg]} ">
+                    <span class='number'> {cards[total]:d}<br> </span>  {LOCALS[Total]} {cards[count_label]}
+                </div>
+
+                <div class= 'col col-sm-6 widget widget-top' style="background-color: {OVERVIEW[remaining-wedgit-bg]} ">
+                        <svg width="2.3vw" height="2.3vw" viewBox="0 0 16 16" class="bi bi-stopwatch-fill" fill="#fff" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M5.5.5A.5.5 0 0 1 6 0h4a.5.5 0 0 1 0 1H9v1.07A7.002 7.002 0 0 1 8 16 7 7 0 0 1 7 2.07V1H6a.5.5 0 0 1-.5-.5zm3 4.5a.5.5 0 0 0-1 0v3.5h-3a.5.5 0 0 0 0 1H8a.5.5 0 0 0 .5-.5V5z"/>
+                    </svg><br>
+                        {LOCALS[Done in]}
+                        {cards[daysLeft]:s} {cards[doneDate]:s} 
+                </div>
+            </div>
+
+            <!-------------------------END ROW 1 --------------------------------->
+            
+            <div class='row'>
+                <div class='widget  col col-sm-6 d-flex align-items-center justify-content-center'  style="background-color:{OVERVIEW[new-wedgit-bg]}  ">
+                    <div>
+                     <svg width="2.3vw" height="2.3vw" viewBox="0 0 16 16" class="bi bi-layers-fill" fill="#fff" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M7.765 1.559a.5.5 0 0 1 .47 0l7.5 4a.5.5 0 0 1 0 .882l-7.5 4a.5.5 0 0 1-.47 0l-7.5-4a.5.5 0 0 1 0-.882l7.5-4z"/>
+                    <path fill-rule="evenodd" d="M2.125 8.567l-1.86.992a.5.5 0 0 0 0 .882l7.5 4a.5.5 0 0 0 .47 0l7.5-4a.5.5 0 0 0 0-.882l-1.86-.992-5.17 2.756a1.5 1.5 0 0 1-1.41 0l.418-.785-.419.785-5.169-2.756z"/>
+                    </svg>                      
+                    <div class='number'>
+                        {cards[new]:d}
+                    </div>
+                    {LOCALS[New]} 
+                    </div>
+                </div>
+
+                <div class='widget  col col-sm-6 d-flex align-items-center justify-content-center'  style="background-color:{OVERVIEW[learning-wedgit-bg]}">
+                    <div>
+                    <svg width="2.3vw" height="2.3vw" viewBox="0 0 16 16" class="bi bi-book-half" fill="#fff" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M12.786 1.072C11.188.752 9.084.71 7.646 2.146A.5.5 0 0 0 7.5 2.5v11a.5.5 0 0 0 .854.354c.843-.844 2.115-1.059 3.47-.92 1.344.14 2.66.617 3.452 1.013A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.276-.447L15.5 2.5l.224-.447-.002-.001-.004-.002-.013-.006-.047-.023a12.582 12.582 0 0 0-.799-.34 12.96 12.96 0 0 0-2.073-.609zM15 2.82v9.908c-.846-.343-1.944-.672-3.074-.788-1.143-.118-2.387-.023-3.426.56V2.718c1.063-.929 2.631-.956 4.09-.664A11.956 11.956 0 0 1 15 2.82z"/>
+                    <path fill-rule="evenodd" d="M3.214 1.072C4.813.752 6.916.71 8.354 2.146A.5.5 0 0 1 8.5 2.5v11a.5.5 0 0 1-.854.354c-.843-.844-2.115-1.059-3.47-.92-1.344.14-2.66.617-3.452 1.013A.5.5 0 0 1 0 13.5v-11a.5.5 0 0 1 .276-.447L.5 2.5l-.224-.447.002-.001.004-.002.013-.006a5.017 5.017 0 0 1 .22-.103 12.958 12.958 0 0 1 2.7-.869z"/>
+                    </svg>
+                    
+                    <div class='number'>
+                        {cards[learning]:d}
+                    </div>
+                    {LOCALS[Learning]} 
+                    </div>
+                </div>
+            </div>
+
+            <!-------------------------END ROW 2 --------------------------------->
+
+            <div class='row'>
+
+                <div class='widget  col col-sm-6 d-flex align-items-center justify-content-center'  style="background-color: {OVERVIEW[review-wedgit-bg]} ">
+                        <div>
+                         <svg width="2.3vw" height="2.3vw" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="#fff" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                        </svg>
+                        <div class='number'>
+                            {cards[review]:d}
+                        </div>
+                        {LOCALS[Review]} 
+                        </div>
+        
+                </div>
+
+                <div class='widget  col col-sm-6 d-flex align-items-center justify-content-center'  style="background-color: {OVERVIEW[total-wedgit-bg]}  ">
+                    <div>
+                         <svg width="2.3vw" height="2.3vw" viewBox="0 0 16 16" class="bi bi-pie-chart-fill" fill="#fff" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15.985 8.5H8.207l-5.5 5.5a8 8 0 0 0 13.277-5.5zM2 13.292A8 8 0 0 1 7.5.015v7.778l-5.5 5.5zM8.5.015V7.5h7.485A8.001 8.001 0 0 0 8.5.015z"/>
+                        </svg>                    <div class='number'>
+                            {cards[todo]:d}
+                    </div>
+                    {LOCALS[Total]} 
+                    </div>
+                </div>
+            </div>
+            <!-------------------------END ROW 3 --------------------------------->
+
+            
+        </div>  
+
+        <!------------------- End widgets ------------------------------>
+
+        <!---------------- the pie chart ------------------------------->
+        <div id='myDiv' class='col col-sm-12 col-lg-6'  style="padding:2% ">
+
+        </div> 
+        <!---------------- END pie chart ------------------------------->
 
 
-
-
-      </div>
-  
-
-</div>  
-
-    <div id='myDiv' class='col s6'  style="height:387px;width: 50%; ">
-
-  </div> 
-
-  </div>
+    </div>
 
   '''.format(cards=cards, OVERVIEW=OVERVIEW , THEME=THEME , PIE=PIE , LOCALS=LOCALS)
 
     return output
+#####################################################################################################################
+heatmapStyle=""
+if THEME["heatmap-background"]:
+    heatmapStyle="""
+        .rh-container{{
+            background-color: {THEME[large-areas-color]};
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            min-width: max-content;
+            width:110%%;
+            text-align: center;
 
+
+        }}
+        .streak{{
+            background-color: {THEME[large-areas-color]};
+            padding:10px;
+            
+
+        }}
+     """.format(THEME=THEME)
+     
 
 f = "%(deck)s" 
 
 Overview._body = """
-<div class="overlay"  >
 <style>
 body{{
      background: linear-gradient(20deg,{THEME[overlay-color1]}, {THEME[overlay-color2]}) fixed, url('{base}/assets/deck_backgrounds/%(deck)s.jpg'),url('{base}/assets/background.jpg') ;
      background-size: 100%%;
      }}
-
-.card{{
-background-color:{THEME[large-areas-color]} ;
-}}
-
 
 @font-face {{
     font-family: '{OVERVIEW[wedgits-font-family]}';
@@ -343,47 +405,56 @@ font-family:{OVERVIEW[deck-name-font-family]};
 font-size:{OVERVIEW[deck-name-font-size]}
 }}
 
-
+{heatmapStyle}
 </style>
-<center class='container  grey-text text-darken-4'>
-<div class = 'row flex' >
-<div class=' col s5 '>
-<div class='container'>
-<h1 class="animate__animated  animate__delay animate__backInDown">%(deck)s</h1>
-%(shareLink)s
-%(desc)s
-</div>
-</div>
-<div class=' col s7 right-col'>
-%(table)s
+<!----------------------END OF STYLE------------------------------->
 
+<div class='container  grey-text text-darken-4'>
+
+    <div class = 'row align-items-center' >
+        <!-------------left side (title and description)------------------------------->
+        <div class=' col col-md-4 col-sm-12 text-center'>
+        
+            <h1 class="animate__animated  animate__delay animate__backInDown">%(deck)s</h1>
+            %(shareLink)s
+            %(desc)s
+        
+        </div>
+         <div class=' col col-md-1 col-sm-0 right-col'></div>
+
+        <!-------------right side (stats)------------------------------->
+
+        <div class=' col col-md-6 col-sm-12 right-col'>
+             %(table)s
+
+        </div>
+    </div>
 </div>
-</div>
-
-</center>
-</div>
 
 
-""".format(THEME=THEME,OVERVIEW=OVERVIEW,base=base)
 
+""".format(THEME=THEME,OVERVIEW=OVERVIEW,base=base,heatmapStyle=heatmapStyle)
+
+
+#####################################################################################################################
 
 def renderDeckBottom(self, _old):
     links = [
-        ["O", "opts", _(
-            "<i class=\" material-icons left\">settings_applications</i> Options")],
+        ["O", "opts", _(            
+            "<img src=\"{base}/assets/icons/deck overview icons/options.svg\" style=\"margin-top: -5px; margin-right:5px\"> Options").format(base=base)],
     ]
     if self.mw.col.decks.current()["dyn"]:
         links.append(
-            ["R", "refresh", _("<i class=\" material-icons left\">build</i> Rebuild")])
+            ["R", "refresh", _( "<img src=\"{base}/assets/icons/deck overview icons/rebuild.svg\" style=\"margin-top: -5px; margin-right:5px\"> Rebuild").format(base=base)])
         links.append(
-            ["E", "empty", _("<i class=\" material-icons left\">delete</i> Empty")])
+            ["E", "empty", _( "<img src=\"{base}/assets/icons/deck overview icons/empty.svg\" style=\"margin-top: -5px; margin-right:5px\"> Empty").format(base=base)])
     else:
         links.append(["C", "studymore", _(
-            "<i class=\" material-icons left\">event</i>Custom Study")])
+            "<img src=\"{base}/assets/icons/deck overview icons/custom study.svg\" style=\"margin-top: -5px; margin-right:5px\"> Custom Study").format(base=base)])
         # links.append(["F", "cram", _("Filter/Cram")])
     if self.mw.col.sched.haveBuried():
         links.append(["U", "unbury", _(
-            "<i class=\" material-icons left\">do_not_disturb_off</i>Unbury")])
+            "<img src=\"{base}/assets/icons/deck overview icons/unbury.svg\" style=\"margin-top: -5px; margin-right:5px\"> Unbury").format(base=base)])
     buf = """<style> 
     
     #outer{{
@@ -394,7 +465,7 @@ def renderDeckBottom(self, _old):
         if b[0]:
             b[0] = _("Shortcut key: %s") % shortcut(b[0])
         buf += """
-<button style="background:{THEME[buttons-color]}" class=' btn-small' title="%s" onclick='pycmd("%s")'>%s</button>""".format(THEME=THEME) % tuple(
+<button style="background:{THEME[buttons-color]}; color:{THEME[buttons-label-color]} " class='btn btn-sm' title="%s" onclick='pycmd("%s")'>%s</button>""".format(THEME=THEME) % tuple(
             b
         )
 
@@ -408,7 +479,7 @@ def renderDeckBottom(self, _old):
 
 def finishedMsg(self, _old) -> str:
     return (
-        "<div class='finish-msg animate__animated animate__rubberBand amber card-panel'>"
+        "<div class='deck-desc finish-msg animate__animated animate__rubberBand' style='background-color:{THEME[large-areas-color]};'>".format(THEME=THEME)
         + _("Congratulations! You have finished this deck for now.")
         + "<br></div>"
         + self._nextDueMsg()
@@ -428,22 +499,22 @@ def nextDueMsg(self, _old) -> str:
         line.append(
             _(
                 """\
-<div class='card-panel animate__animated animate__fadeInUp animate__slow amber amber lighten-4'>
+<div class=' animate__animated animate__fadeInUp animate__slow deck-desc' style='background-color:{THEME[large-areas-color]}'>
 Today's review limit has been reached, but there are still cards
 waiting to be reviewed. For optimum memory, consider increasing
 the daily limit in the options.</div>"""
-            ).replace("\n", " ")
+            ).replace("\n", " ").format(THEME=THEME)
         )
     if self.newDue():
         line.append(
             _(
                 """\
-<div class='card-panel animate__animated animate__fadeInUp animate__slow amber amber lighten-4'>
+<div class=' animate__animated animate__fadeInUp animate__slow deck-desc' style='background-color:{THEME[large-areas-color]}'>
 There are more new cards available, but the daily limit has been
 reached. You can increase the limit in the options, but please
 bear in mind that the more new cards you introduce, the higher
 your short-term review workload will become.</div>"""
-            ).replace("\n", " ")
+            ).replace("\n", " ").format(THEME=THEME)
         )
     if self.haveBuried():
         if self.haveCustomStudy:
@@ -453,8 +524,8 @@ your short-term review workload will become.</div>"""
         line.append(
             _(
                 """\
-<div class='card-panel animate__animated animate__fadeInUp animate__slow amber amber lighten-4'>
-Some related or buried cards were delayed until a later session.</div>"""
+<div class=' animate__animated animate__fadeInUp animate__slow deck-desc lighten-4' style='background-color:{THEME[large-areas-color]}'>
+Some related or buried cards were delayed until a later session.</div>""".format(THEME=THEME)
             )
             + now
         )
@@ -462,10 +533,11 @@ Some related or buried cards were delayed until a later session.</div>"""
         line.append(
             _(
                 """\
-<div class='card-panel animate__animated animate__fadeInUp animate__slow amber amber lighten-4'>
- To study outside of the normal schedule, click the Custom Study button below.</div>"""
+<div class=' animate__animated animate__fadeInUp animate__slow deck-desc lighten-4' style='background-color:{THEME[large-areas-color]}'>
+ To study outside of the normal schedule, click the Custom Study button below.</div>""".format(THEME=THEME)
             )
-        )
+            )
+        
     return "".join(line)
 
 

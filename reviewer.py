@@ -40,12 +40,12 @@ def bottomHTML(self):
 <tr>
 <td align=left width=50 valign=top class=stat>
 <br>
-<a style="background-color:{THEME[buttons-color]} "  class='waves-effect waves-light btn-small'title="%(editkey)s" onclick="pycmd('edit');">%(edit)s</a></td>
+<button style="color: {THEME[buttons-label-color]}; background-color:{THEME[buttons-color]} "  class='btn btn-sm'title="%(editkey)s" onclick="pycmd('edit');">%(edit)s</button></td>
 <td align=center valign=top id=middle>
 </td>
 <td width=50 align=right valign=top class=stat><span id=time class=stattxt>
 </span><br>
-<a style="background-color:{THEME[buttons-color]} "class=' waves-effect waves-light btn-small' onclick="pycmd('more');">%(more)s %(downArrow)s</a>
+<button style="color: {THEME[buttons-label-color]} ; background-color:{THEME[buttons-color]} "class=' btn btn-sm' onclick="pycmd('more');">%(more)s %(downArrow)s</button>
 </td>
 </tr>
 </table>
@@ -67,7 +67,7 @@ def showAnswerButton(self):
         self.bottom.web.setFocus()
     middle = """
 <span class=stattxt>%s</span><br>
-<a style='background-color:{THEME[buttons-color]}' class=' waves-effect waves-light btn-small' title="%s" id=ansbut onclick='pycmd("ans");'>%s</a>""".format(THEME=THEME) % (
+<button style='color: {THEME[buttons-label-color]} ;background-color:{THEME[buttons-color]}' class='btn btn-sm' title="%s" id=ansbut onclick='pycmd("ans");'>%s</button>""".format(THEME=THEME) % (
         self._remaining(),
         _("Shortcut key: %s") % _("Space"),
         _("Show Answer"),
@@ -99,8 +99,8 @@ def answerButtons(self):
         due = self._buttonTime(i)
         
         return """
-<td align=center>%s<a class='waves-effect waves-light btn-small ' %s title="%s" data-ease="%s" onclick='pycmd("ease%d");'>\
-%s</a></td>""" % (
+<td align=center>%s<button class='btn btn-sm ' %s title="%s" data-ease="%s" onclick='pycmd("ease%d");'>\
+%s</button></td>""" % (
             due,
             extra,
             _("Shortcut key: %s") % i,

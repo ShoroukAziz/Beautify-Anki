@@ -1,18 +1,18 @@
 body{
   word-break: break-word;
+  font-size: 12px;
 }
 
 body.nightMode {
   color: white;
-  background:rgba(0,0,0,0);
   background-size: 100%;
 
 }
-   .overlay{
 
-    height: 100vh;
-    background-size: 100%;
-  } 
+.container{
+  width: 80%;
+}
+
 h1{
   font-size:5rem ;
   color: #fff;
@@ -20,79 +20,43 @@ h1{
   font-variant: petite-caps;
   word-break: break-word
 }
-.flex {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-}
 
-.number{
-  font-size:2.5rem
-}
-.number-container{
+
+/***************** Widgets ***************/
+
+.widget{
+  padding:5px;
+  border-radius:5px;
   height: 145px;
-  background-color:#fff;
-  padding:15px;
-  border-radius:5px;
-}
-
-.top{
-  /* width: 92.4% !important;
-  margin-left: 1% !important; */
-  height:60px;
-  padding:15px;
-  border-radius:5px;
-  height: 80px;
-
+  max-width: 46%;
+  margin: 2%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
 }
-
-.row .col.s3 {
-    width: 23% !important ;
-    margin: 1% !important ;
-}    
-
-@media only screen and (min-width: 993px){
-.container {
-   width: 95% !important ; 
-}
+.widget-top{
+  height: 85px;
 }
 
-.right-col{
-  padding-top:2% !important;
+/* large numbers in widgets */
+.number{
+  font-size:2.3vw
 }
 
-.charts{
-  padding:10px;
-  border-radius:5px;
-  background-color:#fff;
+.w-icon{
+display: block;
+font-size: 2vw;
 }
 
-.row .col.s6 {
-    width: 45%  ;
-    margin: 1% !important ;
-} 
+/**************************************/
 
-.stats-row{
-  height:150px;
-}
-
-.row {
-    margin-bottom: 5px !important ;
-    }
-card .card-content {
-    padding: 10px !important ;
-    border-radius: 0 0 2px 2px !important ;
-}
-.material-icons {
-  font-size:35px;
+.deck-desc{
+  padding: 2%;
+  margin: 2%;
 }
 
 .finish-msg{
   font-size: 1.1rem;
   font-weight: 600;
   font-variant: petite-caps;
-
 
 }

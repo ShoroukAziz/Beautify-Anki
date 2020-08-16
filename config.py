@@ -11,7 +11,7 @@ Copyright (c) 2020 Shorouk Abdelaziz (https://shorouk.dev)
 #                                                                               #
 # Acknowledgments                                                               #
 # This Addon uses the following CSS and Javascript libraries                    #
-#   - Materialize                                                               #
+#   - Bootstrap                                                               #
 #   - Animate.css                                                               #
 #   - plotly                                                                    #
 # The Statistics part in the Deck Browser is based on Carlos Duarte             #

@@ -35,7 +35,7 @@ Checkout the [addon's Homebage](https://beautify-anki.shorouk.dev/) for custmoiz
 
 ## 🙏 Acknowledgments
 * This Addon uses the following CSS and Javascript libraries
-  * [Materialize](https://materializecss.com/)
+  * [Bootstrap](https://getbootstrap.com/)
   * [Animate.css](https://animate.style/)
   * [plotly](https://plotly.com/)
 

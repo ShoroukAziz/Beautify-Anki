@@ -11,7 +11,7 @@ Copyright (c) 2020 Shorouk Abdelaziz (https://shorouk.dev)
 #                                                                               #
 # Acknowledgments                                                               #
 # This Addon uses the following CSS and Javascript libraries                    #
-#   - Materialize                                                               #
+#   - Bootstrap                                                                 #
 #   - Animate.css                                                               #
 #   - plotly                                                                    #
 # The Statistics part in the Deck Browser is based on Carlos Duarte             #
@@ -203,16 +203,6 @@ def table(self):
  ####################### Writing Output HTML ########################## 
 
     output = u'''
-    <!------------- Break subtitles script--------------->
-    <script>
-    window.addEventListener('load', function () {{
-    if(this.document.querySelector('h1')){{
-        document.querySelector('h1').innerText = document.querySelector('h1').innerText.split("::").join(" :: ")
-    }}
-
-    }});
-    </script>
-
     <!-----------END Break subtitles script--------------->
 
  
@@ -353,6 +343,38 @@ def table(self):
 
     return output
 #####################################################################################################################
+
+
+def renderPage(self,_old):
+    but = self.mw.button
+    deck = self.mw.col.decks.current()
+    self.sid = deck.get("sharedFrom")
+    if self.sid:
+        self.sidVer = deck.get("ver", None)
+        shareLink = '<a class=smallLink href="review">Reviews and Updates</a>'
+    else:
+        shareLink = ""
+    if "::"in deck["name"]:
+        sub = deck["name"].replace("::"," .. ")
+        
+    else:
+        sub = deck["name"]
+    content = OverviewContent(
+        deck=sub,
+        shareLink=shareLink,
+        desc=self._desc(deck),
+        table=self._table(),
+    )
+    gui_hooks.overview_will_render_content(self, content)
+    self.web.stdHtml(
+        self._body % content.__dict__,
+        css=["overview.css"],
+        js=["jquery.js", "overview.js"],
+        context=self,
+    )
+
+
+####################################################################################################################3
 heatmapStyle=""
 if THEME["heatmap-background"]:
     heatmapStyle="""
@@ -374,7 +396,7 @@ if THEME["heatmap-background"]:
      """.format(THEME=THEME)
      
 
-f = "%(deck)s" 
+
 
 Overview._body = """
 <style>
@@ -546,6 +568,7 @@ Some related or buried cards were delayed until a later session.</div>""".format
 def updateRenderingDeckOverview():
 
     Overview._desc = wrap(Overview._desc, desc, "around")
+    Overview._renderPage = wrap(Overview._renderPage, renderPage, "around")
     Overview._table = table
     Overview._renderBottom = wrap(
         Overview._renderBottom, renderDeckBottom, "around")

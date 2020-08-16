@@ -11,7 +11,7 @@ Copyright (c) 2020 Shorouk Abdelaziz (https://shorouk.dev)
 #                                                                               #
 # Acknowledgments                                                               #
 # This Addon uses the following CSS and Javascript libraries                    #
-#   - Materialize                                                               #
+#   - Bootstrap                                                               #
 #   - Animate.css                                                               #
 #   - plotly                                                                    #
 # The Statistics part in the Deck Browser is based on Carlos Duarte             #
@@ -311,7 +311,8 @@ def drawButtons(self,_old):
     buf = """<style> 
     
     #outer{{
-  background-color: {THEME[bottombar-color]};
+  background-color: {THEME[bottombar-color]} ;
+  background-image:unset !important;
     }}
      </style>""".format(THEME=THEME)
     drawLinks = deepcopy(self.drawLinks)
@@ -392,12 +393,16 @@ main_bg = """
 
 .decks-container{{
 background-color:{THEME[large-areas-color]} ;
-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
 }}
 
 a.deck , .collapseable{{
     color: {THEME[decks-font-color]};
+}}
+
+.collapseable{{
+     color: {THEME[decks-font-color]} !important;
 }}
 
 .filtered{{

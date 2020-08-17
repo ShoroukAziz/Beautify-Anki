@@ -15,11 +15,11 @@ Beautify Anki is an [Anki](https://apps.ankiweb.net/) addon that attempts to giv
 * Material design look
 * 4 themes and the ability to create user themes.
 * Five alternating backgrounds for the home screen.
-* An icon for each deck.
-* A background for each deck.
-* Enhanced look for the statistics.
+* An icon for each deck and subdeck.
+* A background for each deck and subdeck.
+* Enhanced look for the statistics with the option to localize it.
 * Colorful buttons in the reviewer.
-* Complete control over the colors
+* Complete control over the fonts and colors
 
 ## 📥 Download 
 <b>Be sure to read [THIS](https://beautify-anki.shorouk.dev/before-install) first before installing this addon.</b><br>

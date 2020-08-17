@@ -7,7 +7,7 @@
         "Fr": 2,
         "English": 2
         },
-    "heatmap_position" : default
+    "heatmap_position" : "default",
     "theme" : "default",
     "local":{
         "Average" : "Average" , 

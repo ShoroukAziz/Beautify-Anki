@@ -75,8 +75,7 @@ def desc(self, deck, _old):
         finish_msg = ""
         btn = u'''      
             {button:s} 
-            '''.format(button=button('study', _('<span class=\"  oi oi-target\"></span>  Study Now'), id='study', class_='btn btn-lg', extra='style=\'background:{THEME[buttons-color]};color:{THEME[buttons-label-color]}\''.format(THEME=THEME)))
-
+            '''.format(button=button('study', _('<img style=\"margin-top: -5px; margin-right:5px\" src=\"{base}/assets/icons/deck overview icons/study now.svg\" > Study Now'.format(base=base)), id='study', class_='btn btn-lg', extra='style=\'background:{THEME[buttons-color]};color:{THEME[buttons-label-color]};\''.format(THEME=THEME)))
     if deck["dyn"]:
         desc += """
 <div class='card-panel animate__animated animate__fadeInUp animate__slow amber amber lighten-4'>This is a special deck for studying outside of the normal schedule.
@@ -217,11 +216,14 @@ def table(self):
         values: [{cards[mature]:d}, {cards[young]:d}, {cards[unseen]:d},  {cards[suspended]:d}],
         labels: ["{LOCALS[Mature]}", "{LOCALS[Young]}", "{LOCALS[Unseen]}", "{LOCALS[Suspended]}"],
         marker: {{
-        colors:["#2e7d32","#a5d6a7","#707070","#941b1b"]
+        colors:["#2e7d32","#85dd95","#707070","#941b1b"]
 
         }},
         textinfo: "label+percent",
-        insidetextorientation: "radial"
+        insidetextorientation: "radial",
+        textfont :{{
+            color:"{PIE[wedgits-font-color]}"
+        }}
         }}]
 
         var layout = {{
@@ -255,7 +257,7 @@ def table(self):
                 </div>
 
                 <div class= 'col col-sm-6 widget widget-top' style="background-color: {OVERVIEW[remaining-wedgit-bg]} ">
-                        <svg width="2.3vw" height="2.3vw" viewBox="0 0 16 16" class="bi bi-stopwatch-fill" fill="#fff" xmlns="http://www.w3.org/2000/svg">
+                        <svg width="2.3vw" height="2.3vw" viewBox="0 0 16 16" class="bi bi-stopwatch-fill" fill="{OVERVIEW[wedgits-font-color]} " xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M5.5.5A.5.5 0 0 1 6 0h4a.5.5 0 0 1 0 1H9v1.07A7.002 7.002 0 0 1 8 16 7 7 0 0 1 7 2.07V1H6a.5.5 0 0 1-.5-.5zm3 4.5a.5.5 0 0 0-1 0v3.5h-3a.5.5 0 0 0 0 1H8a.5.5 0 0 0 .5-.5V5z"/>
                     </svg><br>
                         {LOCALS[Done in]}
@@ -268,7 +270,7 @@ def table(self):
             <div class='row'>
                 <div class='widget  col col-sm-6 d-flex align-items-center justify-content-center'  style="background-color:{OVERVIEW[new-wedgit-bg]}  ">
                     <div>
-                     <svg width="2.3vw" height="2.3vw" viewBox="0 0 16 16" class="bi bi-layers-fill" fill="#fff" xmlns="http://www.w3.org/2000/svg">
+                     <svg width="2.3vw" height="2.3vw" viewBox="0 0 16 16" class="bi bi-layers-fill" fill="{OVERVIEW[wedgits-font-color]} " xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M7.765 1.559a.5.5 0 0 1 .47 0l7.5 4a.5.5 0 0 1 0 .882l-7.5 4a.5.5 0 0 1-.47 0l-7.5-4a.5.5 0 0 1 0-.882l7.5-4z"/>
                     <path fill-rule="evenodd" d="M2.125 8.567l-1.86.992a.5.5 0 0 0 0 .882l7.5 4a.5.5 0 0 0 .47 0l7.5-4a.5.5 0 0 0 0-.882l-1.86-.992-5.17 2.756a1.5 1.5 0 0 1-1.41 0l.418-.785-.419.785-5.169-2.756z"/>
                     </svg>                      
@@ -281,7 +283,7 @@ def table(self):
 
                 <div class='widget  col col-sm-6 d-flex align-items-center justify-content-center'  style="background-color:{OVERVIEW[learning-wedgit-bg]}">
                     <div>
-                    <svg width="2.3vw" height="2.3vw" viewBox="0 0 16 16" class="bi bi-book-half" fill="#fff" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="2.3vw" height="2.3vw" viewBox="0 0 16 16" class="bi bi-book-half" fill="{OVERVIEW[wedgits-font-color]} " xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M12.786 1.072C11.188.752 9.084.71 7.646 2.146A.5.5 0 0 0 7.5 2.5v11a.5.5 0 0 0 .854.354c.843-.844 2.115-1.059 3.47-.92 1.344.14 2.66.617 3.452 1.013A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.276-.447L15.5 2.5l.224-.447-.002-.001-.004-.002-.013-.006-.047-.023a12.582 12.582 0 0 0-.799-.34 12.96 12.96 0 0 0-2.073-.609zM15 2.82v9.908c-.846-.343-1.944-.672-3.074-.788-1.143-.118-2.387-.023-3.426.56V2.718c1.063-.929 2.631-.956 4.09-.664A11.956 11.956 0 0 1 15 2.82z"/>
                     <path fill-rule="evenodd" d="M3.214 1.072C4.813.752 6.916.71 8.354 2.146A.5.5 0 0 1 8.5 2.5v11a.5.5 0 0 1-.854.354c-.843-.844-2.115-1.059-3.47-.92-1.344.14-2.66.617-3.452 1.013A.5.5 0 0 1 0 13.5v-11a.5.5 0 0 1 .276-.447L.5 2.5l-.224-.447.002-.001.004-.002.013-.006a5.017 5.017 0 0 1 .22-.103 12.958 12.958 0 0 1 2.7-.869z"/>
                     </svg>
@@ -300,7 +302,7 @@ def table(self):
 
                 <div class='widget  col col-sm-6 d-flex align-items-center justify-content-center'  style="background-color: {OVERVIEW[review-wedgit-bg]} ">
                         <div>
-                         <svg width="2.3vw" height="2.3vw" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="#fff" xmlns="http://www.w3.org/2000/svg">
+                         <svg width="2.3vw" height="2.3vw" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="{OVERVIEW[wedgits-font-color]} " xmlns="http://www.w3.org/2000/svg">
                         <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                         <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
                         </svg>
@@ -314,7 +316,7 @@ def table(self):
 
                 <div class='widget  col col-sm-6 d-flex align-items-center justify-content-center'  style="background-color: {OVERVIEW[total-wedgit-bg]}  ">
                     <div>
-                         <svg width="2.3vw" height="2.3vw" viewBox="0 0 16 16" class="bi bi-pie-chart-fill" fill="#fff" xmlns="http://www.w3.org/2000/svg">
+                         <svg width="2.3vw" height="2.3vw" viewBox="0 0 16 16" class="bi bi-pie-chart-fill" fill="{OVERVIEW[wedgits-font-color]} " xmlns="http://www.w3.org/2000/svg">
                         <path d="M15.985 8.5H8.207l-5.5 5.5a8 8 0 0 0 13.277-5.5zM2 13.292A8 8 0 0 1 7.5.015v7.778l-5.5 5.5zM8.5.015V7.5h7.485A8.001 8.001 0 0 0 8.5.015z"/>
                         </svg>                    <div class='number'>
                             {cards[todo]:d}

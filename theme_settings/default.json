@@ -1,21 +1,21 @@
 {
-    "overlay-color1"    :"rgba(31, 109, 102, 0.75)",
-    "overlay-color2"    :"rgba(3, 49, 85, 0.8)",
+    "overlay-color1"    :"rgba(31, 109, 102, 0.6)",
+    "overlay-color2"    :"rgba(3, 49, 85, 0.6)",
     "heatmap-background":true,
     
-    "gear-icon-color"   : "rgba(1, 93, 84,1);",
+    "gear-icon-color"   : "rgba(68, 68, 68,1)",
     "buttons-color"     : "rgba(0, 150, 136,1)",
     "buttons-label-color"  : "rgba(255, 255, 255,1)", 
     "bottombar-color"   : "rgba(224, 242, 241,1)",
     "topbar-color"      : "rgba(0, 150, 136,1)",
     "topbar-position" : "left",
 
-    "large-areas-color"  : "rgba(255,255,255,0.4)" ,
-    "decks-border-color" : "rgba(227, 227, 227 , 0.6)",
-    "decks-font-color"   : "rgba(0,0,0,1)",
-    "decks-font-size"        :"13px",
-    "decks-font-family"        :"inherit",
-    "decks-font-src"        :"",
+    "large-areas-color"  : "rgba(224, 224, 224, 0.28)" ,
+    "decks-border-color" : "rgba(126, 126, 126, 0.6)",
+    "decks-font-color"   : "rgba(39, 39, 39,1)",
+    "decks-font-size"        :"15px",
+    "decks-font-family"        :"Raleway",
+    "decks-font-src"        :"Raleway.ttf",
     "filtered-deck-color" :"rgba(255, 193, 7,1)",
 
     "DECK-BROWSER": {
@@ -23,7 +23,7 @@
                 
         "review-count-background-color" : " rgba(76, 175, 80,1)",
         "review-count-color" : "rgb(255, 255, 255,1)",
-        "new-count-background-color" : "rgba(63, 81, 181,1)",
+        "new-count-background-color" : "rgba(57, 73, 171,0.8)",
         "new-count-color" : "rgb(255, 255, 255,1)",
 
 

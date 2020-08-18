@@ -351,6 +351,9 @@ Toolbar. _body = """
 animation = ""
 if bg_animation :
     animation = """
+    <script>
+    
+    </script>
     <div class="crossfade">
         <figure></figure>
         <figure></figure>
@@ -365,6 +368,7 @@ else:
     <style>
     body{
         background-image: url('%s/assets/background.jpg') !important ; 
+        background-size :cover !important;
 
     }
     </style>

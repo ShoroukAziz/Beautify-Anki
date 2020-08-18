@@ -1,6 +1,6 @@
 
   body{
-   background-size: 100%;
+    background-size :cover !important;
    font-size: 12px;
   }
 

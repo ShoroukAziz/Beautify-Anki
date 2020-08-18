@@ -41,7 +41,7 @@ NIHGT_MODE = theme_manager.night_mode
 CONFIG = mw.addonManager.getConfig(__name__)
 
 ADDON = os.path.dirname(os.path.abspath(__file__)).replace("\\", "/")
-USERTHEMEFILE = ADDON+"/theme_settings/"+CONFIG["theme"]+'.json'
+USERTHEMEFILE = ADDON+"/user_files/theme_settings/"+CONFIG["theme"]+'.json'
 
 with open(USERTHEMEFILE) as json_file:
     THEME = json.load(json_file)

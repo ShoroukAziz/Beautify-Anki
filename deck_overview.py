@@ -75,7 +75,7 @@ def desc(self, deck, _old):
         finish_msg = ""
         btn = u'''      
             {button:s} 
-            '''.format(button=button('study', _('<img style=\"margin-top: -5px; margin-right:5px\" src=\"{base}/assets/icons/deck overview icons/study now.svg\" > Study Now'.format(base=base)), id='study', class_='btn btn-lg', extra='style=\'background:{THEME[buttons-color]};color:{THEME[buttons-label-color]};\''.format(THEME=THEME)))
+            '''.format(button=button('study', _('<img style=\"margin-top: -5px; margin-right:5px\" src=\"{base}/user_files/assets/icons/deck overview icons/study now.svg\" > Study Now'.format(base=base)), id='study', class_='btn btn-lg', extra='style=\'background:{THEME[buttons-color]};color:{THEME[buttons-label-color]};\''.format(THEME=THEME)))
     if deck["dyn"]:
         desc += """
 <div class='card-panel animate__animated animate__fadeInUp animate__slow amber amber lighten-4'>This is a special deck for studying outside of the normal schedule.
@@ -403,13 +403,13 @@ if THEME["heatmap-background"]:
 Overview._body = """
 <style>
 body{{
-     background: linear-gradient(20deg,{THEME[overlay-color1]}, {THEME[overlay-color2]}) fixed, url('{base}/assets/deck_backgrounds/%(deck)s.jpg'),url('{base}/assets/background.jpg') ;
+     background: linear-gradient(20deg,{THEME[overlay-color1]}, {THEME[overlay-color2]}) fixed, url('{base}/user_files/assets/deck_backgrounds/%(deck)s.jpg'),url('{base}/user_files/assets/background.jpg') ;
      background-size: 100%%;
      }}
 
 @font-face {{
     font-family: '{OVERVIEW[wedgits-font-family]}';
-    src: url('{base}/assets/fonts/{OVERVIEW[wedgits-font-src]}');   
+    src: url('{base}/user_files/assets/fonts/{OVERVIEW[wedgits-font-src]}');   
 }}
 
 .widget{{
@@ -421,7 +421,7 @@ color:{OVERVIEW[wedgits-font-color]};
 
 @font-face {{
     font-family: '{OVERVIEW[deck-name-font-family]}';
-    src: url('{base}/assets/fonts/{OVERVIEW[deck-name-font-src]}');   
+    src: url('{base}/user_files/assets/fonts/{OVERVIEW[deck-name-font-src]}');   
 }}
 
 h1{{
@@ -465,20 +465,20 @@ font-size:{OVERVIEW[deck-name-font-size]}
 def renderDeckBottom(self, _old):
     links = [
         ["O", "opts", _(            
-            "<img src=\"{base}/assets/icons/deck overview icons/options.svg\" style=\"margin-top: -5px; margin-right:5px\"> Options").format(base=base)],
+            "<img src=\"{base}/user_files/assets/icons/deck overview icons/options.svg\" style=\"margin-top: -5px; margin-right:5px\"> Options").format(base=base)],
     ]
     if self.mw.col.decks.current()["dyn"]:
         links.append(
-            ["R", "refresh", _( "<img src=\"{base}/assets/icons/deck overview icons/rebuild.svg\" style=\"margin-top: -5px; margin-right:5px\"> Rebuild").format(base=base)])
+            ["R", "refresh", _( "<img src=\"{base}/user_files/assets/icons/deck overview icons/rebuild.svg\" style=\"margin-top: -5px; margin-right:5px\"> Rebuild").format(base=base)])
         links.append(
-            ["E", "empty", _( "<img src=\"{base}/assets/icons/deck overview icons/empty.svg\" style=\"margin-top: -5px; margin-right:5px\"> Empty").format(base=base)])
+            ["E", "empty", _( "<img src=\"{base}/user_files/assets/icons/deck overview icons/empty.svg\" style=\"margin-top: -5px; margin-right:5px\"> Empty").format(base=base)])
     else:
         links.append(["C", "studymore", _(
-            "<img src=\"{base}/assets/icons/deck overview icons/custom study.svg\" style=\"margin-top: -5px; margin-right:5px\"> Custom Study").format(base=base)])
+            "<img src=\"{base}/user_files/assets/icons/deck overview icons/custom study.svg\" style=\"margin-top: -5px; margin-right:5px\"> Custom Study").format(base=base)])
         # links.append(["F", "cram", _("Filter/Cram")])
     if self.mw.col.sched.haveBuried():
         links.append(["U", "unbury", _(
-            "<img src=\"{base}/assets/icons/deck overview icons/unbury.svg\" style=\"margin-top: -5px; margin-right:5px\"> Unbury").format(base=base)])
+            "<img src=\"{base}/user_files/assets/icons/deck overview icons/unbury.svg\" style=\"margin-top: -5px; margin-right:5px\"> Unbury").format(base=base)])
     buf = """<style> 
     
     #outer{{

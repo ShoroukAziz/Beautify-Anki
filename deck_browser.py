@@ -256,7 +256,7 @@ def render_deck_node(self, node: DeckTreeNode, ctx: RenderDeckNodeContext,_old) 
     else:
         extraclass = ""
     buf += """<td class="col col-1" style="padding-left:15px;">
-          <img src="%s/assets/deck_icons/%s.png" onerror="this.src='%s/assets/deck_icons/default.png'" alt="" class="circle"></td>
+          <img src="%s/user_files/assets/deck_icons/%s.png" onerror="this.src='%s/user_files/assets/deck_icons/default.png'" alt="" class="circle"></td>
 
     <td  class='col col-8 decktd ' >%s%s<a class="align-middle deck padding %s"
     href=# onclick="return pycmd('open:%d')">%s</a></td>""" % (
@@ -297,15 +297,15 @@ def render_deck_node(self, node: DeckTreeNode, ctx: RenderDeckNodeContext,_old) 
 
 
 sharedIcon = """
-<img src="{base}/assets/icons/deck browser icons/get shared.svg" style="margin-top: -5px; margin-right:5px">
+<img src="{base}/user_files/assets/icons/deck browser icons/get shared.svg" style="margin-top: -5px; margin-right:5px">
 """.format(base=base)
 
 creatDeckIcon ="""
-<img src="{base}/assets/icons/deck browser icons/create deck.svg" style="margin-top: -5px; margin-right:5px">
+<img src="{base}/user_files/assets/icons/deck browser icons/create deck.svg" style="margin-top: -5px; margin-right:5px">
 """.format(base=base)
 
 importFileIcon = """
-<img src="{base}/assets/icons/deck browser icons/import file.svg" style="margin-top: -5px; margin-right:5px">
+<img src="{base}/user_files/assets/icons/deck browser icons/import file.svg" style="margin-top: -5px; margin-right:5px">
 """.format(base=base)
 
 DeckBrowser.drawLinks = [
@@ -367,7 +367,7 @@ else:
     animation ="""
     <style>
     body{
-        background-image: url('%s/assets/background.jpg') !important ; 
+        background-image: url('%s/user_files/assets/background.jpg') !important ; 
         background-size :cover !important;
 
     }
@@ -438,12 +438,12 @@ a.deck , .collapseable{{
 
 @font-face {{
     font-family: '{THEME[decks-font-family]}';
-    src: url('{base}/assets/fonts/{THEME[decks-font-src]}');   
+    src: url('{base}/user_files/assets/fonts/{THEME[decks-font-src]}');   
 }}
 
 @font-face {{
     font-family: '{BROWSER[wedgits-font-family]}';
-    src: url('{base}/assets/fonts/{BROWSER[wedgits-font-src]}');   
+    src: url('{base}/user_files/assets/fonts/{BROWSER[wedgits-font-src]}');   
 }}
 
 .decktd{{

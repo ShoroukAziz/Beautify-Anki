@@ -49,7 +49,7 @@ with open(USERTHEMEFILE) as json_file:
     BROWSER = THEME["DECK-BROWSER"]
     PIE = THEME["DECK-OVERVIEW"]["PIE-CHART"]
     OVERVIEW =THEME["DECK-OVERVIEW"]
-    change_in_night = ["large-areas-color","decks-border-color","decks-color","filtered-deck-color"]
+    change_in_night = ["large-areas-color","decks-border-color","decks-font-color","filtered-deck-color","gear-icon-color"]
     if CONFIG["theme"] == "default" and NIHGT_MODE:
         for value in change_in_night :
             THEME[value] = THEME["night"][value]

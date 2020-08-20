@@ -89,7 +89,7 @@ def renderStats(self, _old):
     
     <div class='row align-items-center full   stats' style="background-color: {BROWSER[overview-wedgit-bg]} ">
             <div class="col col-2 ">
-                <svg width="3vw" height="3vw" viewBox="0 0 16 16" class="bi bi-card-checklist" fill="{BROWSER[wedgits-font-color]}" xmlns="http://www.w3.org/2000/svg">
+                <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-card-checklist" fill="{BROWSER[wedgits-font-color]}" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
                     <path fill-rule="evenodd" d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
                 </svg>
@@ -104,7 +104,7 @@ def renderStats(self, _old):
         <div class='col col-6  stats half left ' style="background-color: {BROWSER[average-wedgit-bg]}">
             <div class="row align-items-center">
                     <div class="col col-4">
-                        <svg width="3vw" height="3vw" viewBox="0 0 16 16" class="bi bi-watch" fill="{BROWSER[wedgits-font-color]}" xmlns="http://www.w3.org/2000/svg">
+                        <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-watch" fill="{BROWSER[wedgits-font-color]}" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M4 14.333v-1.86A5.985 5.985 0 0 1 2 8c0-1.777.772-3.374 2-4.472V1.667C4 .747 4.746 0 5.667 0h4.666C11.253 0 12 .746 12 1.667v1.86A5.985 5.985 0 0 1 14 8a5.985 5.985 0 0 1-2 4.472v1.861c0 .92-.746 1.667-1.667 1.667H5.667C4.747 16 4 15.254 4 14.333zM13 8A5 5 0 1 0 3 8a5 5 0 0 0 10 0z"/>
                         <path d="M13.918 8.993A.502.502 0 0 0 14.5 8.5v-1a.5.5 0 0 0-.582-.493 6.044 6.044 0 0 1 0 1.986z"/>
                         <path fill-rule="evenodd" d="M8 4.5a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-.5.5H6a.5.5 0 0 1 0-1h1.5V5a.5.5 0 0 1 .5-.5z"/>
@@ -118,7 +118,7 @@ def renderStats(self, _old):
         <div class='col col-6  stats half right ' style="background-color:  {BROWSER[remaining-wedgit-bg]}">
             <div class="row align-items-center">
                 <div class="col col-4">
-                    <svg width="3vw" height="3vw" viewBox="0 0 16 16" class="bi bi-stopwatch-fill" fill="{BROWSER[wedgits-font-color]}" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-stopwatch-fill" fill="{BROWSER[wedgits-font-color]}" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M5.5.5A.5.5 0 0 1 6 0h4a.5.5 0 0 1 0 1H9v1.07A7.002 7.002 0 0 1 8 16 7 7 0 0 1 7 2.07V1H6a.5.5 0 0 1-.5-.5zm3 4.5a.5.5 0 0 0-1 0v3.5h-3a.5.5 0 0 0 0 1H8a.5.5 0 0 0 .5-.5V5z"/>
                     </svg>
                 </div>
@@ -137,7 +137,7 @@ def renderStats(self, _old):
 
         <div class="row align-items-center">
         <div class="col col-4">
-            <svg width="3vw" height="3vw" viewBox="0 0 16 16" class="bi bi-layers-fill" fill="{BROWSER[wedgits-font-color]}" xmlns="http://www.w3.org/2000/svg">
+            <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-layers-fill" fill="{BROWSER[wedgits-font-color]}" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" d="M7.765 1.559a.5.5 0 0 1 .47 0l7.5 4a.5.5 0 0 1 0 .882l-7.5 4a.5.5 0 0 1-.47 0l-7.5-4a.5.5 0 0 1 0-.882l7.5-4z"/>
             <path fill-rule="evenodd" d="M2.125 8.567l-1.86.992a.5.5 0 0 0 0 .882l7.5 4a.5.5 0 0 0 .47 0l7.5-4a.5.5 0 0 0 0-.882l-1.86-.992-5.17 2.756a1.5 1.5 0 0 1-1.41 0l.418-.785-.419.785-5.169-2.756z"/>
             </svg>
@@ -153,7 +153,7 @@ def renderStats(self, _old):
         <div class='col col-6  stats  half right'style="background-color: {BROWSER[due-wedgit-bg]}">
             <div class="row align-items-center">
                 <div class="col col-4">
-                    <svg width="3vw" height="3vw" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="{BROWSER[wedgits-font-color]}" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="{BROWSER[wedgits-font-color]}" xmlns="http://www.w3.org/2000/svg">
                     <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                     <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
                     </svg>
@@ -189,7 +189,7 @@ def renderStats(self, _old):
     <div class='row align-items-center full stats'  style="background-color:{BROWSER[total-wedgit-bg]} ">
               <div class="col col-2">
              
-                        <svg width="3vw" height="3vw" viewBox="0 0 16 16" class="bi bi-pie-chart-fill" fill="{BROWSER[wedgits-font-color]}" xmlns="http://www.w3.org/2000/svg">
+                        <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-pie-chart-fill" fill="{BROWSER[wedgits-font-color]}" xmlns="http://www.w3.org/2000/svg">
                         <path d="M15.985 8.5H8.207l-5.5 5.5a8 8 0 0 0 13.277-5.5zM2 13.292A8 8 0 0 1 7.5.015v7.778l-5.5 5.5zM8.5.015V7.5h7.485A8.001 8.001 0 0 0 8.5.015z"/>
                         </svg>
                     </div>
@@ -272,12 +272,12 @@ def render_deck_node(self, node: DeckTreeNode, ctx: RenderDeckNodeContext,_old) 
     # due counts
     def nonzeroColour(cnt, klass):
         if not cnt:
-            klass = "zero-count"
+            klass = "count zero-count"
         return f'<td class="col col-1 "><span class="{klass}">{cnt}</span></td>'
 
     buf += " %s %s" % (
-        nonzeroColour(due, "review-count"),
-        nonzeroColour(node.new_count, "new-count"),
+        nonzeroColour(due, "count review-count"),
+        nonzeroColour(node.new_count, "count new-count"),
     )
     # options
     buf += (

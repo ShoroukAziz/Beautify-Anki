@@ -41,77 +41,23 @@
       cursor: pointer;
   }
   
-
-.nightMode  .review-count {
-    color: #fff;
-    background-color: #4caf50;
-  }
-  
-  
-  .nightMode .new-count {
-    color: #fff;
-    background-color:#3f51b5;
-  }
-  
-  .nightMode .learn-count {
-    color: #fff;
-    background-color:rgb(195, 43, 23);
-  
-  }
-  
-  .nightMode  .zero-count {
-    color: #bbb9b9;
-    /* background-color: #9e9e9e; */
-  
-  }
-
-
   .collapseable{
     padding-left: 4px;
     padding-right: 10px;
   }
 
-  .review-count {
-    color: #fff;
-    background-color: #4caf50;
+  a.collapseable {
+    text-decoration: none;
+  }
+
+  .count{
     padding: 5px 10px;
-    /* margin: 5px; */
     border-radius: 10px;
     text-align: center;
-
   }
-  
-  
-  .new-count {
-    color: #fff;
-    background-color:#3f51b5;
-    padding: 5px 10px;
-    /* margin: 5px; */
-    border-radius: 10px;
-    text-align: center;
 
-  }
-  
-  .learn-count {
-    color: #fff;
-    background-color:rgb(195, 43, 23);
-    padding: 5px 10px;
-    /* margin: 15px; */
-    border-radius: 10px;
-    text-align: center;
-
-  
-  }
-  
   .zero-count {
     color: #494949;
-    /* background-color: #9e9e9e; */
-    padding: 5px 10px;
-    /* margin: 5px; */
-    border-radius: 10px;
-    text-align: center;
-
-  
   }
   
 

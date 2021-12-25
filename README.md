@@ -25,11 +25,11 @@ Beautify Anki is an [Anki](https://apps.ankiweb.net/) addon that attempts to giv
 
 ## 📥 Download 
 <b>Be sure to read [THIS](https://beautify-anki.shorouk.dev/before-install) first before installing this addon.</b><br>
-Download the latest version from [Ankiweb](https://ankiweb.net/shared/info/1150874988) or select a version manually from [here](https://github.com/my-Anki/Beautify-Anki/releases)
+Download the latest version from [Ankiweb](https://ankiweb.net/shared/info/1150874988) or select a version manually from [here](https://github.com/fylux/Beautify-Anki/releases)
 
 
 ## ⚠️ Disclaimer
-This is a beta version that has only been tested on Anki 2.1.22. and 2.1.26 It probably conflicts with other addons that do similar things [(check the list of known conflicting addons)](https://beautify-anki.shorouk.dev/before-install). For feature request and bug report please post an a [new issue](https://github.com/my-Anki/Beautify-Anki/issues) 
+This is a beta version that has only been tested on Anki 2.1.22. and 2.1.26 It probably conflicts with other addons that do similar things [(check the list of known conflicting addons)](https://beautify-anki.shorouk.dev/before-install). For feature request and bug report please post an a [new issue](https://github.com/fylux/Beautify-Anki/issues) 
 
 
 ## ⚙️ Configuration and Customization 

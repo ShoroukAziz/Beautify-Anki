@@ -3,6 +3,8 @@
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/) 
 <a title="Rate on AnkiWeb" href="add link"><img src="https://glutanimate.com/logos/ankiweb-rate.svg"></a> <a title="Buy me a coffee :)" href="https://ko-fi.com/B0B51L5RI"><img src="https://img.shields.io/badge/ko--fi-contribute-%23579ebd.svg"></a>
 
+> ⚠️ THIS IS A POORLY PATCHED VERSION OF THE ORIGINAL ADDON TO WORK ON NEWER ANKI (TESTED ON 2.1.49)
+
 ![](https://gblobscdn.gitbook.com/assets%2F-M8bIX1VrL7AvQYQHy62%2F-M8bU0Cd_2bCQQXOfPpF%2F-M8bYnu8pXKuV1GQ4lC-%2Fezgif.com-crop.gif?alt=media&token=d2c9feb9-118f-48ea-90da-d2f6e145e6c0)
   
  

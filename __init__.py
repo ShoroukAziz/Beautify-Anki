@@ -71,18 +71,18 @@ def on_webview_will_set_content (web_content: aqt.webview.WebContent,  context: 
     if  isinstance(context, aqt.overview.Overview):        
         web_content.css.append (base+"/user_files/assets/css/overview.css")
         web_content.css.remove("overview.css")
-        web_content.css.remove("webview.css")
+        web_content.css.remove("css/webview.css")
         web_content.js.append (base+"/user_files/assets/js/plotly-latest.min.js")  
 
     # add css and js to deck browser
     if  isinstance(context, aqt.deckbrowser.DeckBrowser):        
         web_content.css.append (base+"/user_files/assets/css/deckbrowser.css")
-        web_content.css.remove("deckbrowser.css")
+        web_content.css.remove("css/deckbrowser.css")
     
     # add css and js to deck browser bottom bar
     if isinstance (context , ( aqt.deckbrowser.DeckBrowserBottomBar,aqt.overview.OverviewBottomBar)):        
         web_content.css.append (base+"/user_files/assets/css/bottombar.css")
-        web_content.css.remove("webview.css")
+        web_content.css.remove("css/webview.css")
 
         if NIHGT_MODE:         
             web_content.css.append (base+"/user_files/assets/css/bottombar_dark.css")

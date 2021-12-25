@@ -63,8 +63,8 @@ time = %(time)d;
     )
 
 def showAnswerButton(self):
-    if not self.typeCorrect:
-        self.bottom.web.setFocus()
+    #if not self.typeCorrect:
+    #    self.bottom.web.setFocus()
     middle = """
 <span class=stattxt>%s</span><br>
 <button style='color: {THEME[buttons-label-color]} ;background-color:{THEME[buttons-color]}' class='btn btn-sm' title="%s" id=ansbut onclick='pycmd("ans");'>%s</button>""".format(THEME=THEME) % (

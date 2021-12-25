@@ -508,16 +508,16 @@ def finishedMsg(self, _old) -> str:
         "<div class='deck-desc finish-msg animate__animated animate__rubberBand' style='background-color:{THEME[large-areas-color]};'>".format(THEME=THEME)
         + _("Congratulations! You have finished this deck for now.")
         + "<br></div>"
-        + self._nextDueMsg()
+        #+ self._nextDueMsg()
     )
 
 
 def nextDueMsg(self, _old) -> str:
     line = []
 
-    learn_msg = self.next_learn_msg()
-    if learn_msg:
-        line.append(learn_msg)
+    #learn_msg = self.next_learn_msg()
+    #if learn_msg:
+    #    line.append(learn_msg)
 
     # the new line replacements are so we don't break translations
     # in a point release

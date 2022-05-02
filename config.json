@@ -1,8 +1,8 @@
 {
-    
+
     "animation":false,
     "change answer buttons":true,
-    "date_format": "eu",
+    "date_format": "iso",
     "note_correction_factors": {
         "Fr": 2,
         "English": 2
@@ -10,7 +10,7 @@
     "heatmap_position" : "default",
     "theme" : "default",
     "local":{
-        "Average" : "Average" , 
+        "Average" : "Average" ,
         "cards/minute" : "cards/minute",
         "minute" : "minute" ,
         "minutes" : "minutes" ,
@@ -34,8 +34,8 @@
     }
 
 
-    
-   
+
+
 }
 
 

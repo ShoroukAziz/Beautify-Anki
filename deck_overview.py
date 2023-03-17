@@ -73,14 +73,14 @@ def desc(self, deck, _old):
         desc += finish_msg
     else:
         finish_msg = ""
-        btn = u'''      
-            {button:s} 
+        btn = u'''
+            {button:s}
             '''.format(button=button('study', _('<img style=\"margin-top: -5px; margin-right:5px\" src=\"{base}/user_files/assets/icons/deck overview icons/study now.svg\" > Study Now'.format(base=base)), id='study', class_='btn btn-lg', extra='style=\'background:{THEME[buttons-color]};color:{THEME[buttons-label-color]};\''.format(THEME=THEME)))
     if deck["dyn"]:
         desc += """
 <div class='card-panel animate__animated animate__fadeInUp animate__slow amber amber lighten-4'>This is a special deck for studying outside of the normal schedule.
-Cards will be automatically returned to their original decks after you review 
-them.Deleting this deck from the deck list will return all remaining cards 
+Cards will be automatically returned to their original decks after you review
+them.Deleting this deck from the deck list will return all remaining cards
 to their original deck.</div>"""+btn
 
     else:
@@ -133,10 +133,12 @@ def table(self):
             date_format = "%Y/%m/%d"
         elif CONFIG['date_format'].strip().lower() == 'eu':
             date_format = "%d.%m.%Y"
+        elif CONFIG['date_format'].strip().lower() == 'iso':
+            date_format = "%Y-%m-%d"
         else:
             date_format = CONFIG['date_format']
     else:
-        date_format = "%d.%m.%Y"
+        date_format = "%Y-%m-%d"
 
     total, mature, young, unseen, suspended, due = self.mw.col.db.first(
         u'''
@@ -199,12 +201,12 @@ def table(self):
     else:
         cards['daysLeft'] = '{} {LOCALS[days]}'.format(daysUntilDone,LOCALS=LOCALS)
 
- ####################### Writing Output HTML ########################## 
+ ####################### Writing Output HTML ##########################
 
     output = u'''
     <!-----------END Break subtitles script--------------->
 
- 
+
     <!------------------ plotly script------------------>
     <script type="text/javascript">
 
@@ -236,10 +238,10 @@ def table(self):
             font: {{
                 "color": "{PIE[wedgits-font-color]}"
             }}
-            
-            }}  
+
+            }}
         }};
-        
+
         Plotly.newPlot('myDiv', data, layout);
         }}
 
@@ -261,23 +263,23 @@ def table(self):
                     <path fill-rule="evenodd" d="M5.5.5A.5.5 0 0 1 6 0h4a.5.5 0 0 1 0 1H9v1.07A7.002 7.002 0 0 1 8 16 7 7 0 0 1 7 2.07V1H6a.5.5 0 0 1-.5-.5zm3 4.5a.5.5 0 0 0-1 0v3.5h-3a.5.5 0 0 0 0 1H8a.5.5 0 0 0 .5-.5V5z"/>
                     </svg><br>
                         {LOCALS[Done in]}
-                        {cards[daysLeft]:s} {cards[doneDate]:s} 
+                        {cards[daysLeft]:s} {cards[doneDate]:s}
                 </div>
             </div>
 
             <!-------------------------END ROW 1 --------------------------------->
-            
+
             <div class='row'>
                 <div class='widget  col col-sm-6 d-flex align-items-center justify-content-center'  style="background-color:{OVERVIEW[new-wedgit-bg]}  ">
                     <div>
                      <svg width="2.3em" height="2.3em" viewBox="0 0 16 16" class="bi bi-layers-fill" fill="{OVERVIEW[wedgits-font-color]} " xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M7.765 1.559a.5.5 0 0 1 .47 0l7.5 4a.5.5 0 0 1 0 .882l-7.5 4a.5.5 0 0 1-.47 0l-7.5-4a.5.5 0 0 1 0-.882l7.5-4z"/>
                     <path fill-rule="evenodd" d="M2.125 8.567l-1.86.992a.5.5 0 0 0 0 .882l7.5 4a.5.5 0 0 0 .47 0l7.5-4a.5.5 0 0 0 0-.882l-1.86-.992-5.17 2.756a1.5 1.5 0 0 1-1.41 0l.418-.785-.419.785-5.169-2.756z"/>
-                    </svg>                      
+                    </svg>
                     <div class='number'>
                         {cards[new]:d}
                     </div>
-                    {LOCALS[New]} 
+                    {LOCALS[New]}
                     </div>
                 </div>
 
@@ -287,11 +289,11 @@ def table(self):
                     <path fill-rule="evenodd" d="M12.786 1.072C11.188.752 9.084.71 7.646 2.146A.5.5 0 0 0 7.5 2.5v11a.5.5 0 0 0 .854.354c.843-.844 2.115-1.059 3.47-.92 1.344.14 2.66.617 3.452 1.013A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.276-.447L15.5 2.5l.224-.447-.002-.001-.004-.002-.013-.006-.047-.023a12.582 12.582 0 0 0-.799-.34 12.96 12.96 0 0 0-2.073-.609zM15 2.82v9.908c-.846-.343-1.944-.672-3.074-.788-1.143-.118-2.387-.023-3.426.56V2.718c1.063-.929 2.631-.956 4.09-.664A11.956 11.956 0 0 1 15 2.82z"/>
                     <path fill-rule="evenodd" d="M3.214 1.072C4.813.752 6.916.71 8.354 2.146A.5.5 0 0 1 8.5 2.5v11a.5.5 0 0 1-.854.354c-.843-.844-2.115-1.059-3.47-.92-1.344.14-2.66.617-3.452 1.013A.5.5 0 0 1 0 13.5v-11a.5.5 0 0 1 .276-.447L.5 2.5l-.224-.447.002-.001.004-.002.013-.006a5.017 5.017 0 0 1 .22-.103 12.958 12.958 0 0 1 2.7-.869z"/>
                     </svg>
-                    
+
                     <div class='number'>
                         {cards[learning]:d}
                     </div>
-                    {LOCALS[Learning]} 
+                    {LOCALS[Learning]}
                     </div>
                 </div>
             </div>
@@ -309,9 +311,9 @@ def table(self):
                         <div class='number'>
                             {cards[review]:d}
                         </div>
-                        {LOCALS[Review]} 
+                        {LOCALS[Review]}
                         </div>
-        
+
                 </div>
 
                 <div class='widget  col col-sm-6 d-flex align-items-center justify-content-center'  style="background-color: {OVERVIEW[total-wedgit-bg]}  ">
@@ -321,21 +323,21 @@ def table(self):
                         </svg>                    <div class='number'>
                             {cards[todo]:d}
                     </div>
-                    {LOCALS[Total]} 
+                    {LOCALS[Total]}
                     </div>
                 </div>
             </div>
             <!-------------------------END ROW 3 --------------------------------->
 
-            
-        </div>  
+
+        </div>
 
         <!------------------- End widgets ------------------------------>
 
         <!---------------- the pie chart ------------------------------->
         <div id='myDiv' class='col col-sm-12 col-lg-6'  style="padding:2% ">
 
-        </div> 
+        </div>
         <!---------------- END pie chart ------------------------------->
 
 
@@ -360,7 +362,7 @@ def renderPage(self,_old):
         sub = deck["name"].replace("::"," .. ")
     if "'" in deck["name"]:
         sub = deck["name"].replace("'","’")
-        
+
     else:
         sub = deck["name"]
     content = OverviewContent(
@@ -394,11 +396,11 @@ if THEME["heatmap-background"]:
         .streak{{
             background-color: {THEME[large-areas-color]};
             padding:10px;
-            
+
 
         }}
      """.format(THEME=THEME)
-     
+
 
 
 
@@ -411,7 +413,7 @@ body{{
 
 @font-face {{
     font-family: '{OVERVIEW[wedgits-font-family]}';
-    src: url('{base}/user_files/assets/fonts/{OVERVIEW[wedgits-font-src]}');   
+    src: url('{base}/user_files/assets/fonts/{OVERVIEW[wedgits-font-src]}');
 }}
 
 .widget{{
@@ -423,7 +425,7 @@ color:{OVERVIEW[wedgits-font-color]};
 
 @font-face {{
     font-family: '{OVERVIEW[deck-name-font-family]}';
-    src: url('{base}/user_files/assets/fonts/{OVERVIEW[deck-name-font-src]}');   
+    src: url('{base}/user_files/assets/fonts/{OVERVIEW[deck-name-font-src]}');
 }}
 
 h1{{
@@ -440,11 +442,11 @@ font-size:{OVERVIEW[deck-name-font-size]}
     <div class = 'row align-items-center' >
         <!-------------left side (title and description)------------------------------->
         <div class=' col col-md-4 col-sm-12 text-center'>
-        
+
             <h1 class="animate__animated  animate__delay animate__backInDown">%(deck)s</h1>
             %(shareLink)s
             %(desc)s
-        
+
         </div>
          <div class=' col col-md-1 col-sm-0 right-col'></div>
 
@@ -466,7 +468,7 @@ font-size:{OVERVIEW[deck-name-font-size]}
 
 def renderDeckBottom(self, _old):
     links = [
-        ["O", "opts", _(            
+        ["O", "opts", _(
             "<img src=\"{base}/user_files/assets/icons/deck overview icons/options.svg\" style=\"margin-top: -5px; margin-right:5px\"> Options").format(base=base)],
     ]
     if self.mw.col.decks.current()["dyn"]:
@@ -481,8 +483,8 @@ def renderDeckBottom(self, _old):
     if self.mw.col.sched.haveBuried():
         links.append(["U", "unbury", _(
             "<img src=\"{base}/user_files/assets/icons/deck overview icons/unbury.svg\" style=\"margin-top: -5px; margin-right:5px\"> Unbury").format(base=base)])
-    buf = """<style> 
-    
+    buf = """<style>
+
     #outer{{
      background-color: {THEME[bottombar-color]};
     }}
@@ -563,7 +565,7 @@ Some related or buried cards were delayed until a later session.</div>""".format
  To study outside of the normal schedule, click the Custom Study button below.</div>""".format(THEME=THEME)
             )
             )
-        
+
     return "".join(line)
 
 

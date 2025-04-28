@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 """
 Beautify Anki
-an Addon for Anki
-Github (https://github.com/my-Anki/Beautify-Anki)
-Copyright (c) 2020 Shorouk Abdelaziz (https://shorouk.dev)
 """
 #################################################################################
 # Beautify Anki n is released under GNU AGPL, version 3 or later                #
@@ -37,7 +34,7 @@ addon = mw.addonManager.addonFromModule(__name__)
 base="/_addons/"+addon
 
 
-NIHGT_MODE = theme_manager.night_mode
+NIGHT_MODE = theme_manager.night_mode
 CONFIG = mw.addonManager.getConfig(__name__)
 
 ADDON = os.path.dirname(os.path.abspath(__file__)).replace("\\", "/")
@@ -50,7 +47,7 @@ with open(USERTHEMEFILE) as json_file:
     PIE = THEME["DECK-OVERVIEW"]["PIE-CHART"]
     OVERVIEW =THEME["DECK-OVERVIEW"]
     change_in_night = ["large-areas-color","decks-border-color","decks-font-color","filtered-deck-color","gear-icon-color"]
-    if CONFIG["theme"] == "default" and NIHGT_MODE:
+    if CONFIG["theme"] == "default" and NIGHT_MODE:
         for value in change_in_night :
             THEME[value] = THEME["night"][value]
 

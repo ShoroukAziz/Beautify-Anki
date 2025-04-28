@@ -4,6 +4,12 @@ Beautify Anki
 an Addon for Anki
 Github (https://github.com/my-Anki/Beautify-Anki)
 Copyright (c) 2020 Shorouk Abdelaziz (https://shorouk.dev)
+
+Contributions from mizmu addons (c) 2023
+Github (https://github.com/hafatsat-anki/Beautify-Anki_2.0)
+new icons: google fonts
+
+Further maintained by Yakaru and the community
 """
 #################################################################################
 # Beautify Anki n is released under GNU AGPL, version 3 or later                #
@@ -28,7 +34,7 @@ Copyright (c) 2020 Shorouk Abdelaziz (https://shorouk.dev)
 
 from anki.errors import DeckRenameError
 from anki.hooks import wrap
-import anki.sched, anki.schedv2
+
 from anki.lang import _, ngettext
 from aqt import mw
 from aqt.deckbrowser import DeckBrowser , DeckBrowserBottomBar , RenderDeckNodeContext
@@ -315,9 +321,10 @@ DeckBrowser.drawLinks = [
     ]
 
 def drawButtons(self,_old):
+    # ##########
     buf = """<style> 
     
-    #outer{{
+    body{{
   background-color: {THEME[bottombar-color]} ;
   background-image:unset !important;
     }}
@@ -340,13 +347,16 @@ def drawButtons(self,_old):
 
 
 
+#########
+Toolbar._body += f"""
+<style>
+body {{{{
+ text-align:{THEME["topbar-position"]};
+ background-color:{THEME["topbar-color"]} !important;
+ }}}}
+</style>
 
-Toolbar. _body = """
-<nav style="font-size:12px ; text-align:{THEME[topbar-position]};background-color:{THEME[topbar-color]}"  width=100%%>
-<tr>
-<td class=tdcenter'>%s</td>
-</tr></nav>
-""".format(THEME=THEME)
+ """
 
 animation = ""
 if bg_animation :
@@ -500,11 +510,10 @@ DeckBrowser._body = """
 
 """.format(animation=animation,THEME=THEME,main_bg=main_bg,BROWSER=BROWSER,TABLE_WIDTH=TABLE_WIDTH,STATS_WIDTH=STATS_WIDTH,HEATMAP_WIDTH=HEATMAP_WIDTH,heatmap_script=heatmap_script)
 
-def updateRenderingMethods():   
-
+def updateRenderingMethods():
     DeckBrowser._renderDeckTree = wrap(DeckBrowser._renderDeckTree , renderDeckTree, "around")
     DeckBrowser._render_deck_node = wrap(DeckBrowser._render_deck_node, render_deck_node, 'around')
     DeckBrowser._drawButtons = wrap(DeckBrowser._drawButtons, drawButtons, 'around')
     DeckBrowser._renderStats = wrap(DeckBrowser._renderStats, renderStats, 'around')
-    
+
     

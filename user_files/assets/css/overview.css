@@ -63,3 +63,11 @@ font-size: 2vw;
   font-variant: petite-caps;
 
 }
+
+.use-dynamic-height{
+	height:auto;
+	justify-content: center;
+	align-items:center;
+	display:flex;
+	flex-direction:column;
+}

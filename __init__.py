@@ -4,6 +4,11 @@ Beautify Anki
 an Addon for Anki
 Github (https://github.com/my-Anki/Beautify-Anki)
 Copyright (c) 2020 Shorouk Abdelaziz (https://shorouk.dev)
+
+updated and upgraded by mizmu addons (c) 2023
+new icons: google fonts
+
+Further maintained by Yakaru and the community
 """
 #################################################################################
 # Beautify Anki n is released under GNU AGPL, version 3 or later                #
@@ -27,8 +32,8 @@ Copyright (c) 2020 Shorouk Abdelaziz (https://shorouk.dev)
 #################################################################################
 
 from .deck_browser import updateRenderingMethods
-from .deck_overview import updateRenderingDeckOverview 
-from .reviewer import renderReviewer
+from .deck_overview import updateRenderingDeckOverview
+from .reviewer import renderReviewer, reviewer_style
 import aqt
 from aqt import  gui_hooks
 from typing import Optional, Any
@@ -50,47 +55,45 @@ base="/_addons/"+addon
 mw.addonManager.setWebExports(__name__, r"user_files/assets/.+(\.svg|\.png|\.css|\.woff|\woff2|\.jpeg|\.gif|\.tiff|\.bmp|\.jpg|\.js|\.TTF|\.ttf|\.otf)")
 
 
-# add my css and js 
+# add my css and js
 def on_webview_will_set_content (web_content: aqt.webview.WebContent,  context: Optional[Any]):
-    
+
     # add css and js to all contexts
     if  isinstance(context, (
         aqt.deckbrowser.DeckBrowser ,aqt.overview.Overview,aqt.toolbar.TopToolbar ,
-         aqt.deckbrowser.DeckBrowserBottomBar , aqt.overview.OverviewBottomBar)) :        
-      
+         aqt.deckbrowser.DeckBrowserBottomBar , aqt.overview.OverviewBottomBar)) :
+
         if CONFIG["animation"]:
             web_content.css.append (base+"/user_files/assets/css/animate.css")
 
         web_content.css.append (base+"/user_files/assets/css/bootstrap.min.css")
         web_content.css.append (base+"/user_files/assets/css/universal.css")
-        
 
-        
-        
+
+
+
     # add css and js to deck overview
-    if  isinstance(context, aqt.overview.Overview):        
+    if  isinstance(context, aqt.overview.Overview):
         web_content.css.append (base+"/user_files/assets/css/overview.css")
-        web_content.css.remove("overview.css")
-        web_content.css.remove("css/webview.css")
-        web_content.js.append (base+"/user_files/assets/js/plotly-latest.min.js")  
+        # web_content.css.remove("overview.css")
+        # web_content.css.remove("webview.css")
+        web_content.js.append (base+"/user_files/assets/js/plotly-latest.min.js")
 
     # add css and js to deck browser
-    if  isinstance(context, aqt.deckbrowser.DeckBrowser):        
+    if  isinstance(context, aqt.deckbrowser.DeckBrowser):
         web_content.css.append (base+"/user_files/assets/css/deckbrowser.css")
-        web_content.css.remove("css/deckbrowser.css")
-    
-    # add css and js to deck browser bottom bar
-    if isinstance (context , ( aqt.deckbrowser.DeckBrowserBottomBar,aqt.overview.OverviewBottomBar)):        
-        web_content.css.append (base+"/user_files/assets/css/bottombar.css")
-        web_content.css.remove("css/webview.css")
+        # web_content.css.remove("deckbrowser.css")
 
-        if NIHGT_MODE:         
+    # add css and js to deck browser bottom bar
+    if isinstance (context , ( aqt.deckbrowser.DeckBrowserBottomBar,aqt.overview.OverviewBottomBar)):
+        web_content.css.append (base+"/user_files/assets/css/bottombar.css")
+        if NIGHT_MODE: #nightmode?
             web_content.css.append (base+"/user_files/assets/css/bottombar_dark.css")
 
-    # add css and js to top bar
-    if isinstance (context ,  aqt.toolbar.TopToolbar):
-        web_content.css.append (base+"/user_files/assets/css/toolbar.css")
-    
+    # # add css and js to top bar
+    # if isinstance (context ,  aqt.toolbar.TopToolbar):
+    #     web_content.css.append (base+"/user_files/assets/css/toolbar.css")
+
     # add css and js to reviewer bottom bar
     if isinstance (context , aqt.reviewer.ReviewerBottomBar) and CONFIG["change answer buttons"]:
       web_content.css.append (base+"/user_files/assets/css/reviewer_bottom.css")

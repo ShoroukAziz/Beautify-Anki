@@ -4,6 +4,11 @@ Beautify Anki
 an Addon for Anki
 Github (https://github.com/my-Anki/Beautify-Anki)
 Copyright (c) 2020 Shorouk Abdelaziz (https://shorouk.dev)
+
+updated and upgraded by mizmu addons (c) 2023
+new icons: google fonts
+
+Further maintained by Yakaru and the community
 """
 #################################################################################
 # Beautify Anki n is released under GNU AGPL, version 3 or later                #
@@ -30,14 +35,12 @@ from typing import Optional, Any
 
 from anki.errors import DeckRenameError
 from anki.hooks import wrap
-import anki.sched
-import anki.schedv2
-from anki.schedv2 import Scheduler
+
 from aqt import mw
 from aqt.overview import Overview, OverviewContent, OverviewBottomBar
 from aqt.toolbar import Toolbar, BottomBar
 from aqt import AnkiQt, gui_hooks
-from aqt.utils import shortcut
+from aqt.utils import shortcut, tr
 import aqt
 
 import json
@@ -63,24 +66,27 @@ def desc(self, deck, _old):
         </div>"""
 
 
-    counts = list(self.mw.col.sched.counts())
-    finished = not sum(counts)
-    if finished:
+
+    if self.mw.col.sched._is_finished():
         finish_msg = u'''
       <div > {:s}</div>
-    '''.format(self.mw.col.sched.finishedMsg())
+    '''.format(tr.scheduling_congratulations_finished())
         btn = ""
         desc += finish_msg
     else:
         finish_msg = ""
-        btn = u'''
-            {button:s}
-            '''.format(button=button('study', _('<img style=\"margin-top: -5px; margin-right:5px\" src=\"{base}/user_files/assets/icons/deck overview icons/study now.svg\" > Study Now'.format(base=base)), id='study', class_='btn btn-lg', extra='style=\'background:{THEME[buttons-color]};color:{THEME[buttons-label-color]};\''.format(THEME=THEME)))
+        btn = u'''      
+            {button:s} 
+            '''.format(button=button('study',
+                                     '<img style=\"margin-top: -5px; margin-right:5px\" src=\"{base}/user_files/assets/icons/deck overview icons/study now.svg\" > Study Now'.format(base=base),
+                                     id='study',
+                                     class_='btn btn-lg',
+                                     extra='style=\'background:{THEME[buttons-color]};color:{THEME[buttons-label-color]};\''.format(THEME=THEME)))
     if deck["dyn"]:
         desc += """
 <div class='card-panel animate__animated animate__fadeInUp animate__slow amber amber lighten-4'>This is a special deck for studying outside of the normal schedule.
-Cards will be automatically returned to their original decks after you review
-them.Deleting this deck from the deck list will return all remaining cards
+Cards will be automatically returned to their original decks after you review 
+them.Deleting this deck from the deck list will return all remaining cards 
 to their original deck.</div>"""+btn
 
     else:
@@ -135,10 +141,12 @@ def table(self):
             date_format = "%d.%m.%Y"
         elif CONFIG['date_format'].strip().lower() == 'iso':
             date_format = "%Y-%m-%d"
+        elif CONFIG['date_format'].strip().lower() == 'kanji':
+            date_format = "%Y\u5E74%m\u6708%d\u65E5"
         else:
             date_format = CONFIG['date_format']
     else:
-        date_format = "%Y-%m-%d"
+        date_format = "%d-%m-%Y"
 
     total, mature, young, unseen, suspended, due = self.mw.col.db.first(
         u'''
@@ -201,12 +209,12 @@ def table(self):
     else:
         cards['daysLeft'] = '{} {LOCALS[days]}'.format(daysUntilDone,LOCALS=LOCALS)
 
- ####################### Writing Output HTML ##########################
+ ####################### Writing Output HTML ########################## 
 
     output = u'''
     <!-----------END Break subtitles script--------------->
 
-
+ 
     <!------------------ plotly script------------------>
     <script type="text/javascript">
 
@@ -238,10 +246,10 @@ def table(self):
             font: {{
                 "color": "{PIE[wedgits-font-color]}"
             }}
-
-            }}
+            
+            }}  
         }};
-
+        
         Plotly.newPlot('myDiv', data, layout);
         }}
 
@@ -254,32 +262,31 @@ def table(self):
 
             <div class='row'">
 
-                <div class= 'col col-sm-6 widget widget-top' style="background-color:{OVERVIEW[total-notes-wedgit-bg]} ">
-                    <span class='number'> {cards[total]:d}<br> </span>  {LOCALS[Total]} {cards[count_label]}
+                <div class= 'col col-sm-6 widget widget-top use-dynamic-height' style="background-color:{OVERVIEW[total-notes-wedgit-bg]} ">
+                    <span class='number'> {cards[total]:d}<br> </span>  <span>{LOCALS[Total]} {cards[count_label]}</span>
                 </div>
 
-                <div class= 'col col-sm-6 widget widget-top' style="background-color: {OVERVIEW[remaining-wedgit-bg]} ">
-                        <svg width="2.3em" height="2.3em" viewBox="0 0 16 16" class="bi bi-stopwatch-fill" fill="{OVERVIEW[wedgits-font-color]} " xmlns="http://www.w3.org/2000/svg">
+                <div class= 'col col-sm-6 widget widget-top use-dynamic-height' style="background-color: {OVERVIEW[remaining-wedgit-bg]} ">
+                        <span><svg width="2.3em" height="2.3em" viewBox="0 0 16 16" class="bi bi-stopwatch-fill" fill="{OVERVIEW[wedgits-font-color]} " xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M5.5.5A.5.5 0 0 1 6 0h4a.5.5 0 0 1 0 1H9v1.07A7.002 7.002 0 0 1 8 16 7 7 0 0 1 7 2.07V1H6a.5.5 0 0 1-.5-.5zm3 4.5a.5.5 0 0 0-1 0v3.5h-3a.5.5 0 0 0 0 1H8a.5.5 0 0 0 .5-.5V5z"/>
-                    </svg><br>
-                        {LOCALS[Done in]}
-                        {cards[daysLeft]:s} {cards[doneDate]:s}
+                    </svg></span>
+                        <span>{LOCALS[Done in]} {cards[daysLeft]:s}</span><span> ({cards[doneDate]:s}) </span>
                 </div>
             </div>
 
             <!-------------------------END ROW 1 --------------------------------->
-
+            
             <div class='row'>
                 <div class='widget  col col-sm-6 d-flex align-items-center justify-content-center'  style="background-color:{OVERVIEW[new-wedgit-bg]}  ">
                     <div>
                      <svg width="2.3em" height="2.3em" viewBox="0 0 16 16" class="bi bi-layers-fill" fill="{OVERVIEW[wedgits-font-color]} " xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M7.765 1.559a.5.5 0 0 1 .47 0l7.5 4a.5.5 0 0 1 0 .882l-7.5 4a.5.5 0 0 1-.47 0l-7.5-4a.5.5 0 0 1 0-.882l7.5-4z"/>
                     <path fill-rule="evenodd" d="M2.125 8.567l-1.86.992a.5.5 0 0 0 0 .882l7.5 4a.5.5 0 0 0 .47 0l7.5-4a.5.5 0 0 0 0-.882l-1.86-.992-5.17 2.756a1.5 1.5 0 0 1-1.41 0l.418-.785-.419.785-5.169-2.756z"/>
-                    </svg>
+                    </svg>                      
                     <div class='number'>
                         {cards[new]:d}
                     </div>
-                    {LOCALS[New]}
+                    {LOCALS[New]} 
                     </div>
                 </div>
 
@@ -289,11 +296,11 @@ def table(self):
                     <path fill-rule="evenodd" d="M12.786 1.072C11.188.752 9.084.71 7.646 2.146A.5.5 0 0 0 7.5 2.5v11a.5.5 0 0 0 .854.354c.843-.844 2.115-1.059 3.47-.92 1.344.14 2.66.617 3.452 1.013A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.276-.447L15.5 2.5l.224-.447-.002-.001-.004-.002-.013-.006-.047-.023a12.582 12.582 0 0 0-.799-.34 12.96 12.96 0 0 0-2.073-.609zM15 2.82v9.908c-.846-.343-1.944-.672-3.074-.788-1.143-.118-2.387-.023-3.426.56V2.718c1.063-.929 2.631-.956 4.09-.664A11.956 11.956 0 0 1 15 2.82z"/>
                     <path fill-rule="evenodd" d="M3.214 1.072C4.813.752 6.916.71 8.354 2.146A.5.5 0 0 1 8.5 2.5v11a.5.5 0 0 1-.854.354c-.843-.844-2.115-1.059-3.47-.92-1.344.14-2.66.617-3.452 1.013A.5.5 0 0 1 0 13.5v-11a.5.5 0 0 1 .276-.447L.5 2.5l-.224-.447.002-.001.004-.002.013-.006a5.017 5.017 0 0 1 .22-.103 12.958 12.958 0 0 1 2.7-.869z"/>
                     </svg>
-
+                    
                     <div class='number'>
                         {cards[learning]:d}
                     </div>
-                    {LOCALS[Learning]}
+                    {LOCALS[Learning]} 
                     </div>
                 </div>
             </div>
@@ -311,9 +318,9 @@ def table(self):
                         <div class='number'>
                             {cards[review]:d}
                         </div>
-                        {LOCALS[Review]}
+                        {LOCALS[Review]} 
                         </div>
-
+        
                 </div>
 
                 <div class='widget  col col-sm-6 d-flex align-items-center justify-content-center'  style="background-color: {OVERVIEW[total-wedgit-bg]}  ">
@@ -323,21 +330,21 @@ def table(self):
                         </svg>                    <div class='number'>
                             {cards[todo]:d}
                     </div>
-                    {LOCALS[Total]}
+                    {LOCALS[Total]} 
                     </div>
                 </div>
             </div>
             <!-------------------------END ROW 3 --------------------------------->
 
-
-        </div>
+            
+        </div>  
 
         <!------------------- End widgets ------------------------------>
 
         <!---------------- the pie chart ------------------------------->
         <div id='myDiv' class='col col-sm-12 col-lg-6'  style="padding:2% ">
 
-        </div>
+        </div> 
         <!---------------- END pie chart ------------------------------->
 
 
@@ -361,8 +368,8 @@ def renderPage(self,_old):
     if "::"in deck["name"]:
         sub = deck["name"].replace("::"," .. ")
     if "'" in deck["name"]:
-        sub = deck["name"].replace("'","’")
-
+        sub = deck["name"].replace("'","\u2019")
+        
     else:
         sub = deck["name"]
     content = OverviewContent(
@@ -371,6 +378,7 @@ def renderPage(self,_old):
         desc=self._desc(deck),
         table=self._table(),
     )
+    content.__dict__["deckAsDirTree"] = deck["name"].replace("::","/")
     gui_hooks.overview_will_render_content(self, content)
     self.web.stdHtml(
         self._body % content.__dict__,
@@ -396,24 +404,24 @@ if THEME["heatmap-background"]:
         .streak{{
             background-color: {THEME[large-areas-color]};
             padding:10px;
-
+            
 
         }}
      """.format(THEME=THEME)
-
+     
 
 
 
 Overview._body = """
 <style>
 body{{
-     background: linear-gradient(20deg,{THEME[overlay-color1]}, {THEME[overlay-color2]}) fixed, url('{base}/user_files/assets/deck_backgrounds/%(deck)s.jpg'),url('{base}/user_files/assets/background.jpg') ;
+     background: linear-gradient(20deg,{THEME[overlay-color1]}, {THEME[overlay-color2]}) fixed, url('{base}/user_files/assets/deck_backgrounds/%(deckAsDirTree)s.jpg'),url('{base}/user_files/assets/background.jpg') ;
      background-size: 100%%;
      }}
 
 @font-face {{
     font-family: '{OVERVIEW[wedgits-font-family]}';
-    src: url('{base}/user_files/assets/fonts/{OVERVIEW[wedgits-font-src]}');
+    src: url('{base}/user_files/assets/fonts/{OVERVIEW[wedgits-font-src]}');   
 }}
 
 .widget{{
@@ -425,7 +433,7 @@ color:{OVERVIEW[wedgits-font-color]};
 
 @font-face {{
     font-family: '{OVERVIEW[deck-name-font-family]}';
-    src: url('{base}/user_files/assets/fonts/{OVERVIEW[deck-name-font-src]}');
+    src: url('{base}/user_files/assets/fonts/{OVERVIEW[deck-name-font-src]}');   
 }}
 
 h1{{
@@ -442,11 +450,11 @@ font-size:{OVERVIEW[deck-name-font-size]}
     <div class = 'row align-items-center' >
         <!-------------left side (title and description)------------------------------->
         <div class=' col col-md-4 col-sm-12 text-center'>
-
+        
             <h1 class="animate__animated  animate__delay animate__backInDown">%(deck)s</h1>
             %(shareLink)s
             %(desc)s
-
+        
         </div>
          <div class=' col col-md-1 col-sm-0 right-col'></div>
 
@@ -468,30 +476,33 @@ font-size:{OVERVIEW[deck-name-font-size]}
 
 def renderDeckBottom(self, _old):
     links = [
-        ["O", "opts", _(
-            "<img src=\"{base}/user_files/assets/icons/deck overview icons/options.svg\" style=\"margin-top: -5px; margin-right:5px\"> Options").format(base=base)],
+        ["O", "opts",
+            "<img src=\"{base}/user_files/assets/icons/deck overview icons/options.svg\" style=\"margin-top: -5px; margin-right:5px\"> Options".format(base=base)],
     ]
     if self.mw.col.decks.current()["dyn"]:
         links.append(
-            ["R", "refresh", _( "<img src=\"{base}/user_files/assets/icons/deck overview icons/rebuild.svg\" style=\"margin-top: -5px; margin-right:5px\"> Rebuild").format(base=base)])
+            ["R", "refresh",  "<img src=\"{base}/user_files/assets/icons/deck overview icons/rebuild.svg\" style=\"margin-top: -5px; margin-right:5px\"> Rebuild".format(base=base)])
         links.append(
-            ["E", "empty", _( "<img src=\"{base}/user_files/assets/icons/deck overview icons/empty.svg\" style=\"margin-top: -5px; margin-right:5px\"> Empty").format(base=base)])
+            ["E", "empty",  "<img src=\"{base}/user_files/assets/icons/deck overview icons/empty.svg\" style=\"margin-top: -5px; margin-right:5px\"> Empty".format(base=base)])
     else:
-        links.append(["C", "studymore", _(
-            "<img src=\"{base}/user_files/assets/icons/deck overview icons/custom study.svg\" style=\"margin-top: -5px; margin-right:5px\"> Custom Study").format(base=base)])
-        # links.append(["F", "cram", _("Filter/Cram")])
+        links.append(["C", "studymore",
+            "<img src=\"{base}/user_files/assets/icons/deck overview icons/custom study.svg\" style=\"margin-top: -5px; margin-right:5px\"> Custom Study".format(base=base)])
+        # links.append(["F", "cram", "Filter/Cram")])
     if self.mw.col.sched.haveBuried():
-        links.append(["U", "unbury", _(
-            "<img src=\"{base}/user_files/assets/icons/deck overview icons/unbury.svg\" style=\"margin-top: -5px; margin-right:5px\"> Unbury").format(base=base)])
-    buf = """<style>
-
+        links.append(["U", "unbury",
+            "<img src=\"{base}/user_files/assets/icons/deck overview icons/unbury.svg\" style=\"margin-top: -5px; margin-right:5px\"> Unbury".format(base=base)])
+    buf = """<style> 
+    
     #outer{{
      background-color: {THEME[bottombar-color]};
+    }}
+    body {{
+     background-color:{THEME[bottombar-color]} !important;
     }}
      </style>""".format(THEME=THEME)
     for b in links:
         if b[0]:
-            b[0] = _("Shortcut key: %s") % shortcut(b[0])
+            b[0] = "Shortcut key: %s" % shortcut(b[0])
         buf += """
 <button style="background:{THEME[buttons-color]}; color:{THEME[buttons-label-color]} " class='btn btn-sm' title="%s" onclick='pycmd("%s")'>%s</button>""".format(THEME=THEME) % tuple(
             b
@@ -508,65 +519,64 @@ def renderDeckBottom(self, _old):
 def finishedMsg(self, _old) -> str:
     return (
         "<div class='deck-desc finish-msg animate__animated animate__rubberBand' style='background-color:{THEME[large-areas-color]};'>".format(THEME=THEME)
-        + _("Congratulations! You have finished this deck for now.")
+        + "Congratulations! You have finished this deck for now."
         + "<br></div>"
-        #+ self._nextDueMsg()
+        # + self._nextDueMsg()
     )
 
 
-def nextDueMsg(self, _old) -> str:
-    line = []
-
-    #learn_msg = self.next_learn_msg()
-    #if learn_msg:
-    #    line.append(learn_msg)
-
-    # the new line replacements are so we don't break translations
-    # in a point release
-    if self.revDue():
-        line.append(
-            _(
-                """\
-<div class=' animate__animated animate__fadeInUp animate__slow deck-desc' style='background-color:{THEME[large-areas-color]}'>
-Today's review limit has been reached, but there are still cards
-waiting to be reviewed. For optimum memory, consider increasing
-the daily limit in the options.</div>"""
-            ).replace("\n", " ").format(THEME=THEME)
-        )
-    if self.newDue():
-        line.append(
-            _(
-                """\
-<div class=' animate__animated animate__fadeInUp animate__slow deck-desc' style='background-color:{THEME[large-areas-color]}'>
-There are more new cards available, but the daily limit has been
-reached. You can increase the limit in the options, but please
-bear in mind that the more new cards you introduce, the higher
-your short-term review workload will become.</div>"""
-            ).replace("\n", " ").format(THEME=THEME)
-        )
-    if self.haveBuried():
-        if self.haveCustomStudy:
-            now = " " + _("To see them now, click the Unbury button below.")
-        else:
-            now = ""
-        line.append(
-            _(
-                """\
-<div class=' animate__animated animate__fadeInUp animate__slow deck-desc lighten-4' style='background-color:{THEME[large-areas-color]}'>
-Some related or buried cards were delayed until a later session.</div>""".format(THEME=THEME)
-            )
-            + now
-        )
-    if self.haveCustomStudy and not self.col.decks.current()["dyn"]:
-        line.append(
-            _(
-                """\
-<div class=' animate__animated animate__fadeInUp animate__slow deck-desc lighten-4' style='background-color:{THEME[large-areas-color]}'>
- To study outside of the normal schedule, click the Custom Study button below.</div>""".format(THEME=THEME)
-            )
-            )
-
-    return "".join(line)
+# def nextDueMsg(self, _old) -> str:
+#     line = []
+#     learn_msg = self.next_learn_msg()
+#     if learn_msg:
+#         line.append(learn_msg)
+#
+#     # the new line replacements are so we don't break translations
+#     # in a point release
+#     if self.revDue():
+#         line.append(
+#             _(
+#                 """\
+# <div class=' animate__animated animate__fadeInUp animate__slow deck-desc' style='background-color:{THEME[large-areas-color]}'>
+# Today's review limit has been reached, but there are still cards
+# waiting to be reviewed. For optimum memory, consider increasing
+# the daily limit in the options.</div>"""
+#             ).replace("\n", " ").format(THEME=THEME)
+#         )
+#     if self.newDue():
+#         line.append(
+#             _(
+#                 """\
+# <div class=' animate__animated animate__fadeInUp animate__slow deck-desc' style='background-color:{THEME[large-areas-color]}'>
+# There are more new cards available, but the daily limit has been
+# reached. You can increase the limit in the options, but please
+# bear in mind that the more new cards you introduce, the higher
+# your short-term review workload will become.</div>"""
+#             ).replace("\n", " ").format(THEME=THEME)
+#         )
+#     if self.haveBuried():
+#         if self.haveCustomStudy:
+#             now = " " + _("To see them now, click the Unbury button below.")
+#         else:
+#             now = ""
+#         line.append(
+#             _(
+#                 """\
+# <div class=' animate__animated animate__fadeInUp animate__slow deck-desc lighten-4' style='background-color:{THEME[large-areas-color]}'>
+# Some related or buried cards were delayed until a later session.</div>""".format(THEME=THEME)
+#             )
+#             + now
+#         )
+#     if self.haveCustomStudy and not self.col.decks.current()["dyn"]:
+#         line.append(
+#             _(
+#                 """\
+# <div class=' animate__animated animate__fadeInUp animate__slow deck-desc lighten-4' style='background-color:{THEME[large-areas-color]}'>
+#  To study outside of the normal schedule, click the Custom Study button below.</div>""".format(THEME=THEME)
+#             )
+#             )
+#
+#     return "".join(line)
 
 
 #####################################################################################################################
@@ -577,7 +587,7 @@ def updateRenderingDeckOverview():
     Overview._renderPage = wrap(Overview._renderPage, renderPage, "around")
     Overview._table = table
     Overview._renderBottom = wrap(
-        Overview._renderBottom, renderDeckBottom, "around")
+    Overview._renderBottom, renderDeckBottom, "around")
 
-    Scheduler._nextDueMsg = wrap(Scheduler._nextDueMsg, nextDueMsg, "around")
-    Scheduler.finishedMsg = wrap(Scheduler.finishedMsg, finishedMsg, "around")
+    # Scheduler._nextDueMsg = wrap(Scheduler._nextDueMsg, nextDueMsg, "around")
+    # Scheduler.finishedMsg = wrap(Scheduler.finishedMsg, finishedMsg, "around")

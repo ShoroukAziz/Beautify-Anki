@@ -1,11 +1,9 @@
 
-  body{
+ body{
     font-size: 12px !important;
+
   }
-  td{
-    text-align: center !important;
-    padding: 1px 5px;;
-  }
+
   
   tr {
     border-bottom: 0}

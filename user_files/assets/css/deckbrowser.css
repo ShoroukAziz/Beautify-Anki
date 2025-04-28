@@ -147,3 +147,18 @@ imageAnimation {  0% {
 td{
   display: inline-block;
 }
+
+
+.current td,
+tr:hover:not(.top-level-drag-row) td{
+  background:none;
+}
+
+:root {
+--border-subtle: none;
+}
+#studiedToday {
+  margin: auto;
+}
+.current {
+}
